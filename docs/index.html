@@ -949,8 +949,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>git clone https://github.com/selcukes/selcukes-java-skeleton.git
-cd selcukes-java-skeleton</pre>
+<pre class="CodeRay highlight"><code data-lang="shell">git clone https://github.com/selcukes/selcukes-java-skeleton.git
+cd selcukes-java-skeleton</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -967,7 +967,7 @@ cd selcukes-java-skeleton</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ mvn clean verify</pre>
+<pre class="CodeRay highlight"><code data-lang="shell">$ mvn clean verify</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -975,7 +975,7 @@ cd selcukes-java-skeleton</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ gradle clean test</pre>
+<pre class="CodeRay highlight"><code data-lang="shell">$ gradle clean test</code></pre>
 </div>
 </div>
 </div>
@@ -1109,7 +1109,7 @@ WebDriverBinary.operaDriver().setup();</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>WebDriverBinary tries to find the browser version. To this aim, WebDriverBinary uses internally a knowledge database called commands database. This database is a collection of shell commands used to discover the version of a given browser in the different operating systems (e.g., <code>google-chrome --version</code> for Chrome in Linux).</p>
+<p>WebDriverBinary tries to find the browser version. To this aim, WebDriverBinary uses internally a knowledge database called commands' database. This database is a collection of shell commands used to discover the version of a given browser in the different operating systems (e.g., <code>google-chrome --version</code> for Chrome in Linux).</p>
 </li>
 <li>
 <p>Using the browser version, it tries to find the proper driver version.
@@ -1203,21 +1203,6 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DataMapperTest</span> {
-
-    <span class="comment">//Pojo class for test data file test-users.json</span>
-    <span class="annotation">@Data</span>
-    <span class="annotation">@DataFile</span>
-    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestUsers</span> {
-        <span class="predefined-type">List</span>&lt;User&gt; users;
-    }
-
-    <span class="annotation">@Data</span>
-    <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
-        <span class="directive">private</span> <span class="predefined-type">String</span> username;
-        <span class="directive">private</span> <span class="predefined-type">String</span> password;
-
-    }
-
     <span class="annotation">@DataProvider</span>
     <span class="directive">public</span> <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">Object</span><span class="type">[]</span>&gt; getTestUsers() {
         <span class="directive">final</span> TestUsers testUsers = DataMapper.parse(TestUsers.class);
@@ -1230,7 +1215,20 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
     <span class="annotation">@Test</span>(dataProvider = <span class="string"><span class="delimiter">&quot;</span><span class="content">getTestUsers</span><span class="delimiter">&quot;</span></span>)
     <span class="directive">public</span> <span class="type">void</span> jsonTest(User user) {
         Assert.assertFalse(user.getUsername().isBlank());
-        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Username[</span><span class="delimiter">&quot;</span></span> + user.getUsername() + <span class="string"><span class="delimiter">&quot;</span><span class="content">] Password[</span><span class="delimiter">&quot;</span></span> + user.getPassword()+<span class="string"><span class="delimiter">&quot;</span><span class="content">]</span><span class="delimiter">&quot;</span></span>);
+        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Username[</span><span class="delimiter">&quot;</span></span> + user.getUsername() + <span class="string"><span class="delimiter">&quot;</span><span class="content">] Password[</span><span class="delimiter">&quot;</span></span> + user.getPassword() + <span class="string"><span class="delimiter">&quot;</span><span class="content">]</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestUsers</span> {
+        <span class="predefined-type">List</span>&lt;User&gt; users;
+    }
+
+    <span class="annotation">@Data</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+        <span class="directive">private</span> <span class="predefined-type">String</span> username;
+        <span class="directive">private</span> <span class="predefined-type">String</span> password;
+
     }
 }</code></pre>
 </div>
@@ -1261,15 +1259,6 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DataMapperWriteTest</span> {
-
-
-    <span class="comment">//Pojo class for test data file test_sample.yml</span>
-    <span class="annotation">@Data</span>
-    <span class="annotation">@DataFile</span>(fileName = <span class="string"><span class="delimiter">&quot;</span><span class="content">test_sample.yml</span><span class="delimiter">&quot;</span></span>)
-    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestSample</span> {
-        <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; users;
-    }
-
     <span class="annotation">@SneakyThrows</span>
     <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> testClass() {
@@ -1279,6 +1268,11 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
         DataMapper.write(testSample);
     }
 
+    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>(fileName = <span class="string"><span class="delimiter">&quot;</span><span class="content">test_sample.yml</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestSample</span> {
+        <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; users;
+    }
 }</code></pre>
 </div>
 </div>
@@ -1348,45 +1342,40 @@ thumbnail.report=false</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@CustomLog</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">CucumberHooks</span> {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CucumberHooks</span> {
 
-    <span class="directive">private</span> Reporter reporter;
     WebDriver driver;
 
-    <span class="directive">public</span> CucumberHooks(<span class="predefined-type">DriverManager</span> driverManager) {
-        driver = driverManager.getDriver();
+    <span class="directive">public</span> CucumberHooks(WebDriver driver) {
+        <span class="local-variable">this</span>.driver = driver;
     }
-
 
     <span class="annotation">@Before</span>
     <span class="directive">public</span> <span class="type">void</span> beforeTest(Scenario scenario) {
-        reporter = Reporter.getReport();
-        reporter.start() <span class="comment">//Initialise Extent Report and start recording logRecord</span>
+        getReport().start() <span class="comment">//Initialise Extent Report and start recording logRecord</span>
                 .initSnapshot(driver); <span class="comment">//Initialise Full page screenshot</span>
         logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Starting Scenario ..</span><span class="delimiter">&quot;</span></span> + scenario.getName());
-        reporter.attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+        getReport().attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
 
     }
 
     <span class="annotation">@BeforeStep</span>
-    <span class="directive">public</span> <span class="type">void</span> beforeStep(Scenario scenario) {
-
+    <span class="directive">public</span> <span class="type">void</span> beforeStep() {
         logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Before Step</span><span class="delimiter">&quot;</span></span>);
-        reporter.attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+        getReport().attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
     }
 
     <span class="annotation">@AfterStep</span>
-    <span class="directive">public</span> <span class="type">void</span> afterStep(Scenario scenario) {
-        logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">After Step</span><span class="delimiter">&quot;</span></span>);
-        reporter.attachScreenshot(); <span class="comment">//Attach Full page screenshot</span>
-        reporter.attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+    <span class="directive">public</span> <span class="type">void</span> afterStep() {
+        getReport().attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+        getReport().attachScreenshot(); <span class="comment">//Attach Full page screenshot</span>
+
     }
 
     <span class="annotation">@After</span>
     <span class="directive">public</span> <span class="type">void</span> afterTest(Scenario scenario) {
         logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Completed Scenario ..</span><span class="delimiter">&quot;</span></span> + scenario.getName());
-        reporter.attachAndClear(); <span class="comment">// Attach INFO logs and clear logRecord</span>
+        getReport().attachAndClear(); <span class="comment">// Attach INFO logs and clear logRecord</span>
     }
 }</code></pre>
 </div>
@@ -1639,7 +1628,7 @@ thumbnail.report=false</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.6.0<br>
-Updated on 2022-04-24T05:28:40Z
+Updated on 2022-04-24T08:10:26Z
 </div>
 </div>
 </body>
