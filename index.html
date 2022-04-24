@@ -810,11 +810,45 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#selcukes-databind">3. Selcukes DataBind</a>
 <ul class="sectlevel2">
 <li><a href="#setup-2">3.1. Setup</a></li>
-<li><a href="#data-parser">3.2. Data Parser</a></li>
+<li><a href="#data-parser">3.2. Data Parser</a>
+<ul class="sectlevel3">
+<li><a href="#read-jsonyml-files">3.2.1. Read Json/Yml files</a></li>
+<li><a href="#update-jsonyml-files">3.2.2. Update Json/Yml files</a></li>
 </ul>
 </li>
-<li><a href="#community">4. Community</a></li>
-<li><a href="#support">5. Support</a></li>
+</ul>
+</li>
+<li><a href="#selcukes-extent-reports">4. Selcukes Extent Reports</a>
+<ul class="sectlevel2">
+<li><a href="#setup-3">4.1. Setup</a></li>
+<li><a href="#usage">4.2. Usage</a></li>
+</ul>
+</li>
+<li><a href="#selcukes-notifier">5. Selcukes Notifier</a>
+<ul class="sectlevel2">
+<li><a href="#motivation-2">5.1. Motivation</a></li>
+<li><a href="#setup-4">5.2. Setup</a></li>
+<li><a href="#usage-2">5.3. Usage</a></li>
+</ul>
+</li>
+<li><a href="#selcukes-snapshot">6. Selcukes Snapshot</a>
+<ul class="sectlevel2">
+<li><a href="#setup-5">6.1. Setup</a></li>
+<li><a href="#usage-3">6.2. Usage</a></li>
+</ul>
+</li>
+<li><a href="#selcukes-excel-runner">7. Selcukes Excel Runner</a>
+<ul class="sectlevel2">
+<li><a href="#setup-6">7.1. Setup</a></li>
+</ul>
+</li>
+<li><a href="#selcukes-reports">8. Selcukes Reports</a>
+<ul class="sectlevel2">
+<li><a href="#setup-7">8.1. Setup</a></li>
+</ul>
+</li>
+<li><a href="#community">9. Community</a></li>
+<li><a href="#support">10. Support</a></li>
 </ul>
 </div>
 </div>
@@ -908,7 +942,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect3">
 <h4 id="getting-started"><a class="anchor" href="#getting-started"></a>1.3.4. Getting Started</h4>
 <div class="paragraph">
-<p>The quickest way to create a new project is to take one of the starter projects on Github. You can find the starter project for TestNG at <a href="https://github.com/selcukes/selcukes-java-skeleton">https://github.com/selcukes/selcukes-java-skeleton</a>.</p>
+<p>The quickest way to create a new project is to take one of the starter projects on Github. You can find the starter project for TestNG at <a href="https://github.com/selcukes/selcukes-java-skeleton">selcukes-java-skeleton</a>.</p>
 </div>
 <div class="paragraph">
 <p>You can clone this repository:</p>
@@ -997,7 +1031,7 @@ cd selcukes-java-skeleton</pre>
 <div class="sect2">
 <h3 id="setup"><a class="anchor" href="#setup"></a>2.2. Setup</h3>
 <div class="paragraph">
-<p>WebDriver Binaries is primarily used as a Java dependency . We typically use a <em>build tool</em> (such as <a href="https://maven.apache.org/">Maven</a> or <a href="https://gradle.org/">Gradle</a>) to resolve the WebDriverManager dependency. In Maven, it can be done as follows (notice that it is declared using the <code>test</code> scope, since it is typically used in tests classes):</p>
+<p>WebDriver Binaries is primarily used as a Java dependency . We typically use a <em>build tool</em> (such as <a href="https://maven.apache.org/">Maven</a> or <a href="https://gradle.org/">Gradle</a>) to resolve the WebDriverManager dependency. in Maven as follows (notice that it is declared using the <code>test</code> scope, since it is typically used in tests classes):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1079,7 +1113,7 @@ WebDriverBinary.operaDriver().setup();</code></pre>
 </li>
 <li>
 <p>Using the browser version, it tries to find the proper driver version.
-This process is different for each browser. In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release. For instance, to find out the version of chromedriver required for Chrome 89, we need to read the following <a href="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_89">file</a>. Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox. For this reason, WebDriverManager uses another knowledge database called <a href="https://github.com/bonigarcia/webdrivermanager/blob/master/src/main/resources/versions.properties">versions database</a>. This database maps the browser releases with the known compatible driver versions.</p>
+This process is different for each browser. In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release. For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following <a href="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100">file</a>. Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox. For this reason, WebDriverManager uses another knowledge database called versions database. This database maps the browser releases with the known compatible driver versions.</p>
 </li>
 <li>
 <p>Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at <code>%temp%webdriver</code> by default). These drivers are reused in subsequent calls.</p>
@@ -1118,7 +1152,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div class="sect2">
 <h3 id="setup-2"><a class="anchor" href="#setup-2"></a>3.1. Setup</h3>
 <div class="paragraph">
-<p>Selcukes DataBind used as a Java dependency in Maven, it can be done as follows</p>
+<p>Selcukes DataBind used as a Java dependency in Maven as follows</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1142,12 +1176,447 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 <div class="sect2">
 <h3 id="data-parser"><a class="anchor" href="#data-parser"></a>3.2. Data Parser</h3>
+<div class="sect3">
+<h4 id="read-jsonyml-files"><a class="anchor" href="#read-jsonyml-files"></a>3.2.1. Read Json/Yml files</h4>
+<div class="paragraph">
+<p>Create Test data file as test-users.json in resource folder</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: [
+    {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">junk</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">things</span><span class="delimiter">&quot;</span></span>
+    },
+    {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">spam</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">eggs</span><span class="delimiter">&quot;</span></span>
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example class to demonstrate to parse  and read test-users.json</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DataMapperTest</span> {
 
+    <span class="comment">//Pojo class for test data file test-users.json</span>
+    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestUsers</span> {
+        <span class="predefined-type">List</span>&lt;User&gt; users;
+    }
+
+    <span class="annotation">@Data</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+        <span class="directive">private</span> <span class="predefined-type">String</span> username;
+        <span class="directive">private</span> <span class="predefined-type">String</span> password;
+
+    }
+
+    <span class="annotation">@DataProvider</span>
+    <span class="directive">public</span> <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">Object</span><span class="type">[]</span>&gt; getTestUsers() {
+        <span class="directive">final</span> TestUsers testUsers = DataMapper.parse(TestUsers.class);
+        <span class="directive">final</span> <span class="predefined-type">List</span>&lt;<span class="predefined-type">Object</span><span class="type">[]</span>&gt; data = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        testUsers.getUsers()
+            .forEach(user -&gt; data.add(<span class="keyword">new</span> <span class="predefined-type">Object</span><span class="type">[]</span>{user}));
+        <span class="keyword">return</span> data.iterator();
+    }
+
+    <span class="annotation">@Test</span>(dataProvider = <span class="string"><span class="delimiter">&quot;</span><span class="content">getTestUsers</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">public</span> <span class="type">void</span> jsonTest(User user) {
+        Assert.assertFalse(user.getUsername().isBlank());
+        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Username[</span><span class="delimiter">&quot;</span></span> + user.getUsername() + <span class="string"><span class="delimiter">&quot;</span><span class="content">] Password[</span><span class="delimiter">&quot;</span></span> + user.getPassword()+<span class="string"><span class="delimiter">&quot;</span><span class="content">]</span><span class="delimiter">&quot;</span></span>);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="update-jsonyml-files"><a class="anchor" href="#update-jsonyml-files"></a>3.2.2. Update Json/Yml files</h4>
+<div class="paragraph">
+<p>Here is another example to update test file in runtime</p>
+</div>
+<div class="paragraph">
+<p>Consider we have test_sample.yml located in resource folder as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yml"><span class="key">users</span>:
+  <span class="key">user1</span>:
+    <span class="key">username</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">junk</span><span class="delimiter">&quot;</span></span>
+    <span class="key">password</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">4177472e-23a3-4426-893f-8a794af7189c</span><span class="delimiter">&quot;</span></span>
+  <span class="key">user2</span>:
+    <span class="key">username</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">spam</span><span class="delimiter">&quot;</span></span>
+    <span class="key">password</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">40aafad2-1d24-4d6c-85e2-b7630dc17c57</span><span class="delimiter">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example class to demonstrate to update test_sample.yml</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DataMapperWriteTest</span> {
+
+
+    <span class="comment">//Pojo class for test data file test_sample.yml</span>
+    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>(fileName = <span class="string"><span class="delimiter">&quot;</span><span class="content">test_sample.yml</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestSample</span> {
+        <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; users;
+    }
+
+    <span class="annotation">@SneakyThrows</span>
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testClass() {
+        <span class="predefined-type">UUID</span> uuid = <span class="predefined-type">UUID</span>.randomUUID();
+        TestSample testSample = DataMapper.parse(TestSample.class);
+        testSample.getUsers().get(<span class="string"><span class="delimiter">&quot;</span><span class="content">user1</span><span class="delimiter">&quot;</span></span>).put(<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>, uuid.toString());
+        DataMapper.write(testSample);
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="community"><a class="anchor" href="#community"></a>4. Community</h2>
+<h2 id="selcukes-extent-reports"><a class="anchor" href="#selcukes-extent-reports"></a>4. Selcukes Extent Reports</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-extent-reports">Selcukes Extent Reports</a> is used to generate Extent reports for Cucumber JVM.</p>
+</div>
+<div class="sect2">
+<h3 id="setup-3"><a class="anchor" href="#setup-3"></a>4.1. Setup</h3>
+<div class="paragraph">
+<p>Selcukes Extent Reports used as a Java dependency in Maven as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>selcukes-extent-reports<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of a Gradle project, we can declare Selcukes Extent Reports as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-extent-reports:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage"><a class="anchor" href="#usage"></a>4.2. Usage</h3>
+<div class="paragraph">
+<p>Create extent.properties file in src/test/resources</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">extent.reporter.spark.start=true
+extent.reporter.spark.out=target/extent-reports/Sample.html
+systeminfo.Author=Ramesh
+timestamp.report=false
+thumbnail.report=false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add Selcukes Extent Reports plugin to cucumber runner as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@CucumberOptions</span>(tags = <span class="string"><span class="delimiter">&quot;</span><span class="content">@tag1</span><span class="delimiter">&quot;</span></span>, plugin = {
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes.extent.report.SelcukesExtentAdapter:</span><span class="delimiter">&quot;</span></span>,
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">html:target/cucumber-reports/cucumber.html</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">json:target/cucumber-reports/cucumber.json</span><span class="delimiter">&quot;</span></span>
+
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Update Cucumber Hooks file as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@CustomLog</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CucumberHooks</span> {
+
+    <span class="directive">private</span> Reporter reporter;
+    WebDriver driver;
+
+    <span class="directive">public</span> CucumberHooks(<span class="predefined-type">DriverManager</span> driverManager) {
+        driver = driverManager.getDriver();
+    }
+
+
+    <span class="annotation">@Before</span>
+    <span class="directive">public</span> <span class="type">void</span> beforeTest(Scenario scenario) {
+        reporter = Reporter.getReport();
+        reporter.start() <span class="comment">//Initialise Extent Report and start recording logRecord</span>
+                .initSnapshot(driver); <span class="comment">//Initialise Full page screenshot</span>
+        logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Starting Scenario ..</span><span class="delimiter">&quot;</span></span> + scenario.getName());
+        reporter.attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+
+    }
+
+    <span class="annotation">@BeforeStep</span>
+    <span class="directive">public</span> <span class="type">void</span> beforeStep(Scenario scenario) {
+
+        logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Before Step</span><span class="delimiter">&quot;</span></span>);
+        reporter.attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+    }
+
+    <span class="annotation">@AfterStep</span>
+    <span class="directive">public</span> <span class="type">void</span> afterStep(Scenario scenario) {
+        logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">After Step</span><span class="delimiter">&quot;</span></span>);
+        reporter.attachScreenshot(); <span class="comment">//Attach Full page screenshot</span>
+        reporter.attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
+    }
+
+    <span class="annotation">@After</span>
+    <span class="directive">public</span> <span class="type">void</span> afterTest(Scenario scenario) {
+        logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Completed Scenario ..</span><span class="delimiter">&quot;</span></span> + scenario.getName());
+        reporter.attachAndClear(); <span class="comment">// Attach INFO logs and clear logRecord</span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="selcukes-notifier"><a class="anchor" href="#selcukes-notifier"></a>5. Selcukes Notifier</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-notifier">Selcukes Notifier</a> helps to send notifications using Slack and Microsoft Teams.</p>
+</div>
+<div class="sect2">
+<h3 id="motivation-2"><a class="anchor" href="#motivation-2"></a>5.1. Motivation</h3>
+<div class="paragraph">
+<p>Currently, we moved to On premises environments. To view HTML report generated by automation scripts we need to connect to the different VPN’s to open the report and check the related screenshots to see which test case has failed and why. So, why not raise an alert as soon as the test case fails? And why not attach a screenshot along with that alert so that all the stakeholders can actually see what has failed in the application?</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setup-4"><a class="anchor" href="#setup-4"></a>5.2. Setup</h3>
+<div class="paragraph">
+<p>Selcukes Notifier used as a Java dependency in Maven as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>selcukes-notifier<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of a Gradle project, we can declare Selcukes Notifier as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-notifier:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage-2"><a class="anchor" href="#usage-2"></a>5.3. Usage</h3>
+<div class="paragraph">
+<p>Add selcukes.yaml and update below config as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yml"><span class="comment"># Selcukes Environment Properties</span>
+<span class="key">projectName</span>: <span class="string"><span class="content">Test Automation Report</span></span>
+<span class="key">env</span>: <span class="string"><span class="content">QA01</span></span>
+<span class="key">notifier</span>:
+  <span class="key">type</span>: <span class="string"><span class="content">teams</span></span>
+  <span class="key">webhook-token</span>: <span class="string"><span class="content">WEBXXX</span></span>
+  <span class="key">api-token</span>: <span class="string"><span class="content">APIXXXX</span></span>
+  <span class="key">channel</span>: <span class="string"><span class="content">selcukes</span></span>
+  <span class="key">authorIcon</span>: <span class="string"><span class="content">https://avatars0.githubusercontent.com/u/2510294?s=400&amp;u=5d6412ba1dd13052992ff66317ae28d007a971d3&amp;v=4</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create testcase as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">NotifierTest</span> {
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testNotifications() {
+        NotifierFactory.getNotifier()
+              .scenarioName(<span class="string"><span class="delimiter">&quot;</span><span class="content">This is sample scenario</span><span class="delimiter">&quot;</span></span>)
+              .scenarioStatus(<span class="string"><span class="delimiter">&quot;</span><span class="content">FAILED</span><span class="delimiter">&quot;</span></span>)
+              .stepDetails(<span class="string"><span class="delimiter">&quot;</span><span class="content">This is sample test step</span><span class="delimiter">&quot;</span></span>)
+              .errorMessage(<span class="string"><span class="delimiter">&quot;</span><span class="content">NullPointerException</span><span class="delimiter">&quot;</span></span>)
+              .path(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)
+              .pushNotification();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="selcukes-snapshot"><a class="anchor" href="#selcukes-snapshot"></a>6. Selcukes Snapshot</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-snapshot">Selcukes Snapshot</a> is a utility library written in Java for creating full page screenshots using Selenium WebDriver.</p>
+</div>
+<div class="sect2">
+<h3 id="setup-5"><a class="anchor" href="#setup-5"></a>6.1. Setup</h3>
+<div class="paragraph">
+<p>Selcukes Snapshot used as a Java dependency in Maven as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>selcukes-snapshot<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of a Gradle project, we can declare Selcukes Snapshot as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-snapshot:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage-3"><a class="anchor" href="#usage-3"></a>6.2. Usage</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@CustomLog</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">SnapshotTest</span> {
+    WebDriver driver;
+
+    <span class="annotation">@BeforeClass</span>
+    <span class="directive">static</span> <span class="type">void</span> setupClass() {
+        WebDriverBinary.chromeDriver().setup();
+    }
+
+    <span class="annotation">@BeforeTest</span>
+    <span class="type">void</span> setupTest() {
+        driver = <span class="keyword">new</span> ChromeDriver();
+    }
+
+    <span class="annotation">@AfterTest</span>
+    <span class="type">void</span> teardown() {
+        driver.quit();
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> fullPageScreenshotTest() {
+        <span class="directive">final</span> <span class="predefined-type">String</span> url = <span class="string"><span class="delimiter">&quot;</span><span class="content">https://techyworks.blogspot.com/</span><span class="delimiter">&quot;</span></span>;
+
+        <span class="predefined-type">String</span> browser = driver.getClass().getSimpleName().replace(<span class="string"><span class="delimiter">&quot;</span><span class="content">Driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);
+        logger.info(() -&gt; <span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Initiated %s browser</span><span class="delimiter">&quot;</span></span>, browser));
+        driver.get(url);
+        logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Navigated to </span><span class="delimiter">&quot;</span></span> + url);
+        Snapshot snapshot = <span class="keyword">new</span> SnapshotImpl(driver);
+        <span class="predefined-type">String</span> screenshotFilePath = snapshot
+                .withText(<span class="string"><span class="delimiter">&quot;</span><span class="content">Browser: </span><span class="delimiter">&quot;</span></span> + browser + <span class="string"><span class="delimiter">&quot;</span><span class="char">\n</span><span class="content">This sample Text Message</span><span class="char">\n</span><span class="content">Make it simple Make it simple Make it simple Make it simple Make it simple</span><span class="delimiter">&quot;</span></span>)
+                .shootPage();
+        logger.info(() -&gt; <span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Captured full page screenshot for %s browser and placed at %s </span><span class="delimiter">&quot;</span></span>,
+                browser, screenshotFilePath));
+
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="selcukes-excel-runner"><a class="anchor" href="#selcukes-excel-runner"></a>7. Selcukes Excel Runner</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner">Selcukes Excel Runner</a> is an excel driven cucumber runner which helps to
+1. Execute cucumber scenarios in required order
+2. Execute only specific examples in a Scenario Outline</p>
+</div>
+<div class="sect2">
+<h3 id="setup-6"><a class="anchor" href="#setup-6"></a>7.1. Setup</h3>
+<div class="paragraph">
+<p>Selcukes Excel Runner used as a Java dependency in Maven as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>selcukes-excel-runner<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of a Gradle project, we can declare Selcukes Excel Runner as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-excel-runner:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="selcukes-reports"><a class="anchor" href="#selcukes-reports"></a>8. Selcukes Reports</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-reports">Selcukes Reports</a> helps to record video and send notifications on test failures</p>
+</div>
+<div class="sect2">
+<h3 id="setup-7"><a class="anchor" href="#setup-7"></a>8.1. Setup</h3>
+<div class="paragraph">
+<p>Selcukes Reports used as a Java dependency in Maven as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>selcukes-reports<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of a Gradle project, we can declare Selcukes Reports as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-reports:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="community"><a class="anchor" href="#community"></a>9. Community</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in <a href="https://stackoverflow.com/questions/tagged/selcukes_java">StackOverflow</a>, using the tag <em>selcukes_java</em>. In addition, comments, suggestions, and bug-reporting should be made using the <a href="https://github.com/selcukes/issues">GitHub issues</a>. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  <a href="https://github.com/selcukes/pulls">pull request</a>.</p>
@@ -1155,7 +1624,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="support"><a class="anchor" href="#support"></a>5. Support</h2>
+<h2 id="support"><a class="anchor" href="#support"></a>10. Support</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://opencollective.com/selcukes">Selcukes</a> is part of <a href="https://opencollective.com/selcukes">OpenCollective</a>, an online funding platform for open and transparent communities. You can support the project by contributing as a backer (i.e., a personal <a href="https://opencollective.com/selcukes/donate">donation</a> or <a href="https://opencollective.com/selcukes/contribute/backer-8132/checkout">recurring contribution</a>) or as a <a href="https://opencollective.com/selcukes/contribute/sponsor-8133/checkout">sponsor</a> (i.e., a recurring contribution by a company).</p>
@@ -1170,7 +1639,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.6.0<br>
-Updated on 2022-04-24T02:37:02Z
+Updated on 2022-04-24T05:28:40Z
 </div>
 </div>
 </body>
