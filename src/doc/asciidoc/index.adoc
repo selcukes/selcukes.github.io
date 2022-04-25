@@ -36,15 +36,15 @@ Seamlessly integrate the framework with your existing tools and processes. Execu
 [[techs-used]]
 [.thumb]
 .Technologies
-image::techs-used.png[scaledwidth=60%]
+image::techs-used.png[scaledwidth=100%]
 
-=== First Steps
+=== Getting Started
 What you need to start
 
 ==== Java 11
 Test Automation is a development activity, so you will need some familiarity with Java. Selcukes uses Java 11, so make sure you have a http://www.oracle.com/technetwork/java/javase/downloads/index.html[JDK 11 or later] installed.
 
-==== An Integrated Development Environment
+==== IDE
 
 You will need a modern IDE to work with Java. We recommend IntelliJ (you can download the Community Edition, which is free, https://www.jetbrains.com/idea/download[from here]. But Eclipse will work fine as well.
 
@@ -52,7 +52,7 @@ You will need a modern IDE to work with Java. We recommend IntelliJ (you can dow
 
 You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports. Make sure you have either http://www.gradle.org/downloads[Gradle 3.x or higher] or https://maven.apache.org/download.cgi[Maven 3.3.x or higher] installed.
 
-==== Getting Started
+==== Quick Start
 
 The quickest way to create a new project is to take one of the starter projects on Github. You can find the starter project for TestNG at https://github.com/selcukes/selcukes-java-skeleton[selcukes-java-skeleton].
 
@@ -65,7 +65,7 @@ cd selcukes-java-skeleton
 
 Or simply https://github.com/selcukes/selcukes-java-skeleton/archive/master.zip[download a zip file from here].
 
-If you are using Maven, you can also create a new project using one of the Serenity https://maven.apache.org/guides/introduction/introduction-to-archetypes.html[Maven Archetypes].
+If you are using Maven, you can also create a new project using one of the Selcukes https://maven.apache.org/guides/introduction/introduction-to-archetypes.html[Maven Archetypes].
 
 ==== So far so good?
 
@@ -82,7 +82,39 @@ or
 ----
 $ gradle clean test
 ----
-
+=== Browser Tests
+Add `selcukes.yaml` file in resource folder and updated below options as required
+[source,yaml]
+----
+include::../../main/resources/selcukes.yaml[lines=9..13]
+----
+Create Sample Browser Test as follows
+[source,java]
+----
+include::../../test/java/io/github/selcukes/tests/WebTest.java[tags=snippet-in-doc,indent=0]
+----
+=== Desktop Tests
+Add `selcukes.yaml` file in resource folder and updated below options as required
+[source,yaml]
+----
+include::../../main/resources/selcukes.yaml[lines=14..17]
+----
+Create Sample Notepad Test as follows
+[source,java]
+----
+include::../../test/java/io/github/selcukes/tests/NotepadTest.java[tags=snippet-in-doc,indent=0]
+----
+=== Mobile Tests
+Add `selcukes.yaml` file in resource folder and updated below options as required
+[source,yaml]
+----
+include::../../main/resources/selcukes.yaml[lines=18..20]
+----
+Create Sample Browser Test as follows
+[source,java]
+----
+include::../../test/java/io/github/selcukes/tests/MobileTest.java[tags=snippet-in-doc,indent=0]
+----
 == WebDriver Binaries
 https://github.com/selcukes/selcukes-java/tree/master/webdriver-binaries[WebDriver Binaries] is an open-source Java library that automatically downloads and configures the binary drivers (e.g., chromedriver, geckodriver, msedgedriver, etc.) required by Selenium WebDriver.
 
@@ -134,7 +166,7 @@ dependencies {
 ----
 
 === Driver Management
-The primary use of WebDriver Binaries is the automation of driver management. For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., `chromeDriver()` for Chrome) and invoke the method `setup()`. The following example shows a test case using https://junit.org/junit5/[JUnit 5], Selenium WebDriver, WebDriver Binaries. In this test, we invoke WebDriver Binaries in the setup method for all tests (`@BeforeAll`). This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.
+The primary use of WebDriver Binaries is the automation of driver management. For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., `chromeDriver()` for Chrome) and invoke the method `setup()`. The following example shows a test case using https://testng.org/doc/[TestNG], Selenium WebDriver, WebDriver Binaries. In this test, we invoke WebDriver Binaries in the setup method for all tests (`@BeforeClass`). This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.
 
 [source,java]
 ----
@@ -198,7 +230,7 @@ dependencies {
 ----
 === Data Parser
 ==== Read Json/Yml files
-Create Test data file as test-users.json in resource folder
+Create Test data file as `test-users.json` in resource folder
 [source,json]
 ----
 {
@@ -214,7 +246,7 @@ Create Test data file as test-users.json in resource folder
   ]
 }
 ----
-Here is an example class to demonstrate to parse  and read test-users.json
+Here is an example class to demonstrate to parse  and read `test-users.json`
 [source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[tags=snippet-in-doc,indent=0]
@@ -222,7 +254,7 @@ include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[t
 ==== Update Json/Yml files
 Here is another example to update test file in runtime
 
-Consider we have test_sample.yml located in resource folder as follows
+Consider we have `test_sample.yml` located in resource folder as follows
 [source,yml]
 ----
 users:
@@ -233,7 +265,7 @@ users:
     username: "spam"
     password: "40aafad2-1d24-4d6c-85e2-b7630dc17c57"
 ----
-Here is an example class to demonstrate to update test_sample.yml
+Here is an example class to demonstrate to update `test_sample.yml`
 
 [source,java]
 ----
@@ -242,6 +274,14 @@ include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.j
 
 == Selcukes Extent Reports
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-extent-reports[Selcukes Extent Reports] is used to generate Extent reports for Cucumber JVM.
+
+=== Features
+1. Generates Emailable extent report
+2. Full page screenshots attached to report as base64 format
+3. Supports to add JUL based info logs to report
+----
+logger.info(()-> "Navigated to Home page..")
+----
 
 === Setup
 Selcukes Extent Reports used as a Java dependency in Maven as follows
@@ -314,18 +354,13 @@ dependencies {
 === Usage
 Add selcukes.yaml and update below config as follows
 [source,yml]
+[source,yaml]
 ----
-# Selcukes Environment Properties
-projectName: Test Automation Report
-env: QA01
-notifier:
-  type: teams
-  webhook-token: WEBXXX
-  api-token: APIXXXX
-  channel: selcukes
-  authorIcon: https://avatars0.githubusercontent.com/u/2510294?s=400&u=5d6412ba1dd13052992ff66317ae28d007a971d3&v=4
+include::../../main/resources/selcukes.yaml[lines=26..31]
 ----
-Create testcase as follows
+
+Create test class as follows
+
 [source,java]
 ----
 public class NotifierTest {
@@ -369,7 +404,8 @@ dependencies {
 include::../../test/java/io/github/selcukes/tests/SnapshotTest.java[tags=snippet-in-doc,indent=0]
 ----
 == Selcukes Excel Runner
-https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner[Selcukes Excel Runner] is an excel driven cucumber runner which helps to
+https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner[Selcukes Excel Runner] is an Excel driven cucumber runner which helps to
+
 1. Execute cucumber scenarios in required order
 2. Execute only specific examples in a Scenario Outline
 
@@ -392,6 +428,7 @@ dependencies {
     implementation("io.github.selcukes:selcukes-excel-runner:{project-version}")
 }
 ----
+
 == Selcukes Reports
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-reports[Selcukes Reports] helps to record video and send notifications on test failures
 
@@ -414,9 +451,36 @@ dependencies {
     implementation("io.github.selcukes:selcukes-reports:{project-version}")
 }
 ----
+== Selcukes Configuration
+=== Environment Properties
+Selcukes environment properties are created using `selcukes.yaml` file
+[source,yaml]
+----
+include::../../main/resources/selcukes.yaml[]
+----
+=== Runtime Properties
 
+The below `selcukes.properties` provides flexibility to override default environment properties in runtime.
+
+----
+selcukes.excel.runner=  # true or false. default: true
+selcukes.excel.suiteName=     # Name of Sheet in Excel Suite File
+selcukes.excel.suiteFile=       # Excel File path used as excel runner
+selcukes.extent.report=      # true or false. default: true.
+selcukes.features=              # comma separated paths to feature files. example: path/to/example.feature, path/to/other.feature
+selcukes.tags=           # tag expression. example: @smoke and not @slow
+selcukes.glue=                  # comma separated package names. example: com.example.glue
+selcukes.plugin=                # comma separated plugin strings. example: pretty, json:path/to/report.json
+selcukes.reports.path=        # path/target
+selcukes.timestamp.report=     # true or false. default: false
+----
+=== Logger Properties
+[source,yaml]
+----
+include::../../main/resources/selcukes-logback.yaml[]
+----
 == Community
-There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in https://stackoverflow.com/questions/tagged/selcukes_java[StackOverflow], using the tag _selcukes_java_. In addition, comments, suggestions, and bug-reporting should be made using the https://github.com/selcukes/issues[GitHub issues]. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  https://github.com/selcukes/pulls[pull request].
+There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in https://stackoverflow.com/questions/tagged/selcukes_java[StackOverflow], using the tag _selcukes_java_. In addition, comments, suggestions, and bug-reporting should be made using the https://github.com/selcukes/selcukes-java/issues[GitHub issues]. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  https://github.com/selcukes/selcukes-java/pulls[pull request].
 
 == Support
 https://opencollective.com/selcukes[Selcukes] is part of https://opencollective.com/selcukes[OpenCollective], an online funding platform for open and transparent communities. You can support the project by contributing as a backer (i.e., a personal https://opencollective.com/selcukes/donate[donation] or https://opencollective.com/selcukes/contribute/backer-8132/checkout[recurring contribution]) or as a https://opencollective.com/selcukes/contribute/sponsor-8133/checkout[sponsor] (i.e., a recurring contribution by a company).
@@ -426,4 +490,4 @@ ifndef::backend-epub3[]
 [discrete]
 
 == About
-Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by https://rameshbabuprudhvi.github.io/[Ramesh Babu Prudhvi] (https://twitter.com/amrameshbabu[@amrameshbabu]), licensed under the terms of https://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 License]. This documentation (also available in link:selcukes.pdf[PDF] and link:selcukes.epub[EPUB]) is released under the terms of https://creativecommons.org/licenses/by-nc-sa/2.0/[CC BY-NC-SA 2.0].
+Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by https://github.com/RameshBabuPrudhvi/[Ramesh Babu Prudhvi] (https://twitter.com/amrameshbabu[@amrameshbabu]), licensed under the terms of https://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 License]. This documentation (also available in link:selcukes.pdf[PDF] and link:selcukes.epub[EPUB]) is released under the terms of https://creativecommons.org/licenses/by-nc-sa/2.0/[CC BY-NC-SA 2.0].

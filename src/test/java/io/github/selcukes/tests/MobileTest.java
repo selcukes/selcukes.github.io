@@ -24,6 +24,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 //tag::snippet-in-doc[]
 public class MobileTest {
     DriverManager<AppiumDriver> driverManager;
@@ -42,8 +43,7 @@ public class MobileTest {
 
     @AfterTest
     void afterTest() {
-        if (driverManager.getManager() != null)
-            driverManager.getManager().destroyDriver();
+        driverManager.getManager().destroyDriver();
     }
 }
 //end::snippet-in-doc[]

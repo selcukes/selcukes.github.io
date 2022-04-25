@@ -23,7 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
+//tag::snippet-in-doc[]
 public class WebTest {
 
     DriverManager<RemoteWebDriver> driverManager;
@@ -33,12 +33,10 @@ public class WebTest {
     void beforeTest() {
         driverManager = new DriverManager<>();
         driver = driverManager.createDriver(DeviceType.BROWSER);
-
     }
 
-
-    @Test(enabled = false)
-    public void remoteTest() {
+    @Test
+    public void webTest() {
         WebPage page = new WebPage(driver);
         page.enableDriverEvents();
         page.open("https://www.google.com/");
@@ -47,7 +45,7 @@ public class WebTest {
 
     @AfterMethod
     void afterTest() {
-
         driverManager.getManager().destroyDriver();
     }
+    //end::snippet-in-doc[]
 }

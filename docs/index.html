@@ -784,15 +784,18 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel2">
 <li><a href="#overview">1.1. Overview</a></li>
 <li><a href="#features">1.2. Features</a></li>
-<li><a href="#first-steps">1.3. First Steps</a>
+<li><a href="#getting-started">1.3. Getting Started</a>
 <ul class="sectlevel3">
 <li><a href="#java-11">1.3.1. Java 11</a></li>
-<li><a href="#an-integrated-development-environment">1.3.2. An Integrated Development Environment</a></li>
+<li><a href="#ide">1.3.2. IDE</a></li>
 <li><a href="#a-build-tool">1.3.3. A Build Tool</a></li>
-<li><a href="#getting-started">1.3.4. Getting Started</a></li>
+<li><a href="#quick-start">1.3.4. Quick Start</a></li>
 <li><a href="#so-far-so-good">1.3.5. So far so good?</a></li>
 </ul>
 </li>
+<li><a href="#browser-tests">1.4. Browser Tests</a></li>
+<li><a href="#desktop-tests">1.5. Desktop Tests</a></li>
+<li><a href="#mobile-tests">1.6. Mobile Tests</a></li>
 </ul>
 </li>
 <li><a href="#webdriver-binaries">2. WebDriver Binaries</a>
@@ -820,8 +823,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#selcukes-extent-reports">4. Selcukes Extent Reports</a>
 <ul class="sectlevel2">
-<li><a href="#setup-3">4.1. Setup</a></li>
-<li><a href="#usage">4.2. Usage</a></li>
+<li><a href="#features-2">4.1. Features</a></li>
+<li><a href="#setup-3">4.2. Setup</a></li>
+<li><a href="#usage">4.3. Usage</a></li>
 </ul>
 </li>
 <li><a href="#selcukes-notifier">5. Selcukes Notifier</a>
@@ -847,8 +851,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#setup-7">8.1. Setup</a></li>
 </ul>
 </li>
-<li><a href="#community">9. Community</a></li>
-<li><a href="#support">10. Support</a></li>
+<li><a href="#selcukes-configuration">9. Selcukes Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#environment-properties">9.1. Environment Properties</a></li>
+<li><a href="#runtime-properties">9.2. Runtime Properties</a></li>
+<li><a href="#logger-properties">9.3. Logger Properties</a></li>
+</ul>
+</li>
+<li><a href="#community">10. Community</a></li>
+<li><a href="#support">11. Support</a></li>
 </ul>
 </div>
 </div>
@@ -917,7 +928,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect2">
-<h3 id="first-steps"><a class="anchor" href="#first-steps"></a>1.3. First Steps</h3>
+<h3 id="getting-started"><a class="anchor" href="#getting-started"></a>1.3. Getting Started</h3>
 <div class="paragraph">
 <p>What you need to start</p>
 </div>
@@ -928,7 +939,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect3">
-<h4 id="an-integrated-development-environment"><a class="anchor" href="#an-integrated-development-environment"></a>1.3.2. An Integrated Development Environment</h4>
+<h4 id="ide"><a class="anchor" href="#ide"></a>1.3.2. IDE</h4>
 <div class="paragraph">
 <p>You will need a modern IDE to work with Java. We recommend IntelliJ (you can download the Community Edition, which is free, <a href="https://www.jetbrains.com/idea/download">from here</a>. But Eclipse will work fine as well.</p>
 </div>
@@ -940,7 +951,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect3">
-<h4 id="getting-started"><a class="anchor" href="#getting-started"></a>1.3.4. Getting Started</h4>
+<h4 id="quick-start"><a class="anchor" href="#quick-start"></a>1.3.4. Quick Start</h4>
 <div class="paragraph">
 <p>The quickest way to create a new project is to take one of the starter projects on Github. You can find the starter project for TestNG at <a href="https://github.com/selcukes/selcukes-java-skeleton">selcukes-java-skeleton</a>.</p>
 </div>
@@ -957,7 +968,7 @@ cd selcukes-java-skeleton</code></pre>
 <p>Or simply <a href="https://github.com/selcukes/selcukes-java-skeleton/archive/master.zip">download a zip file from here</a>.</p>
 </div>
 <div class="paragraph">
-<p>If you are using Maven, you can also create a new project using one of the Serenity <a href="https://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven Archetypes</a>.</p>
+<p>If you are using Maven, you can also create a new project using one of the Selcukes <a href="https://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven Archetypes</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -977,6 +988,133 @@ cd selcukes-java-skeleton</code></pre>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="shell">$ gradle clean test</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="browser-tests"><a class="anchor" href="#browser-tests"></a>1.4. Browser Tests</h3>
+<div class="paragraph">
+<p>Add <code>selcukes.yaml</code> file in resource folder and updated below options as required</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">web</span>:
+  <span class="key">remote</span>: <span class="string"><span class="content">false</span></span>
+  <span class="key">browserName</span>: <span class="string"><span class="content">CHROME</span></span>
+  <span class="key">headLess</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://localhost:4444</span><span class="delimiter">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create Sample Browser Test as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">WebTest</span> {
+
+    <span class="predefined-type">DriverManager</span>&lt;RemoteWebDriver&gt; driverManager;
+    WebDriver driver;
+
+    <span class="annotation">@BeforeMethod</span>
+    <span class="type">void</span> beforeTest() {
+        driverManager = <span class="keyword">new</span> <span class="predefined-type">DriverManager</span>&lt;&gt;();
+        driver = driverManager.createDriver(DeviceType.BROWSER);
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> webTest() {
+        WebPage page = <span class="keyword">new</span> WebPage(driver);
+        page.enableDriverEvents();
+        page.open(<span class="string"><span class="delimiter">&quot;</span><span class="content">https://www.google.com/</span><span class="delimiter">&quot;</span></span>);
+        Assert.assertEquals(page.title(), <span class="string"><span class="delimiter">&quot;</span><span class="content">Google</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@AfterMethod</span>
+    <span class="type">void</span> afterTest() {
+        driverManager.getManager().destroyDriver();
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="desktop-tests"><a class="anchor" href="#desktop-tests"></a>1.5. Desktop Tests</h3>
+<div class="paragraph">
+<p>Add <code>selcukes.yaml</code> file in resource folder and updated below options as required</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">windows</span>:
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
+  <span class="key">winApp-path</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:/Program Files (x86)/Windows Application Driver/WinAppDriver.exe</span><span class="delimiter">&quot;</span></span>
+  <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:\\Windows\\System32\\notepad.exe</span><span class="delimiter">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create Sample Notepad Test as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">NotepadTest</span> {
+    <span class="predefined-type">DriverManager</span>&lt;WindowsDriver&gt; driverManager;
+
+    <span class="annotation">@BeforeTest</span>
+    <span class="directive">public</span> <span class="type">void</span> beforeTest() {
+        driverManager = <span class="keyword">new</span> <span class="predefined-type">DriverManager</span>&lt;&gt;();
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> notepadTest() {
+        WindowsDriver driver = driverManager.createDriver(DeviceType.DESKTOP);
+        WinPage page = <span class="keyword">new</span> WinPage(driver);
+        page.write(By.className(<span class="string"><span class="delimiter">&quot;</span><span class="content">Edit</span><span class="delimiter">&quot;</span></span>), <span class="string"><span class="delimiter">&quot;</span><span class="content">This is sample</span><span class="delimiter">&quot;</span></span>);
+
+    }
+
+    <span class="annotation">@AfterTest</span>
+    <span class="directive">public</span> <span class="type">void</span> afterTest() {
+        driverManager.getManager().destroyDriver();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mobile-tests"><a class="anchor" href="#mobile-tests"></a>1.6. Mobile Tests</h3>
+<div class="paragraph">
+<p>Add <code>selcukes.yaml</code> file in resource folder and updated below options as required</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">mobile</span>:
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
+  <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ApiDemos-debug.apk</span><span class="delimiter">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create Sample Browser Test as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MobileTest</span> {
+    <span class="predefined-type">DriverManager</span>&lt;AppiumDriver&gt; driverManager;
+
+    <span class="annotation">@BeforeTest</span>
+    <span class="type">void</span> beforeTest() {
+        driverManager = <span class="keyword">new</span> <span class="predefined-type">DriverManager</span>&lt;&gt;();
+    }
+
+    <span class="annotation">@Test</span>(enabled = <span class="predefined-constant">false</span>)
+    <span class="directive">public</span> <span class="type">void</span> remoteTest() {
+        AppiumDriver driver = driverManager.createDriver(DeviceType.MOBILE);
+        MobilePage page = <span class="keyword">new</span> MobilePage(driver);
+        page.click(By.xpath(<span class="string"><span class="delimiter">&quot;</span><span class="content">//android.widget.TextView[contains(@text,'Views')]</span><span class="delimiter">&quot;</span></span>));
+    }
+
+    <span class="annotation">@AfterTest</span>
+    <span class="type">void</span> afterTest() {
+        driverManager.getManager().destroyDriver();
+    }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -1057,7 +1195,7 @@ cd selcukes-java-skeleton</code></pre>
 <div class="sect2">
 <h3 id="driver-management"><a class="anchor" href="#driver-management"></a>2.3. Driver Management</h3>
 <div class="paragraph">
-<p>The primary use of WebDriver Binaries is the automation of driver management. For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., <code>chromeDriver()</code> for Chrome) and invoke the method <code>setup()</code>. The following example shows a test case using <a href="https://junit.org/junit5/">JUnit 5</a>, Selenium WebDriver, WebDriver Binaries. In this test, we invoke WebDriver Binaries in the setup method for all tests (<code>@BeforeAll</code>). This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.</p>
+<p>The primary use of WebDriver Binaries is the automation of driver management. For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., <code>chromeDriver()</code> for Chrome) and invoke the method <code>setup()</code>. The following example shows a test case using <a href="https://testng.org/doc/">TestNG</a>, Selenium WebDriver, WebDriver Binaries. In this test, we invoke WebDriver Binaries in the setup method for all tests (<code>@BeforeClass</code>). This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1179,7 +1317,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div class="sect3">
 <h4 id="read-jsonyml-files"><a class="anchor" href="#read-jsonyml-files"></a>3.2.1. Read Json/Yml files</h4>
 <div class="paragraph">
-<p>Create Test data file as test-users.json in resource folder</p>
+<p>Create Test data file as <code>test-users.json</code> in resource folder</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1198,7 +1336,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is an example class to demonstrate to parse  and read test-users.json</p>
+<p>Here is an example class to demonstrate to parse  and read <code>test-users.json</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1240,7 +1378,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <p>Here is another example to update test file in runtime</p>
 </div>
 <div class="paragraph">
-<p>Consider we have test_sample.yml located in resource folder as follows</p>
+<p>Consider we have <code>test_sample.yml</code> located in resource folder as follows</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1254,7 +1392,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is an example class to demonstrate to update test_sample.yml</p>
+<p>Here is an example class to demonstrate to update <code>test_sample.yml</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1287,7 +1425,28 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-extent-reports">Selcukes Extent Reports</a> is used to generate Extent reports for Cucumber JVM.</p>
 </div>
 <div class="sect2">
-<h3 id="setup-3"><a class="anchor" href="#setup-3"></a>4.1. Setup</h3>
+<h3 id="features-2"><a class="anchor" href="#features-2"></a>4.1. Features</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generates Emailable extent report</p>
+</li>
+<li>
+<p>Full page screenshots attached to report as base64 format</p>
+</li>
+<li>
+<p>Supports to add JUL based info logs to report</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>logger.info(()-&gt; "Navigated to Home page..")</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setup-3"><a class="anchor" href="#setup-3"></a>4.2. Setup</h3>
 <div class="paragraph">
 <p>Selcukes Extent Reports used as a Java dependency in Maven as follows</p>
 </div>
@@ -1312,7 +1471,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="usage"><a class="anchor" href="#usage"></a>4.2. Usage</h3>
+<h3 id="usage"><a class="anchor" href="#usage"></a>4.3. Usage</h3>
 <div class="paragraph">
 <p>Create extent.properties file in src/test/resources</p>
 </div>
@@ -1427,19 +1586,16 @@ thumbnail.report=false</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="yml"><span class="comment"># Selcukes Environment Properties</span>
-<span class="key">projectName</span>: <span class="string"><span class="content">Test Automation Report</span></span>
-<span class="key">env</span>: <span class="string"><span class="content">QA01</span></span>
-<span class="key">notifier</span>:
-  <span class="key">type</span>: <span class="string"><span class="content">teams</span></span>
-  <span class="key">webhook-token</span>: <span class="string"><span class="content">WEBXXX</span></span>
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">notifier</span>:
+  <span class="key">notification</span>: <span class="string"><span class="content">false</span></span>
+  <span class="key">type</span>: <span class="string"><span class="content">slack</span></span>
+  <span class="key">webhook-token</span>: <span class="string"><span class="content">WEBHOOKXXXX</span></span>
   <span class="key">api-token</span>: <span class="string"><span class="content">APIXXXX</span></span>
-  <span class="key">channel</span>: <span class="string"><span class="content">selcukes</span></span>
-  <span class="key">authorIcon</span>: <span class="string"><span class="content">https://avatars0.githubusercontent.com/u/2510294?s=400&amp;u=5d6412ba1dd13052992ff66317ae28d007a971d3&amp;v=4</span></span></code></pre>
+  <span class="key">channel</span>: <span class="string"><span class="content">selcukes</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Create testcase as follows</p>
+<p>Create test class as follows</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1540,9 +1696,17 @@ thumbnail.report=false</code></pre>
 <h2 id="selcukes-excel-runner"><a class="anchor" href="#selcukes-excel-runner"></a>7. Selcukes Excel Runner</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner">Selcukes Excel Runner</a> is an excel driven cucumber runner which helps to
-1. Execute cucumber scenarios in required order
-2. Execute only specific examples in a Scenario Outline</p>
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner">Selcukes Excel Runner</a> is an Excel driven cucumber runner which helps to</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Execute cucumber scenarios in required order</p>
+</li>
+<li>
+<p>Execute only specific examples in a Scenario Outline</p>
+</li>
+</ol>
 </div>
 <div class="sect2">
 <h3 id="setup-6"><a class="anchor" href="#setup-6"></a>7.1. Setup</h3>
@@ -1605,22 +1769,116 @@ thumbnail.report=false</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="community"><a class="anchor" href="#community"></a>9. Community</h2>
+<h2 id="selcukes-configuration"><a class="anchor" href="#selcukes-configuration"></a>9. Selcukes Configuration</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="environment-properties"><a class="anchor" href="#environment-properties"></a>9.1. Environment Properties</h3>
 <div class="paragraph">
-<p>There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in <a href="https://stackoverflow.com/questions/tagged/selcukes_java">StackOverflow</a>, using the tag <em>selcukes_java</em>. In addition, comments, suggestions, and bug-reporting should be made using the <a href="https://github.com/selcukes/issues">GitHub issues</a>. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  <a href="https://github.com/selcukes/pulls">pull request</a>.</p>
+<p>Selcukes environment properties are created using <code>selcukes.yaml</code> file</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="comment"># Selcukes Environment Properties</span>
+<span class="key">projectName</span>: <span class="string"><span class="content">Selcukes</span></span>
+<span class="key">env</span>: <span class="string"><span class="content">Dev</span></span>
+<span class="key">proxy</span>: <span class="string"><span class="content">false</span></span>
+<span class="key">baseUrl</span>:
+<span class="key">excelRunner</span>:
+  <span class="key">filePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>
+  <span class="key">suiteName</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">smoke</span><span class="delimiter">&quot;</span></span>
+<span class="key">web</span>:
+  <span class="key">remote</span>: <span class="string"><span class="content">false</span></span>
+  <span class="key">browserName</span>: <span class="string"><span class="content">CHROME</span></span>
+  <span class="key">headLess</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://localhost:4444</span><span class="delimiter">&quot;</span></span>
+<span class="key">windows</span>:
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
+  <span class="key">winApp-path</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:/Program Files (x86)/Windows Application Driver/WinAppDriver.exe</span><span class="delimiter">&quot;</span></span>
+  <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:\\Windows\\System32\\notepad.exe</span><span class="delimiter">&quot;</span></span>
+<span class="key">mobile</span>:
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
+  <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ApiDemos-debug.apk</span><span class="delimiter">&quot;</span></span>
+<span class="key">video</span>:
+  <span class="key">recording</span>: <span class="string"><span class="content">false</span></span>
+  <span class="key">recorderType</span>: <span class="string"><span class="content">FFMPEG</span></span>
+  <span class="key">ffmpegPath</span>:
+  <span class="key">watermarkStatus</span>: <span class="string"><span class="content">false</span></span>
+<span class="key">notifier</span>:
+  <span class="key">notification</span>: <span class="string"><span class="content">false</span></span>
+  <span class="key">type</span>: <span class="string"><span class="content">slack</span></span>
+  <span class="key">webhook-token</span>: <span class="string"><span class="content">WEBHOOKXXXX</span></span>
+  <span class="key">api-token</span>: <span class="string"><span class="content">APIXXXX</span></span>
+  <span class="key">channel</span>: <span class="string"><span class="content">selcukes</span></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="runtime-properties"><a class="anchor" href="#runtime-properties"></a>9.2. Runtime Properties</h3>
+<div class="paragraph">
+<p>The below <code>selcukes.properties</code> provides flexibility to override default environment properties in runtime.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>selcukes.excel.runner=  # true or false. default: true
+selcukes.excel.suiteName=     # Name of Sheet in Excel Suite File
+selcukes.excel.suiteFile=       # Excel File path used as excel runner
+selcukes.extent.report=      # true or false. default: true.
+selcukes.features=              # comma separated paths to feature files. example: path/to/example.feature, path/to/other.feature
+selcukes.tags=           # tag expression. example: @smoke and not @slow
+selcukes.glue=                  # comma separated package names. example: com.example.glue
+selcukes.plugin=                # comma separated plugin strings. example: pretty, json:path/to/report.json
+selcukes.reports.path=        # path/target
+selcukes.timestamp.report=     # true or false. default: false</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logger-properties"><a class="anchor" href="#logger-properties"></a>9.3. Logger Properties</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="comment"># To add the FileHandler, use the following line.</span>
+<span class="key">handlers</span>: <span class="string"><span class="content">java.util.logging.FileHandler, java.util.logging.ConsoleHandler</span></span>
+
+<span class="comment">#.level: INFO</span>
+<span class="key">.level</span>: <span class="string"><span class="content">INFO</span></span>
+
+<span class="comment"># For example, set the io.github.selcukes.core logger to only log SEVERE</span>
+<span class="key">io.github.selcukes.level</span>: <span class="string"><span class="content">ALL</span></span>
+<span class="key">io.github.selcukes.handler</span>: <span class="string"><span class="content">java.util.logging.ConsoleHandler</span></span>
+
+<span class="comment"># Default file output is in user's home directory.</span>
+<span class="key">java.util.logging.FileHandler.pattern</span>: <span class="string"><span class="content">target/selcukes.log</span></span>
+<span class="key">java.util.logging.FileHandler.limit</span>: <span class="string"><span class="content">50000</span></span>
+<span class="key">java.util.logging.FileHandler.count</span>: <span class="string"><span class="content">1</span></span>
+<span class="key">java.util.logging.FileHandler.formatter</span>: <span class="string"><span class="content">io.github.selcukes.commons.logging.SelcukesLoggerFormatter</span></span>
+<span class="key">java.util.logging.FileHandler.level</span>: <span class="string"><span class="content">FINE</span></span>
+
+<span class="comment"># Limit the message that are printed on the console to INFO and above.</span>
+<span class="key">java.util.logging.ConsoleHandler.level</span>: <span class="string"><span class="content">FINE</span></span>
+<span class="comment">#java.util.logging.ConsoleHandler.formatter : java.util.logging.SimpleFormatter</span>
+<span class="key">java.util.logging.ConsoleHandler.formatter</span>: <span class="string"><span class="content">io.github.selcukes.commons.logging.SelcukesColorFormatter</span></span></code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="support"><a class="anchor" href="#support"></a>10. Support</h2>
+<h2 id="community"><a class="anchor" href="#community"></a>10. Community</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in <a href="https://stackoverflow.com/questions/tagged/selcukes_java">StackOverflow</a>, using the tag <em>selcukes_java</em>. In addition, comments, suggestions, and bug-reporting should be made using the <a href="https://github.com/selcukes/selcukes-java/issues">GitHub issues</a>. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  <a href="https://github.com/selcukes/selcukes-java/pulls">pull request</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="support"><a class="anchor" href="#support"></a>11. Support</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://opencollective.com/selcukes">Selcukes</a> is part of <a href="https://opencollective.com/selcukes">OpenCollective</a>, an online funding platform for open and transparent communities. You can support the project by contributing as a backer (i.e., a personal <a href="https://opencollective.com/selcukes/donate">donation</a> or <a href="https://opencollective.com/selcukes/contribute/backer-8132/checkout">recurring contribution</a>) or as a <a href="https://opencollective.com/selcukes/contribute/sponsor-8133/checkout">sponsor</a> (i.e., a recurring contribution by a company).</p>
 </div>
 <h2 id="about" class="discrete">About</h2>
 <div class="paragraph">
-<p>Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by <a href="https://rameshbabuprudhvi.github.io/">Ramesh Babu Prudhvi</a> (<a href="https://twitter.com/amrameshbabu">@amrameshbabu</a>), licensed under the terms of <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. This documentation (also available in <a href="selcukes.pdf">PDF</a> and <a href="selcukes.epub">EPUB</a>) is released under the terms of <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC BY-NC-SA 2.0</a>.</p>
+<p>Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by <a href="https://github.com/RameshBabuPrudhvi/">Ramesh Babu Prudhvi</a> (<a href="https://twitter.com/amrameshbabu">@amrameshbabu</a>), licensed under the terms of <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. This documentation (also available in <a href="selcukes.pdf">PDF</a> and <a href="selcukes.epub">EPUB</a>) is released under the terms of <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC BY-NC-SA 2.0</a>.</p>
 </div>
 </div>
 </div>
@@ -1628,7 +1886,7 @@ thumbnail.report=false</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.6.0<br>
-Updated on 2022-04-24T08:10:26Z
+Updated on 2022-04-25T10:26:48Z
 </div>
 </div>
 </body>

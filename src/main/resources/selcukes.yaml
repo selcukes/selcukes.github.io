@@ -1,5 +1,4 @@
 # Selcukes Environment Properties
----
 projectName: Selcukes
 env: Dev
 proxy: false
