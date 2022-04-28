@@ -4,6 +4,7 @@ Version {project-version}
 
 :revnumber: {project-version}
 == Selcukes Core
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-core[Selcukes Core] can help your team to build high-quality and highly scalable automated tests.
 
 === Overview
@@ -15,7 +16,8 @@ As an open source company, we're passionately engaged in numerous projects, init
 
 .Unified Framework API
 ****
-All features that we provide- use the same syntax. Once you learn how to write tests for the web, you can start immediately writing for mobile, desktop, or REST.
+All features that we provide- use the same syntax.
+Once you learn how to write tests for the web, you can start immediately writing for mobile, desktop, or REST.
 ****
 
 .Test Everything
@@ -25,11 +27,15 @@ Web, including responsive, iOS, Android, Desktop, and REST services.
 
 .Integrations
 ****
-Seamlessly integrate the framework with your existing tools and processes. Execute tests in the clouds, distributed and publish test results in reporting solutions.
+Seamlessly integrate the framework with your existing tools and processes.
+Execute tests in the clouds, distributed and publish test results in reporting solutions.
 ****
 
 === Features
-1. Easy add new logic to your tests without causing regression issues. Control the whole execution workflow - change browsers or reuse them. Retry your failing tests to make sure that there is a real problem.
+
+1. Easy add new logic to your tests without causing regression issues.
+Control the whole execution workflow - change browsers or reuse them.
+Retry your failing tests to make sure that there is a real problem.
 2. Automate UI actions or user scenarios on real devices or emulators with Selcukes features from test creation to execution.
 3. Cross-platform screenshot and video recording on test failure
 
@@ -39,25 +45,33 @@ Seamlessly integrate the framework with your existing tools and processes. Execu
 image::techs-used.png[scaledwidth=100%]
 
 === Getting Started
+
 What you need to start
 
 ==== Java 11
-Test Automation is a development activity, so you will need some familiarity with Java. Selcukes uses Java 11, so make sure you have a http://www.oracle.com/technetwork/java/javase/downloads/index.html[JDK 11 or later] installed.
+
+Test Automation is a development activity, so you will need some familiarity with Java.
+Selcukes uses Java 11, so make sure you have a http://www.oracle.com/technetwork/java/javase/downloads/index.html[JDK 11 or later] installed.
 
 ==== IDE
 
-You will need a modern IDE to work with Java. We recommend IntelliJ (you can download the Community Edition, which is free, https://www.jetbrains.com/idea/download[from here]. But Eclipse will work fine as well.
+You will need a modern IDE to work with Java.
+We recommend IntelliJ (you can download the Community Edition, which is free, https://www.jetbrains.com/idea/download[from here].
+But Eclipse will work fine as well.
 
 ==== A Build Tool
 
-You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports. Make sure you have either http://www.gradle.org/downloads[Gradle 3.x or higher] or https://maven.apache.org/download.cgi[Maven 3.3.x or higher] installed.
+You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports.
+Make sure you have either http://www.gradle.org/downloads[Gradle 3.x or higher] or https://maven.apache.org/download.cgi[Maven 3.3.x or higher] installed.
 
 ==== Quick Start
 
-The quickest way to create a new project is to take one of the starter projects on Github. You can find the starter project for TestNG at https://github.com/selcukes/selcukes-java-skeleton[selcukes-java-skeleton].
+The quickest way to create a new project is to take one of the starter projects on Github.
+You can find the starter project for TestNG at https://github.com/selcukes/selcukes-java-skeleton[selcukes-java-skeleton].
 
 You can clone this repository:
 [source,shell]
+
 ----
 git clone https://github.com/selcukes/selcukes-java-skeleton.git
 cd selcukes-java-skeleton
@@ -69,7 +83,8 @@ If you are using Maven, you can also create a new project using one of the Selcu
 
 ==== So far so good?
 
-The starter project comes with a demo test that you can run. From the command line, run either
+The starter project comes with a demo test that you can run.
+From the command line, run either
 
 [source,shell]
 ----
@@ -82,56 +97,90 @@ or
 ----
 $ gradle clean test
 ----
+
 === Browser Tests
+
 Add `selcukes.yaml` file in resource folder and updated below options as required
 [source,yaml]
+
 ----
 include::../../main/resources/selcukes.yaml[lines=9..13]
 ----
+
 Create Sample Browser Test as follows
 [source,java]
+
 ----
 include::../../test/java/io/github/selcukes/tests/WebTest.java[tags=snippet-in-doc,indent=0]
 ----
+
 === Desktop Tests
+
 Add `selcukes.yaml` file in resource folder and updated below options as required
 [source,yaml]
+
 ----
 include::../../main/resources/selcukes.yaml[lines=14..17]
 ----
-Create Sample Notepad Test as follows
+
+Create Sample WindowDriver Test for Notepad application as follows
 [source,java]
+
 ----
 include::../../test/java/io/github/selcukes/tests/NotepadTest.java[tags=snippet-in-doc,indent=0]
 ----
+
 === Mobile Tests
+
 Add `selcukes.yaml` file in resource folder and updated below options as required
 [source,yaml]
+
 ----
 include::../../main/resources/selcukes.yaml[lines=18..20]
 ----
-Create Sample Browser Test as follows
+
+Create Sample AndroidDriver Test for `ApiDemos-debug.apk` as follows
 [source,java]
+
 ----
 include::../../test/java/io/github/selcukes/tests/MobileTest.java[tags=snippet-in-doc,indent=0]
 ----
+
 == WebDriver Binaries
+
 https://github.com/selcukes/selcukes-java/tree/master/webdriver-binaries[WebDriver Binaries] is an open-source Java library that automatically downloads and configures the binary drivers (e.g., chromedriver, geckodriver, msedgedriver, etc.) required by Selenium WebDriver.
 
 === Motivation
-https://www.selenium.dev/documentation/webdriver/[Selenium WebDriver] is a library that allows controlling web browsers programmatically. It provides a cross-browser API that can be used to drive web browsers (e.g., Chrome, Edge, or Firefox, among others) using different programming languages (e.g., Java, JavaScript, Python, C#, or Ruby). The primary use of Selenium WebDriver is implementing automated tests for web applications.
 
-Selenium WebDriver carries out the automation using the native support of each browser. For this reason, we need to place a binary file called _driver_ between the test using the Selenium WebDriver API and the browser to be controlled. Examples of drivers for major web browsers nowadays are https://chromedriver.chromium.org/[chromedriver] (for Chrome), https://github.com/mozilla/geckodriver/[geckodriver] (for Firefox), or https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/[msedgedriver] (for Edge). As you can see in the following picture, the communication between the WebDriver API and the driver binary is done using a standard protocol called https://www.w3.org/TR/webdriver/[W3C WebDriver] (formerly the so-called _JSON Wire Protocol_). Then, the communication between the driver and the browser is done using the native capabilities of each browser.
+https://www.selenium.dev/documentation/webdriver/[Selenium WebDriver] is a library that allows controlling web browsers programmatically.
+It provides a cross-browser API that can be used to drive web browsers (e.g., Chrome, Edge, or Firefox, among others) using different programming languages (e.g., Java, JavaScript, Python, C#, or Ruby).
+The primary use of Selenium WebDriver is implementing automated tests for web applications.
+
+Selenium WebDriver carries out the automation using the native support of each browser.
+For this reason, we need to place a binary file called _driver_ between the test using the Selenium WebDriver API and the browser to be controlled.
+Examples of drivers for major web browsers nowadays are https://chromedriver.chromium.org/[chromedriver] (for Chrome), https://github.com/mozilla/geckodriver/[geckodriver] (for Firefox), or https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/[msedgedriver] (for Edge).
+As you can see in the following picture, the communication between the WebDriver API and the driver binary is done using a standard protocol called https://www.w3.org/TR/webdriver/[W3C WebDriver] (formerly the so-called _JSON Wire Protocol_).
+Then, the communication between the driver and the browser is done using the native capabilities of each browser.
 
 [[webdriver_arch]]
 [.thumb]
 .Selenium WebDriver Architecture
 image::selenium-webdriver-architecture.png[scaledwidth=100%]
 
-From a practical point of view, we need to make a _driver management process_ to use Selenium WebDriver. This process consists on:
+From a practical point of view, we need to make a _driver management process_ to use Selenium WebDriver.
+This process consists on:
 
-1. Download. Drivers are platform-specific binary files. To download the proper driver, we have to identify the driver type we need (e.g., chromedriver if we want to use Chrome), the operating system (typically, Windows, Linux, or Mac OS), the architecture (typically, 32 or 64 bits), and very important, the driver version. Concerning the version, each driver release is usually compatible with a given browser version(s). For this reason, we need to discover the correct driver version for a specific browser release (typically reading the driver documentation or release notes).
-2. Setup. Once we have downloaded the driver to our computer, we need to provide a way to locate this driver from our Selenium WebDriver tests. In Java, this setup can be done in two different ways. First, we can add the driver location to our `PATH` environmental variable. Second, we can use _Java system properties_ to export the driver path. Each driver path should be identified using a given system property, as follows:
+1. Download.
+Drivers are platform-specific binary files.
+To download the proper driver, we have to identify the driver type we need (e.g., chromedriver if we want to use Chrome), the operating system (typically, Windows, Linux, or Mac OS), the architecture (typically, 32 or 64 bits), and very important, the driver version.
+Concerning the version, each driver release is usually compatible with a given browser version(s).
+For this reason, we need to discover the correct driver version for a specific browser release (typically reading the driver documentation or release notes).
+2. Setup.
+Once we have downloaded the driver to our computer, we need to provide a way to locate this driver from our Selenium WebDriver tests.
+In Java, this setup can be done in two different ways.
+First, we can add the driver location to our `PATH` environmental variable.
+Second, we can use _Java system properties_ to export the driver path.
+Each driver path should be identified using a given system property, as follows:
 +
 [source,java]
 ----
@@ -141,9 +190,13 @@ System.setProperty("webdriver.edge.driver", "/path/to/msedgedriver");
 System.setProperty("webdriver.opera.driver", "/path/to/operadriver");
 System.setProperty("webdriver.ie.driver", "C:/path/to/IEDriverServer.exe");
 ----
-3. Maintenance. Last but not least, we need to warranty the compatibility between driver and browser in time. This step is relevant since modern browsers automatically upgrade themselves (i.e., they are _evergreen_ browsers), and for this reason, the compatibility driver-browser is not warranted in the long run. For instance, when a WebDriver test using Chrome faces a driver incompatibility, it reports the following error message: "_this version of chromedriver only supports chrome version N_." As you can see in https://stackoverflow.com/search?q=this+version+of+chromedriver+only+supports+Chrome+version[StackOverflow], this is a recurrent problem for manually managed drivers (chromedriver in this case).
+3. Maintenance.
+Last but not least, we need to warranty the compatibility between driver and browser in time.
+This step is relevant since modern browsers automatically upgrade themselves (i.e., they are _evergreen_ browsers), and for this reason, the compatibility driver-browser is not warranted in the long run.
+For instance, when a WebDriver test using Chrome faces a driver incompatibility, it reports the following error message: "_this version of chromedriver only supports chrome version N_." As you can see in https://stackoverflow.com/search?q=this+version+of+chromedriver+only+supports+Chrome+version[StackOverflow], this is a recurrent problem for manually managed drivers (chromedriver in this case).
 
 === Setup
+
 WebDriver Binaries is primarily used as a Java dependency . We typically use a _build tool_ (such as https://maven.apache.org/[Maven] or https://gradle.org/[Gradle]) to resolve the WebDriverManager dependency. in Maven as follows (notice that it is declared using the `test` scope, since it is typically used in tests classes):
 
 [source,xml,subs="attributes+"]
@@ -166,14 +219,20 @@ dependencies {
 ----
 
 === Driver Management
-The primary use of WebDriver Binaries is the automation of driver management. For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., `chromeDriver()` for Chrome) and invoke the method `setup()`. The following example shows a test case using https://testng.org/doc/[TestNG], Selenium WebDriver, WebDriver Binaries. In this test, we invoke WebDriver Binaries in the setup method for all tests (`@BeforeClass`). This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.
+
+The primary use of WebDriver Binaries is the automation of driver management.
+For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., `chromeDriver()` for Chrome) and invoke the method `setup()`.
+The following example shows a test case using https://testng.org/doc/[TestNG], Selenium WebDriver, WebDriver Binaries.
+In this test, we invoke WebDriver Binaries in the setup method for all tests (`@BeforeClass`).
+This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.
 
 [source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/BrowserTest.java[tags=snippet-in-doc,indent=0]
 ----
 
-WebDriver Binaries provides a set of _binaries_ for Chrome, Firefox, Edge, Opera, Chromium, and Internet Explorer. The basic use of these binary is the following:
+WebDriver Binaries provides a set of _binaries_ for Chrome, Firefox, Edge, Opera, Chromium, and Internet Explorer.
+The basic use of these binary is the following:
 
 [source,java]
 ----
@@ -186,18 +245,38 @@ WebDriverBinary.operaDriver().setup();
 ----
 
 ==== Resolution Algorithm
-WebDriver Binaries executes a _resolution algorithm_ when calling to `setup()` in a given manager. The most relevant parts of this algorithm are the following:
 
-1. WebDriverBinary tries to find the browser version. To this aim, WebDriverBinary uses internally a knowledge database called commands' database. This database is a collection of shell commands used to discover the version of a given browser in the different operating systems (e.g., `google-chrome --version` for Chrome in Linux).
+WebDriver Binaries executes a _resolution algorithm_ when calling to `setup()` in a given manager.
+The most relevant parts of this algorithm are the following:
+
+1. WebDriverBinary tries to find the browser version.
+To this aim, WebDriverBinary uses internally a knowledge database called commands' database.
+This database is a collection of shell commands used to discover the version of a given browser in the different operating systems (e.g., `google-chrome --version` for Chrome in Linux).
 2. Using the browser version, it tries to find the proper driver version.
-This process is different for each browser. In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release. For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100[file]. Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox. For this reason, WebDriverManager uses another knowledge database called versions database. This database maps the browser releases with the known compatible driver versions.
-3. Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at `%temp%webdriver` by default). These drivers are reused in subsequent calls.
+This process is different for each browser.
+In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release.
+For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100[file].
+Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox.
+For this reason, WebDriverManager uses another knowledge database called versions database.
+This database maps the browser releases with the known compatible driver versions.
+3. Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at `%temp%webdriver` by default).
+These drivers are reused in subsequent calls.
 4. Finally, WebDriverManager exports the driver path using Java system properties (e.g., `webdriver.chrome.driver` in the case of the Chrome manager).
 
-This process automated the first two stages of the driver management previously introduced, i.e., download and setup. To support the third stage (i.e., maintenance), WebDriverManager implements _resolution cache_. This cache (called by default `resolution.properties` and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions. This relationship is valid during a given _time-to-live_ (TTL). The default value for this TTL is 1 hour for browsers and 1 day for drivers. In other words, the discovered browser version is valid for 1 hour, and the driver version is considered correct for 1 day. This mechanism improves the performance dramatically since the second (and following) calls to the resolution algorithm for the same browser are resolved using only local resources (i.e., without using the shell nor requesting external services).
+This process automated the first two stages of the driver management previously introduced, i.e., download and setup.
+To support the third stage (i.e., maintenance), WebDriverManager implements _resolution cache_.
+This cache (called by default `resolution.properties` and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions.
+This relationship is valid during a given _time-to-live_ (TTL).
+The default value for this TTL is 1 hour for browsers and 1 day for drivers.
+In other words, the discovered browser version is valid for 1 hour, and the driver version is considered correct for 1 day.
+This mechanism improves the performance dramatically since the second (and following) calls to the resolution algorithm for the same browser are resolved using only local resources (i.e., without using the shell nor requesting external services).
 
 === Advanced Configuration
-WebDriver Binaries provides different ways of configuration. First, by using its _Java API_. To that aim, each manager (e.g., `chromeDriver()`, `firefoxDriver()`, etc., allows to concatenate different methods of this API to specify custom options or preferences. For example (the explanation of these methods and the other possibilities are explained in the tables at the end of this section):
+
+WebDriver Binaries provides different ways of configuration.
+First, by using its _Java API_.
+To that aim, each manager (e.g., `chromeDriver()`, `firefoxDriver()`, etc., allows to concatenate different methods of this API to specify custom options or preferences.
+For example (the explanation of these methods and the other possibilities are explained in the tables at the end of this section):
 
 [source,java]
 ----
@@ -205,10 +284,13 @@ WebDriverBinary.firefoxDriver().version("v0.26.0").setup();
 WebDriverBinary.chromeDriver().targetPath("temp").setup();
 WebDriverBinary.firefoxDriver().arch32().setup();
 ----
+
 == Selcukes DataBind
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind[Selcukes DataBind] helps to parse Json and Yml files
 
 === Setup
+
 Selcukes DataBind used as a Java dependency in Maven as follows
 
 [source,xml,subs="attributes+"]
@@ -228,44 +310,114 @@ dependencies {
     implementation("io.github.selcukes:selcukes-databind:{project-version}")
 }
 ----
-=== Data Parser
-==== Read Json/Yml files
-Create Test data file as `test-users.json` in resource folder
+
+=== Data Mapper
+
+DataMapper object helps to read and write Json or yaml/yml files with `@DataFile` annotation.
+
+==== Resolution Algorithm
+
+DataMapper looks for matching data files in test resource folder by converting POJO class name to a SnakeCase json or yaml/yml file.
+
+- For POJO class `TestUsers.java`
+- Matching test data files are `test_users.json` or `test_users.yml` or `test_users.yml`
+
+`@DataFile` annotation also takes additional attributes as follows
+
+- fileName : Specify custom data file like 'mydata.json'
+- filePath : path where data file is located. 'src/main/resources'
+- rootFolder : root directory
+
+==== Read data files
+
+Let's first look at the `test_users.json` file we'll be reading
 [source,json]
+
 ----
 {
   "users": [
     {
-      "username": "junk",
+      "username": "MyName",
       "password": "things"
     },
     {
-      "username": "spam",
+      "username": "TestName",
       "password": "eggs"
     }
   ]
 }
 ----
-Here is an example class to demonstrate to parse  and read `test-users.json`
+
+Then, let's define the POJO class with `@DataFile` annotation
 [source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[lines=49..53]
+----
+
+Finally, let's create our User class:
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[lines=55..59]
+----
+
+We're going to use DataMapper to read our JSON file into an TestUsers object, so let's set that up now
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[lines=36..36]
+----
+
+We'll find that our TestUsers object is populated from the file, including the list of User.
+
+Here is full example code to demonstrate to parse and read `test_users.json` file
+[source,java]
+
 ----
 include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[tags=snippet-in-doc,indent=0]
 ----
-==== Update Json/Yml files
-Here is another example to update test file in runtime
 
-Consider we have `test_sample.yml` located in resource folder as follows
+==== Update data files
+
+We're also going to use DataMapper to write a TestSample out to a file.
+This time we will try using yml file.
+
+Let's quickly look at the `test_sample.yml` file we'll be writing the values
 [source,yml]
+
 ----
 users:
   user1:
-    username: "junk"
+    username: "Ramesh"
     password: "4177472e-23a3-4426-893f-8a794af7189c"
   user2:
-    username: "spam"
+    username: "Babu"
     password: "40aafad2-1d24-4d6c-85e2-b7630dc17c57"
 ----
-Here is an example class to demonstrate to update `test_sample.yml`
+
+Then, let's define the POJO class with `@DataFile` annotation
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[lines=41..45]
+----
+
+Let's read our TestSample and update values:
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[lines=35..37]
+----
+
+Let's write our updated TestSample values:
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[lines=38]
+----
+
+Here is full example code to demonstrate to update and write values to `test_sample.yml`
 
 [source,java]
 ----
@@ -273,17 +425,21 @@ include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.j
 ----
 
 == Selcukes Extent Reports
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-extent-reports[Selcukes Extent Reports] is used to generate Extent reports for Cucumber JVM.
 
 === Features
+
 1. Generates Emailable extent report
 2. Full page screenshots attached to report as base64 format
 3. Supports to add JUL based info logs to report
+
 ----
 logger.info(()-> "Navigated to Home page..")
 ----
 
 === Setup
+
 Selcukes Extent Reports used as a Java dependency in Maven as follows
 
 [source,xml,subs="attributes+"]
@@ -294,6 +450,7 @@ Selcukes Extent Reports used as a Java dependency in Maven as follows
     <version>{project-version}</version>
 </dependency>
 ----
+
 In the case of a Gradle project, we can declare Selcukes Extent Reports as follows:
 
 [source,json,subs="attributes+"]
@@ -302,9 +459,12 @@ dependencies {
     implementation("io.github.selcukes:selcukes-extent-reports:{project-version}")
 }
 ----
+
 === Usage
+
 Create extent.properties file in src/test/resources
 [source,xml]
+
 ----
 extent.reporter.spark.start=true
 extent.reporter.spark.out=target/extent-reports/Sample.html
@@ -312,8 +472,10 @@ systeminfo.Author=Ramesh
 timestamp.report=false
 thumbnail.report=false
 ----
+
 Add Selcukes Extent Reports plugin to cucumber runner as follows
 [source,java]
+
 ----
 @CucumberOptions(tags = "@tag1", plugin = {
         "io.github.selcukes.extent.report.SelcukesExtentAdapter:",
@@ -321,18 +483,27 @@ Add Selcukes Extent Reports plugin to cucumber runner as follows
 
 })
 ----
+
 Update Cucumber Hooks file as follows
 [source,java]
+
 ----
 include::../../test/java/io/github/selcukes/tests/cucumber/CucumberHooks.java[tags=snippet-in-doc,indent=0]
 ----
+
 == Selcukes Notifier
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-notifier[Selcukes Notifier] helps to send notifications using Slack and Microsoft Teams.
 
 === Motivation
-Currently, we moved to On premises environments. To view HTML report generated by automation scripts we need to connect to the different VPN’s to open the report and check the related screenshots to see which test case has failed and why. So, why not raise an alert as soon as the test case fails? And why not attach a screenshot along with that alert so that all the stakeholders can actually see what has failed in the application?
+
+Currently, we moved to On premises environments.
+To view HTML report generated by automation scripts we need to connect to the different VPN’s to open the report and check the related screenshots to see which test case has failed and why.
+So, why not raise an alert as soon as the test case fails?
+And why not attach a screenshot along with that alert so that all the stakeholders can actually see what has failed in the application?
 
 === Setup
+
 Selcukes Notifier used as a Java dependency in Maven as follows
 
 [source,xml,subs="attributes+"]
@@ -343,6 +514,7 @@ Selcukes Notifier used as a Java dependency in Maven as follows
     <version>{project-version}</version>
 </dependency>
 ----
+
 In the case of a Gradle project, we can declare Selcukes Notifier as follows:
 
 [source,json,subs="attributes+"]
@@ -351,10 +523,13 @@ dependencies {
     implementation("io.github.selcukes:selcukes-notifier:{project-version}")
 }
 ----
+
 === Usage
+
 Add selcukes.yaml and update below config as follows
 [source,yml]
 [source,yaml]
+
 ----
 include::../../main/resources/selcukes.yaml[lines=26..31]
 ----
@@ -376,10 +551,13 @@ public class NotifierTest {
     }
 }
 ----
+
 == Selcukes Snapshot
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-snapshot[Selcukes Snapshot] is a utility library written in Java for creating full page screenshots using Selenium WebDriver.
 
 === Setup
+
 Selcukes Snapshot used as a Java dependency in Maven as follows
 
 [source,xml,subs="attributes+"]
@@ -390,6 +568,7 @@ Selcukes Snapshot used as a Java dependency in Maven as follows
     <version>{project-version}</version>
 </dependency>
 ----
+
 In the case of a Gradle project, we can declare Selcukes Snapshot as follows:
 
 [source,json,subs="attributes+"]
@@ -398,18 +577,23 @@ dependencies {
     implementation("io.github.selcukes:selcukes-snapshot:{project-version}")
 }
 ----
+
 === Usage
+
 [source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/SnapshotTest.java[tags=snippet-in-doc,indent=0]
 ----
+
 == Selcukes Excel Runner
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner[Selcukes Excel Runner] is an Excel driven cucumber runner which helps to
 
 1. Execute cucumber scenarios in required order
 2. Execute only specific examples in a Scenario Outline
 
 === Setup
+
 Selcukes Excel Runner used as a Java dependency in Maven as follows
 
 [source,xml,subs="attributes+"]
@@ -420,6 +604,7 @@ Selcukes Excel Runner used as a Java dependency in Maven as follows
     <version>{project-version}</version>
 </dependency>
 ----
+
 In the case of a Gradle project, we can declare Selcukes Excel Runner as follows:
 
 [source,json,subs="attributes+"]
@@ -430,9 +615,11 @@ dependencies {
 ----
 
 == Selcukes Reports
+
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-reports[Selcukes Reports] helps to record video and send notifications on test failures
 
 === Setup
+
 Selcukes Reports used as a Java dependency in Maven as follows
 
 [source,xml,subs="attributes+"]
@@ -443,6 +630,7 @@ Selcukes Reports used as a Java dependency in Maven as follows
     <version>{project-version}</version>
 </dependency>
 ----
+
 In the case of a Gradle project, we can declare Selcukes Reports as follows:
 
 [source,json,subs="attributes+"]
@@ -451,13 +639,18 @@ dependencies {
     implementation("io.github.selcukes:selcukes-reports:{project-version}")
 }
 ----
+
 == Selcukes Configuration
+
 === Environment Properties
+
 Selcukes environment properties are created using `selcukes.yaml` file
 [source,yaml]
+
 ----
 include::../../main/resources/selcukes.yaml[]
 ----
+
 === Runtime Properties
 
 The below `selcukes.properties` provides flexibility to override default environment properties in runtime.
@@ -474,20 +667,31 @@ selcukes.plugin=                # comma separated plugin strings. example: prett
 selcukes.reports.path=        # path/target
 selcukes.timestamp.report=     # true or false. default: false
 ----
+
 === Logger Properties
+
 [source,yaml]
 ----
 include::../../main/resources/selcukes-logback.yaml[]
 ----
+
 == Community
-There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in https://stackoverflow.com/questions/tagged/selcukes_java[StackOverflow], using the tag _selcukes_java_. In addition, comments, suggestions, and bug-reporting should be made using the https://github.com/selcukes/selcukes-java/issues[GitHub issues]. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  https://github.com/selcukes/selcukes-java/pulls[pull request].
+
+There are two ways to try to get community support related to Selcukes.
+First, questions about it can be discussed in https://stackoverflow.com/questions/tagged/selcukes_java[StackOverflow], using the tag _selcukes_java_.
+In addition, comments, suggestions, and bug-reporting should be made using the https://github.com/selcukes/selcukes-java/issues[GitHub issues].
+Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  https://github.com/selcukes/selcukes-java/pulls[pull request].
 
 == Support
-https://opencollective.com/selcukes[Selcukes] is part of https://opencollective.com/selcukes[OpenCollective], an online funding platform for open and transparent communities. You can support the project by contributing as a backer (i.e., a personal https://opencollective.com/selcukes/donate[donation] or https://opencollective.com/selcukes/contribute/backer-8132/checkout[recurring contribution]) or as a https://opencollective.com/selcukes/contribute/sponsor-8133/checkout[sponsor] (i.e., a recurring contribution by a company).
+
+https://opencollective.com/selcukes[Selcukes] is part of https://opencollective.com/selcukes[OpenCollective], an online funding platform for open and transparent communities.
+You can support the project by contributing as a backer (i.e., a personal https://opencollective.com/selcukes/donate[donation] or https://opencollective.com/selcukes/contribute/backer-8132/checkout[recurring contribution]) or as a https://opencollective.com/selcukes/contribute/sponsor-8133/checkout[sponsor] (i.e., a recurring contribution by a company).
 
 ifndef::backend-pdf[]
 ifndef::backend-epub3[]
-[discrete]
 
+[discrete]
 == About
-Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by https://github.com/RameshBabuPrudhvi/[Ramesh Babu Prudhvi] (https://twitter.com/amrameshbabu[@amrameshbabu]), licensed under the terms of https://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 License]. This documentation (also available in link:selcukes.pdf[PDF] and link:selcukes.epub[EPUB]) is released under the terms of https://creativecommons.org/licenses/by-nc-sa/2.0/[CC BY-NC-SA 2.0].
+
+Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by https://github.com/RameshBabuPrudhvi/[Ramesh Babu Prudhvi] (https://twitter.com/amrameshbabu[@amrameshbabu]), licensed under the terms of https://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 License].
+This documentation (also available in link:selcukes.pdf[PDF] and link:selcukes.epub[EPUB]) is released under the terms of https://creativecommons.org/licenses/by-nc-sa/2.0/[CC BY-NC-SA 2.0].
