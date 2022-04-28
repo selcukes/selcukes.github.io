@@ -813,10 +813,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#selcukes-databind">3. Selcukes DataBind</a>
 <ul class="sectlevel2">
 <li><a href="#setup-2">3.1. Setup</a></li>
-<li><a href="#data-parser">3.2. Data Parser</a>
+<li><a href="#data-mapper">3.2. Data Mapper</a>
 <ul class="sectlevel3">
-<li><a href="#read-jsonyml-files">3.2.1. Read Json/Yml files</a></li>
-<li><a href="#update-jsonyml-files">3.2.2. Update Json/Yml files</a></li>
+<li><a href="#resolution-algorithm-2">3.2.1. Resolution Algorithm</a></li>
+<li><a href="#read-data-files">3.2.2. Read data files</a></li>
+<li><a href="#update-data-files">3.2.3. Update data files</a></li>
 </ul>
 </li>
 </ul>
@@ -884,7 +885,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="content">
 <div class="title">Unified Framework API</div>
 <div class="paragraph">
-<p>All features that we provide- use the same syntax. Once you learn how to write tests for the web, you can start immediately writing for mobile, desktop, or REST.</p>
+<p>All features that we provide- use the same syntax.
+Once you learn how to write tests for the web, you can start immediately writing for mobile, desktop, or REST.</p>
 </div>
 </div>
 </div>
@@ -900,7 +902,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="content">
 <div class="title">Integrations</div>
 <div class="paragraph">
-<p>Seamlessly integrate the framework with your existing tools and processes. Execute tests in the clouds, distributed and publish test results in reporting solutions.</p>
+<p>Seamlessly integrate the framework with your existing tools and processes.
+Execute tests in the clouds, distributed and publish test results in reporting solutions.</p>
 </div>
 </div>
 </div>
@@ -910,7 +913,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Easy add new logic to your tests without causing regression issues. Control the whole execution workflow - change browsers or reuse them. Retry your failing tests to make sure that there is a real problem.</p>
+<p>Easy add new logic to your tests without causing regression issues.
+Control the whole execution workflow - change browsers or reuse them.
+Retry your failing tests to make sure that there is a real problem.</p>
 </li>
 <li>
 <p>Automate UI actions or user scenarios on real devices or emulators with Selcukes features from test creation to execution.</p>
@@ -935,25 +940,30 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect3">
 <h4 id="java-11"><a class="anchor" href="#java-11"></a>1.3.1. Java 11</h4>
 <div class="paragraph">
-<p>Test Automation is a development activity, so you will need some familiarity with Java. Selcukes uses Java 11, so make sure you have a <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK 11 or later</a> installed.</p>
+<p>Test Automation is a development activity, so you will need some familiarity with Java.
+Selcukes uses Java 11, so make sure you have a <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK 11 or later</a> installed.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="ide"><a class="anchor" href="#ide"></a>1.3.2. IDE</h4>
 <div class="paragraph">
-<p>You will need a modern IDE to work with Java. We recommend IntelliJ (you can download the Community Edition, which is free, <a href="https://www.jetbrains.com/idea/download">from here</a>. But Eclipse will work fine as well.</p>
+<p>You will need a modern IDE to work with Java.
+We recommend IntelliJ (you can download the Community Edition, which is free, <a href="https://www.jetbrains.com/idea/download">from here</a>.
+But Eclipse will work fine as well.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="a-build-tool"><a class="anchor" href="#a-build-tool"></a>1.3.3. A Build Tool</h4>
 <div class="paragraph">
-<p>You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports. Make sure you have either <a href="http://www.gradle.org/downloads">Gradle 3.x or higher</a> or <a href="https://maven.apache.org/download.cgi">Maven 3.3.x or higher</a> installed.</p>
+<p>You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports.
+Make sure you have either <a href="http://www.gradle.org/downloads">Gradle 3.x or higher</a> or <a href="https://maven.apache.org/download.cgi">Maven 3.3.x or higher</a> installed.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="quick-start"><a class="anchor" href="#quick-start"></a>1.3.4. Quick Start</h4>
 <div class="paragraph">
-<p>The quickest way to create a new project is to take one of the starter projects on Github. You can find the starter project for TestNG at <a href="https://github.com/selcukes/selcukes-java-skeleton">selcukes-java-skeleton</a>.</p>
+<p>The quickest way to create a new project is to take one of the starter projects on Github.
+You can find the starter project for TestNG at <a href="https://github.com/selcukes/selcukes-java-skeleton">selcukes-java-skeleton</a>.</p>
 </div>
 <div class="paragraph">
 <p>You can clone this repository:</p>
@@ -974,7 +984,8 @@ cd selcukes-java-skeleton</code></pre>
 <div class="sect3">
 <h4 id="so-far-so-good"><a class="anchor" href="#so-far-so-good"></a>1.3.5. So far so good?</h4>
 <div class="paragraph">
-<p>The starter project comes with a demo test that you can run. From the command line, run either</p>
+<p>The starter project comes with a demo test that you can run.
+From the command line, run either</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1050,7 +1061,7 @@ cd selcukes-java-skeleton</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Create Sample Notepad Test as follows</p>
+<p>Create Sample WindowDriver Test for Notepad application as follows</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1091,7 +1102,7 @@ cd selcukes-java-skeleton</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Create Sample Browser Test as follows</p>
+<p>Create Sample AndroidDriver Test for <code>ApiDemos-debug.apk</code> as follows</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1129,10 +1140,16 @@ cd selcukes-java-skeleton</code></pre>
 <div class="sect2">
 <h3 id="motivation"><a class="anchor" href="#motivation"></a>2.1. Motivation</h3>
 <div class="paragraph">
-<p><a href="https://www.selenium.dev/documentation/webdriver/">Selenium WebDriver</a> is a library that allows controlling web browsers programmatically. It provides a cross-browser API that can be used to drive web browsers (e.g., Chrome, Edge, or Firefox, among others) using different programming languages (e.g., Java, JavaScript, Python, C#, or Ruby). The primary use of Selenium WebDriver is implementing automated tests for web applications.</p>
+<p><a href="https://www.selenium.dev/documentation/webdriver/">Selenium WebDriver</a> is a library that allows controlling web browsers programmatically.
+It provides a cross-browser API that can be used to drive web browsers (e.g., Chrome, Edge, or Firefox, among others) using different programming languages (e.g., Java, JavaScript, Python, C#, or Ruby).
+The primary use of Selenium WebDriver is implementing automated tests for web applications.</p>
 </div>
 <div class="paragraph">
-<p>Selenium WebDriver carries out the automation using the native support of each browser. For this reason, we need to place a binary file called <em>driver</em> between the test using the Selenium WebDriver API and the browser to be controlled. Examples of drivers for major web browsers nowadays are <a href="https://chromedriver.chromium.org/">chromedriver</a> (for Chrome), <a href="https://github.com/mozilla/geckodriver/">geckodriver</a> (for Firefox), or <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">msedgedriver</a> (for Edge). As you can see in the following picture, the communication between the WebDriver API and the driver binary is done using a standard protocol called <a href="https://www.w3.org/TR/webdriver/">W3C WebDriver</a> (formerly the so-called <em>JSON Wire Protocol</em>). Then, the communication between the driver and the browser is done using the native capabilities of each browser.</p>
+<p>Selenium WebDriver carries out the automation using the native support of each browser.
+For this reason, we need to place a binary file called <em>driver</em> between the test using the Selenium WebDriver API and the browser to be controlled.
+Examples of drivers for major web browsers nowadays are <a href="https://chromedriver.chromium.org/">chromedriver</a> (for Chrome), <a href="https://github.com/mozilla/geckodriver/">geckodriver</a> (for Firefox), or <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">msedgedriver</a> (for Edge).
+As you can see in the following picture, the communication between the WebDriver API and the driver binary is done using a standard protocol called <a href="https://www.w3.org/TR/webdriver/">W3C WebDriver</a> (formerly the so-called <em>JSON Wire Protocol</em>).
+Then, the communication between the driver and the browser is done using the native capabilities of each browser.</p>
 </div>
 <div id="webdriver_arch" class="imageblock thumb">
 <div class="content">
@@ -1141,15 +1158,25 @@ cd selcukes-java-skeleton</code></pre>
 <div class="title">Figure 2. Selenium WebDriver Architecture</div>
 </div>
 <div class="paragraph">
-<p>From a practical point of view, we need to make a <em>driver management process</em> to use Selenium WebDriver. This process consists on:</p>
+<p>From a practical point of view, we need to make a <em>driver management process</em> to use Selenium WebDriver.
+This process consists on:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download. Drivers are platform-specific binary files. To download the proper driver, we have to identify the driver type we need (e.g., chromedriver if we want to use Chrome), the operating system (typically, Windows, Linux, or Mac OS), the architecture (typically, 32 or 64 bits), and very important, the driver version. Concerning the version, each driver release is usually compatible with a given browser version(s). For this reason, we need to discover the correct driver version for a specific browser release (typically reading the driver documentation or release notes).</p>
+<p>Download.
+Drivers are platform-specific binary files.
+To download the proper driver, we have to identify the driver type we need (e.g., chromedriver if we want to use Chrome), the operating system (typically, Windows, Linux, or Mac OS), the architecture (typically, 32 or 64 bits), and very important, the driver version.
+Concerning the version, each driver release is usually compatible with a given browser version(s).
+For this reason, we need to discover the correct driver version for a specific browser release (typically reading the driver documentation or release notes).</p>
 </li>
 <li>
-<p>Setup. Once we have downloaded the driver to our computer, we need to provide a way to locate this driver from our Selenium WebDriver tests. In Java, this setup can be done in two different ways. First, we can add the driver location to our <code>PATH</code> environmental variable. Second, we can use <em>Java system properties</em> to export the driver path. Each driver path should be identified using a given system property, as follows:</p>
+<p>Setup.
+Once we have downloaded the driver to our computer, we need to provide a way to locate this driver from our Selenium WebDriver tests.
+In Java, this setup can be done in two different ways.
+First, we can add the driver location to our <code>PATH</code> environmental variable.
+Second, we can use <em>Java system properties</em> to export the driver path.
+Each driver path should be identified using a given system property, as follows:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">System</span>.setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">webdriver.chrome.driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/chromedriver</span><span class="delimiter">&quot;</span></span>);
@@ -1161,7 +1188,10 @@ cd selcukes-java-skeleton</code></pre>
 </div>
 </li>
 <li>
-<p>Maintenance. Last but not least, we need to warranty the compatibility between driver and browser in time. This step is relevant since modern browsers automatically upgrade themselves (i.e., they are <em>evergreen</em> browsers), and for this reason, the compatibility driver-browser is not warranted in the long run. For instance, when a WebDriver test using Chrome faces a driver incompatibility, it reports the following error message: "<em>this version of chromedriver only supports chrome version N</em>." As you can see in <a href="https://stackoverflow.com/search?q=this+version+of+chromedriver+only+supports+Chrome+version">StackOverflow</a>, this is a recurrent problem for manually managed drivers (chromedriver in this case).</p>
+<p>Maintenance.
+Last but not least, we need to warranty the compatibility between driver and browser in time.
+This step is relevant since modern browsers automatically upgrade themselves (i.e., they are <em>evergreen</em> browsers), and for this reason, the compatibility driver-browser is not warranted in the long run.
+For instance, when a WebDriver test using Chrome faces a driver incompatibility, it reports the following error message: "<em>this version of chromedriver only supports chrome version N</em>." As you can see in <a href="https://stackoverflow.com/search?q=this+version+of+chromedriver+only+supports+Chrome+version">StackOverflow</a>, this is a recurrent problem for manually managed drivers (chromedriver in this case).</p>
 </li>
 </ol>
 </div>
@@ -1195,7 +1225,11 @@ cd selcukes-java-skeleton</code></pre>
 <div class="sect2">
 <h3 id="driver-management"><a class="anchor" href="#driver-management"></a>2.3. Driver Management</h3>
 <div class="paragraph">
-<p>The primary use of WebDriver Binaries is the automation of driver management. For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., <code>chromeDriver()</code> for Chrome) and invoke the method <code>setup()</code>. The following example shows a test case using <a href="https://testng.org/doc/">TestNG</a>, Selenium WebDriver, WebDriver Binaries. In this test, we invoke WebDriver Binaries in the setup method for all tests (<code>@BeforeClass</code>). This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.</p>
+<p>The primary use of WebDriver Binaries is the automation of driver management.
+For using this feature, you need to select a given driver in the WebDriver Binaries API (e.g., <code>chromeDriver()</code> for Chrome) and invoke the method <code>setup()</code>.
+The following example shows a test case using <a href="https://testng.org/doc/">TestNG</a>, Selenium WebDriver, WebDriver Binaries.
+In this test, we invoke WebDriver Binaries in the setup method for all tests (<code>@BeforeClass</code>).
+This way, the required binary (chromeDriver) will be available for all the WebDriver tests using Chrome in this class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1227,7 +1261,8 @@ cd selcukes-java-skeleton</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>WebDriver Binaries provides a set of <em>binaries</em> for Chrome, Firefox, Edge, Opera, Chromium, and Internet Explorer. The basic use of these binary is the following:</p>
+<p>WebDriver Binaries provides a set of <em>binaries</em> for Chrome, Firefox, Edge, Opera, Chromium, and Internet Explorer.
+The basic use of these binary is the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1242,19 +1277,28 @@ WebDriverBinary.operaDriver().setup();</code></pre>
 <div class="sect3">
 <h4 id="resolution-algorithm"><a class="anchor" href="#resolution-algorithm"></a>2.3.1. Resolution Algorithm</h4>
 <div class="paragraph">
-<p>WebDriver Binaries executes a <em>resolution algorithm</em> when calling to <code>setup()</code> in a given manager. The most relevant parts of this algorithm are the following:</p>
+<p>WebDriver Binaries executes a <em>resolution algorithm</em> when calling to <code>setup()</code> in a given manager.
+The most relevant parts of this algorithm are the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>WebDriverBinary tries to find the browser version. To this aim, WebDriverBinary uses internally a knowledge database called commands' database. This database is a collection of shell commands used to discover the version of a given browser in the different operating systems (e.g., <code>google-chrome --version</code> for Chrome in Linux).</p>
+<p>WebDriverBinary tries to find the browser version.
+To this aim, WebDriverBinary uses internally a knowledge database called commands' database.
+This database is a collection of shell commands used to discover the version of a given browser in the different operating systems (e.g., <code>google-chrome --version</code> for Chrome in Linux).</p>
 </li>
 <li>
 <p>Using the browser version, it tries to find the proper driver version.
-This process is different for each browser. In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release. For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following <a href="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100">file</a>. Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox. For this reason, WebDriverManager uses another knowledge database called versions database. This database maps the browser releases with the known compatible driver versions.</p>
+This process is different for each browser.
+In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release.
+For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following <a href="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100">file</a>.
+Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox.
+For this reason, WebDriverManager uses another knowledge database called versions database.
+This database maps the browser releases with the known compatible driver versions.</p>
 </li>
 <li>
-<p>Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at <code>%temp%webdriver</code> by default). These drivers are reused in subsequent calls.</p>
+<p>Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at <code>%temp%webdriver</code> by default).
+These drivers are reused in subsequent calls.</p>
 </li>
 <li>
 <p>Finally, WebDriverManager exports the driver path using Java system properties (e.g., <code>webdriver.chrome.driver</code> in the case of the Chrome manager).</p>
@@ -1262,14 +1306,23 @@ This process is different for each browser. In Chrome and Edge, their respective
 </ol>
 </div>
 <div class="paragraph">
-<p>This process automated the first two stages of the driver management previously introduced, i.e., download and setup. To support the third stage (i.e., maintenance), WebDriverManager implements <em>resolution cache</em>. This cache (called by default <code>resolution.properties</code> and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions. This relationship is valid during a given <em>time-to-live</em> (TTL). The default value for this TTL is 1 hour for browsers and 1 day for drivers. In other words, the discovered browser version is valid for 1 hour, and the driver version is considered correct for 1 day. This mechanism improves the performance dramatically since the second (and following) calls to the resolution algorithm for the same browser are resolved using only local resources (i.e., without using the shell nor requesting external services).</p>
+<p>This process automated the first two stages of the driver management previously introduced, i.e., download and setup.
+To support the third stage (i.e., maintenance), WebDriverManager implements <em>resolution cache</em>.
+This cache (called by default <code>resolution.properties</code> and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions.
+This relationship is valid during a given <em>time-to-live</em> (TTL).
+The default value for this TTL is 1 hour for browsers and 1 day for drivers.
+In other words, the discovered browser version is valid for 1 hour, and the driver version is considered correct for 1 day.
+This mechanism improves the performance dramatically since the second (and following) calls to the resolution algorithm for the same browser are resolved using only local resources (i.e., without using the shell nor requesting external services).</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="advanced-configuration"><a class="anchor" href="#advanced-configuration"></a>2.4. Advanced Configuration</h3>
 <div class="paragraph">
-<p>WebDriver Binaries provides different ways of configuration. First, by using its <em>Java API</em>. To that aim, each manager (e.g., <code>chromeDriver()</code>, <code>firefoxDriver()</code>, etc., allows to concatenate different methods of this API to specify custom options or preferences. For example (the explanation of these methods and the other possibilities are explained in the tables at the end of this section):</p>
+<p>WebDriver Binaries provides different ways of configuration.
+First, by using its <em>Java API</em>.
+To that aim, each manager (e.g., <code>chromeDriver()</code>, <code>firefoxDriver()</code>, etc., allows to concatenate different methods of this API to specify custom options or preferences.
+For example (the explanation of these methods and the other possibilities are explained in the tables at the end of this section):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1313,22 +1366,57 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="data-parser"><a class="anchor" href="#data-parser"></a>3.2. Data Parser</h3>
-<div class="sect3">
-<h4 id="read-jsonyml-files"><a class="anchor" href="#read-jsonyml-files"></a>3.2.1. Read Json/Yml files</h4>
+<h3 id="data-mapper"><a class="anchor" href="#data-mapper"></a>3.2. Data Mapper</h3>
 <div class="paragraph">
-<p>Create Test data file as <code>test-users.json</code> in resource folder</p>
+<p>DataMapper object helps to read and write Json or yaml/yml files with <code>@DataFile</code> annotation.</p>
+</div>
+<div class="sect3">
+<h4 id="resolution-algorithm-2"><a class="anchor" href="#resolution-algorithm-2"></a>3.2.1. Resolution Algorithm</h4>
+<div class="paragraph">
+<p>DataMapper looks for matching data files in test resource folder by converting POJO class name to a SnakeCase json or yaml/yml file.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For POJO class <code>TestUsers.java</code></p>
+</li>
+<li>
+<p>Matching test data files are <code>test_users.json</code> or <code>test_users.yml</code> or <code>test_users.yml</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>@DataFile</code> annotation also takes additional attributes as follows</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>fileName : Specify custom data file like 'mydata.json'</p>
+</li>
+<li>
+<p>filePath : path where data file is located. 'src/main/resources'</p>
+</li>
+<li>
+<p>rootFolder : root directory</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="read-data-files"><a class="anchor" href="#read-data-files"></a>3.2.2. Read data files</h4>
+<div class="paragraph">
+<p>Let&#8217;s first look at the <code>test_users.json</code> file we&#8217;ll be reading</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: [
     {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">junk</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MyName</span><span class="delimiter">&quot;</span></span>,
       <span class="key"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">things</span><span class="delimiter">&quot;</span></span>
     },
     {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">spam</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">TestName</span><span class="delimiter">&quot;</span></span>,
       <span class="key"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">eggs</span><span class="delimiter">&quot;</span></span>
     }
   ]
@@ -1336,7 +1424,41 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is an example class to demonstrate to parse  and read <code>test-users.json</code></p>
+<p>Then, let&#8217;s define the POJO class with <code>@DataFile</code> annotation</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestUsers</span> {
+        <span class="predefined-type">List</span>&lt;User&gt; users;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, let&#8217;s create our User class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Data</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+        <span class="directive">private</span> <span class="predefined-type">String</span> username;
+        <span class="directive">private</span> <span class="predefined-type">String</span> password;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;re going to use DataMapper to read our JSON file into an TestUsers object, so let&#8217;s set that up now</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        <span class="directive">final</span> TestUsers testUsers = DataMapper.parse(TestUsers.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll find that our TestUsers object is populated from the file, including the list of User.</p>
+</div>
+<div class="paragraph">
+<p>Here is full example code to demonstrate to parse and read <code>test_users.json</code> file</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1373,26 +1495,57 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="update-jsonyml-files"><a class="anchor" href="#update-jsonyml-files"></a>3.2.2. Update Json/Yml files</h4>
+<h4 id="update-data-files"><a class="anchor" href="#update-data-files"></a>3.2.3. Update data files</h4>
 <div class="paragraph">
-<p>Here is another example to update test file in runtime</p>
+<p>We&#8217;re also going to use DataMapper to write a TestSample out to a file.
+This time we will try using yml file.</p>
 </div>
 <div class="paragraph">
-<p>Consider we have <code>test_sample.yml</code> located in resource folder as follows</p>
+<p>Let&#8217;s quickly look at the <code>test_sample.yml</code> file we&#8217;ll be writing the values</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="yml"><span class="key">users</span>:
   <span class="key">user1</span>:
-    <span class="key">username</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">junk</span><span class="delimiter">&quot;</span></span>
+    <span class="key">username</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Ramesh</span><span class="delimiter">&quot;</span></span>
     <span class="key">password</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">4177472e-23a3-4426-893f-8a794af7189c</span><span class="delimiter">&quot;</span></span>
   <span class="key">user2</span>:
-    <span class="key">username</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">spam</span><span class="delimiter">&quot;</span></span>
+    <span class="key">username</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Babu</span><span class="delimiter">&quot;</span></span>
     <span class="key">password</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">40aafad2-1d24-4d6c-85e2-b7630dc17c57</span><span class="delimiter">&quot;</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is an example class to demonstrate to update <code>test_sample.yml</code></p>
+<p>Then, let&#8217;s define the POJO class with <code>@DataFile</code> annotation</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>(fileName = <span class="string"><span class="delimiter">&quot;</span><span class="content">test_sample.yml</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">TestSample</span> {
+        <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; users;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s read our TestSample and update values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        <span class="predefined-type">UUID</span> uuid = <span class="predefined-type">UUID</span>.randomUUID();
+        TestSample testSample = DataMapper.parse(TestSample.class);
+        testSample.getUsers().get(<span class="string"><span class="delimiter">&quot;</span><span class="content">user1</span><span class="delimiter">&quot;</span></span>).put(<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>, uuid.toString());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s write our updated TestSample values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        DataMapper.write(testSample);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is full example code to demonstrate to update and write values to <code>test_sample.yml</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1551,7 +1704,10 @@ thumbnail.report=false</code></pre>
 <div class="sect2">
 <h3 id="motivation-2"><a class="anchor" href="#motivation-2"></a>5.1. Motivation</h3>
 <div class="paragraph">
-<p>Currently, we moved to On premises environments. To view HTML report generated by automation scripts we need to connect to the different VPN’s to open the report and check the related screenshots to see which test case has failed and why. So, why not raise an alert as soon as the test case fails? And why not attach a screenshot along with that alert so that all the stakeholders can actually see what has failed in the application?</p>
+<p>Currently, we moved to On premises environments.
+To view HTML report generated by automation scripts we need to connect to the different VPN’s to open the report and check the related screenshots to see which test case has failed and why.
+So, why not raise an alert as soon as the test case fails?
+And why not attach a screenshot along with that alert so that all the stakeholders can actually see what has failed in the application?</p>
 </div>
 </div>
 <div class="sect2">
@@ -1866,7 +2022,10 @@ selcukes.timestamp.report=     # true or false. default: false</pre>
 <h2 id="community"><a class="anchor" href="#community"></a>10. Community</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two ways to try to get community support related to Selcukes. First, questions about it can be discussed in <a href="https://stackoverflow.com/questions/tagged/selcukes_java">StackOverflow</a>, using the tag <em>selcukes_java</em>. In addition, comments, suggestions, and bug-reporting should be made using the <a href="https://github.com/selcukes/selcukes-java/issues">GitHub issues</a>. Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  <a href="https://github.com/selcukes/selcukes-java/pulls">pull request</a>.</p>
+<p>There are two ways to try to get community support related to Selcukes.
+First, questions about it can be discussed in <a href="https://stackoverflow.com/questions/tagged/selcukes_java">StackOverflow</a>, using the tag <em>selcukes_java</em>.
+In addition, comments, suggestions, and bug-reporting should be made using the <a href="https://github.com/selcukes/selcukes-java/issues">GitHub issues</a>.
+Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  <a href="https://github.com/selcukes/selcukes-java/pulls">pull request</a>.</p>
 </div>
 </div>
 </div>
@@ -1874,11 +2033,13 @@ selcukes.timestamp.report=     # true or false. default: false</pre>
 <h2 id="support"><a class="anchor" href="#support"></a>11. Support</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://opencollective.com/selcukes">Selcukes</a> is part of <a href="https://opencollective.com/selcukes">OpenCollective</a>, an online funding platform for open and transparent communities. You can support the project by contributing as a backer (i.e., a personal <a href="https://opencollective.com/selcukes/donate">donation</a> or <a href="https://opencollective.com/selcukes/contribute/backer-8132/checkout">recurring contribution</a>) or as a <a href="https://opencollective.com/selcukes/contribute/sponsor-8133/checkout">sponsor</a> (i.e., a recurring contribution by a company).</p>
+<p><a href="https://opencollective.com/selcukes">Selcukes</a> is part of <a href="https://opencollective.com/selcukes">OpenCollective</a>, an online funding platform for open and transparent communities.
+You can support the project by contributing as a backer (i.e., a personal <a href="https://opencollective.com/selcukes/donate">donation</a> or <a href="https://opencollective.com/selcukes/contribute/backer-8132/checkout">recurring contribution</a>) or as a <a href="https://opencollective.com/selcukes/contribute/sponsor-8133/checkout">sponsor</a> (i.e., a recurring contribution by a company).</p>
 </div>
 <h2 id="about" class="discrete">About</h2>
 <div class="paragraph">
-<p>Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by <a href="https://github.com/RameshBabuPrudhvi/">Ramesh Babu Prudhvi</a> (<a href="https://twitter.com/amrameshbabu">@amrameshbabu</a>), licensed under the terms of <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. This documentation (also available in <a href="selcukes.pdf">PDF</a> and <a href="selcukes.epub">EPUB</a>) is released under the terms of <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC BY-NC-SA 2.0</a>.</p>
+<p>Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by <a href="https://github.com/RameshBabuPrudhvi/">Ramesh Babu Prudhvi</a> (<a href="https://twitter.com/amrameshbabu">@amrameshbabu</a>), licensed under the terms of <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.
+This documentation (also available in <a href="selcukes.pdf">PDF</a> and <a href="selcukes.epub">EPUB</a>) is released under the terms of <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC BY-NC-SA 2.0</a>.</p>
 </div>
 </div>
 </div>
@@ -1886,7 +2047,7 @@ selcukes.timestamp.report=     # true or false. default: false</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.6.0<br>
-Updated on 2022-04-25T10:26:48Z
+Updated on 2022-04-28T02:54:02Z
 </div>
 </div>
 </body>
