@@ -843,15 +843,6 @@ First, questions about it can be discussed in https://stackoverflow.com/question
 In addition, comments, suggestions, and bug-reporting should be made using the https://github.com/selcukes/selcukes-java/issues[GitHub issues].
 Finally, if you think Selcukes can be enhanced, consider contributing to the project through a  https://github.com/selcukes/selcukes-java/pulls[pull request].
 
-== Support
-
-https://opencollective.com/selcukes[Selcukes] is part of https://opencollective.com/selcukes[OpenCollective], an online funding platform for open and transparent communities.
-You can support the project by contributing as a backer (i.e., a personal https://opencollective.com/selcukes/donate[donation] or https://opencollective.com/selcukes/contribute/backer-8132/checkout[recurring contribution]) or as a https://opencollective.com/selcukes/contribute/sponsor-8133/checkout[sponsor] (i.e., a recurring contribution by a company).
-
-ifndef::backend-pdf[]
-ifndef::backend-epub3[]
-
-[discrete]
 == About
 
 Selcukes (Copyright © 2019-2022) is an open-source project created and maintained by https://github.com/RameshBabuPrudhvi/[Ramesh Babu Prudhvi] (https://twitter.com/amrameshbabu[@amrameshbabu]), licensed under the terms of https://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 License].
