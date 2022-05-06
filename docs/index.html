@@ -775,7 +775,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Selcukes</h1>
 <div class="details">
 <span id="author" class="author">Ramesh Babu Prudhvi</span><br>
-<span id="revdate">Version 1.6.0</span>
+<span id="revdate">Version 2.0.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -818,6 +818,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#resolution-algorithm-2">3.2.1. Resolution Algorithm</a></li>
 <li><a href="#read-data-files">3.2.2. Read data files</a></li>
 <li><a href="#update-data-files">3.2.3. Update data files</a></li>
+<li><a href="#write-data-files">3.2.4. Write data files</a></li>
 </ul>
 </li>
 </ul>
@@ -842,25 +843,36 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#usage-3">6.2. Usage</a></li>
 </ul>
 </li>
-<li><a href="#selcukes-excel-runner">7. Selcukes Excel Runner</a>
+<li><a href="#_selcukes_testng">7. Selcukes TestNG</a>
 <ul class="sectlevel2">
 <li><a href="#setup-6">7.1. Setup</a></li>
+<li><a href="#usage-4">7.2. Usage</a></li>
 </ul>
 </li>
-<li><a href="#selcukes-reports">8. Selcukes Reports</a>
+<li><a href="#selcukes-excel-runner">8. Selcukes Excel Runner</a>
 <ul class="sectlevel2">
 <li><a href="#setup-7">8.1. Setup</a></li>
 </ul>
 </li>
-<li><a href="#selcukes-configuration">9. Selcukes Configuration</a>
+<li><a href="#selcukes-reports">9. Selcukes Reports</a>
 <ul class="sectlevel2">
-<li><a href="#environment-properties">9.1. Environment Properties</a></li>
-<li><a href="#runtime-properties">9.2. Runtime Properties</a></li>
-<li><a href="#logger-properties">9.3. Logger Properties</a></li>
+<li><a href="#setup-8">9.1. Setup</a></li>
+<li><a href="#video-recorder">9.2. Video Recorder</a>
+<ul class="sectlevel3">
+<li><a href="#ffmpeg-installation">9.2.1. FFMPEG Installation</a></li>
 </ul>
 </li>
-<li><a href="#community">10. Community</a></li>
-<li><a href="#support">11. Support</a></li>
+</ul>
+</li>
+<li><a href="#selcukes-configuration">10. Selcukes Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#environment-properties">10.1. Environment Properties</a></li>
+<li><a href="#runtime-properties">10.2. Runtime Properties</a></li>
+<li><a href="#logger-properties">10.3. Logger Properties</a></li>
+</ul>
+</li>
+<li><a href="#community">11. Community</a></li>
+<li><a href="#support">12. Support</a></li>
 </ul>
 </div>
 </div>
@@ -1005,7 +1017,7 @@ From the command line, run either</p>
 <div class="sect2">
 <h3 id="browser-tests"><a class="anchor" href="#browser-tests"></a>1.4. Browser Tests</h3>
 <div class="paragraph">
-<p>Add <code>selcukes.yaml</code> file in resource folder and updated below options as required</p>
+<p>Add <code>selcukes.yaml</code> file in <code>src/test/resource</code> folder and update below options as required</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1013,7 +1025,7 @@ From the command line, run either</p>
   <span class="key">remote</span>: <span class="string"><span class="content">false</span></span>
   <span class="key">browserName</span>: <span class="string"><span class="content">CHROME</span></span>
   <span class="key">headLess</span>: <span class="string"><span class="content">true</span></span>
-  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://localhost:4444</span><span class="delimiter">&quot;</span></span></code></pre>
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:8080</span><span class="delimiter">&quot;</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1022,27 +1034,22 @@ From the command line, run either</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">WebTest</span> {
-
-    <span class="predefined-type">DriverManager</span>&lt;RemoteWebDriver&gt; driverManager;
-    WebDriver driver;
-
-    <span class="annotation">@BeforeMethod</span>
-    <span class="type">void</span> beforeTest() {
-        driverManager = <span class="keyword">new</span> <span class="predefined-type">DriverManager</span>&lt;&gt;();
-        driver = driverManager.createDriver(DeviceType.BROWSER);
+    <span class="annotation">@BeforeSuite</span>
+    <span class="type">void</span> beforeSuite() {
+        GridRunner.startSeleniumServer(DriverType.CHROME);
     }
 
     <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> webTest() {
+        WebDriver driver = <span class="predefined-type">DriverManager</span>.createDriver(DeviceType.BROWSER);
         WebPage page = <span class="keyword">new</span> WebPage(driver);
-        page.enableDriverEvents();
         page.open(<span class="string"><span class="delimiter">&quot;</span><span class="content">https://www.google.com/</span><span class="delimiter">&quot;</span></span>);
         Assert.assertEquals(page.title(), <span class="string"><span class="delimiter">&quot;</span><span class="content">Google</span><span class="delimiter">&quot;</span></span>);
     }
 
     <span class="annotation">@AfterMethod</span>
     <span class="type">void</span> afterTest() {
-        driverManager.getManager().destroyDriver();
+        <span class="predefined-type">DriverManager</span>.removeDriver();
     }</code></pre>
 </div>
 </div>
@@ -1050,13 +1057,12 @@ From the command line, run either</p>
 <div class="sect2">
 <h3 id="desktop-tests"><a class="anchor" href="#desktop-tests"></a>1.5. Desktop Tests</h3>
 <div class="paragraph">
-<p>Add <code>selcukes.yaml</code> file in resource folder and updated below options as required</p>
+<p>Add <code>selcukes.yaml</code> file in resource folder and update below options as required</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">windows</span>:
   <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
-  <span class="key">winApp-path</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:/Program Files (x86)/Windows Application Driver/WinAppDriver.exe</span><span class="delimiter">&quot;</span></span>
   <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:\\Windows\\System32\\notepad.exe</span><span class="delimiter">&quot;</span></span></code></pre>
 </div>
 </div>
@@ -1066,24 +1072,30 @@ From the command line, run either</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">NotepadTest</span> {
-    <span class="predefined-type">DriverManager</span>&lt;WindowsDriver&gt; driverManager;
-
-    <span class="annotation">@BeforeTest</span>
-    <span class="directive">public</span> <span class="type">void</span> beforeTest() {
-        driverManager = <span class="keyword">new</span> <span class="predefined-type">DriverManager</span>&lt;&gt;();
+    <span class="annotation">@BeforeSuite</span>
+    <span class="directive">public</span> <span class="type">void</span> beforeSuite() {
+        GridRunner.startAppiumServer();
     }
 
     <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> notepadTest() {
-        WindowsDriver driver = driverManager.createDriver(DeviceType.DESKTOP);
+        WindowsDriver driver = <span class="predefined-type">DriverManager</span>.createDriver(DeviceType.DESKTOP);
         WinPage page = <span class="keyword">new</span> WinPage(driver);
-        page.write(By.className(<span class="string"><span class="delimiter">&quot;</span><span class="content">Edit</span><span class="delimiter">&quot;</span></span>), <span class="string"><span class="delimiter">&quot;</span><span class="content">This is sample</span><span class="delimiter">&quot;</span></span>);
-
+        page.enableDriverEvents();
+        By edit = By.className(<span class="string"><span class="delimiter">&quot;</span><span class="content">Edit</span><span class="delimiter">&quot;</span></span>);
+        page.enter(edit, <span class="string"><span class="delimiter">&quot;</span><span class="content">This is sample</span><span class="delimiter">&quot;</span></span>)
+                .enter(edit, Keys.ENTER)
+                .enter(edit, <span class="string"><span class="delimiter">&quot;</span><span class="content">Time is</span><span class="delimiter">&quot;</span></span>)
+                .enter(edit, Keys.ENTER)
+                .enter(edit, Keys.F5)
+                .enter(edit, Keys.CONTROL + <span class="string"><span class="delimiter">&quot;</span><span class="content">w</span><span class="delimiter">&quot;</span></span> + Keys.CONTROL)
+                .click(By.name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Don't Save</span><span class="delimiter">&quot;</span></span>));
     }
 
-    <span class="annotation">@AfterTest</span>
-    <span class="directive">public</span> <span class="type">void</span> afterTest() {
-        driverManager.getManager().destroyDriver();
+    <span class="annotation">@AfterSuite</span>
+    <span class="directive">public</span> <span class="type">void</span> afterSuite() {
+        <span class="predefined-type">DriverManager</span>.removeDriver();
+        GridRunner.stopAppiumServer();
     }
 }</code></pre>
 </div>
@@ -1092,7 +1104,7 @@ From the command line, run either</p>
 <div class="sect2">
 <h3 id="mobile-tests"><a class="anchor" href="#mobile-tests"></a>1.6. Mobile Tests</h3>
 <div class="paragraph">
-<p>Add <code>selcukes.yaml</code> file in resource folder and updated below options as required</p>
+<p>Add <code>selcukes.yaml</code> file in resource folder and update below options as required</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1107,23 +1119,23 @@ From the command line, run either</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MobileTest</span> {
-    <span class="predefined-type">DriverManager</span>&lt;AppiumDriver&gt; driverManager;
-
-    <span class="annotation">@BeforeTest</span>
-    <span class="type">void</span> beforeTest() {
-        driverManager = <span class="keyword">new</span> <span class="predefined-type">DriverManager</span>&lt;&gt;();
+    <span class="annotation">@BeforeSuite</span>
+    <span class="type">void</span> beforeSuite() {
+        GridRunner.startAppiumServer();
     }
 
-    <span class="annotation">@Test</span>(enabled = <span class="predefined-constant">false</span>)
+    <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> remoteTest() {
-        AppiumDriver driver = driverManager.createDriver(DeviceType.MOBILE);
+        AppiumDriver driver = <span class="predefined-type">DriverManager</span>.createDriver(DeviceType.MOBILE);
         MobilePage page = <span class="keyword">new</span> MobilePage(driver);
+        page.enableDriverEvents();
         page.click(By.xpath(<span class="string"><span class="delimiter">&quot;</span><span class="content">//android.widget.TextView[contains(@text,'Views')]</span><span class="delimiter">&quot;</span></span>));
     }
 
-    <span class="annotation">@AfterTest</span>
-    <span class="type">void</span> afterTest() {
-        driverManager.getManager().destroyDriver();
+    <span class="annotation">@AfterSuite</span>
+    <span class="type">void</span> afterSuite() {
+        <span class="predefined-type">DriverManager</span>.removeDriver();
+        GridRunner.stopAppiumServer();
     }
 }</code></pre>
 </div>
@@ -1179,11 +1191,11 @@ Second, we can use <em>Java system properties</em> to export the driver path.
 Each driver path should be identified using a given system property, as follows:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">System</span>.setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">webdriver.chrome.driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/chromedriver</span><span class="delimiter">&quot;</span></span>);
-<span class="predefined-type">System</span>.setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">webdriver.gecko.driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/geckodriver</span><span class="delimiter">&quot;</span></span>);
-<span class="predefined-type">System</span>.setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">webdriver.edge.driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/msedgedriver</span><span class="delimiter">&quot;</span></span>);
-<span class="predefined-type">System</span>.setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">webdriver.opera.driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">/path/to/operadriver</span><span class="delimiter">&quot;</span></span>);
-<span class="predefined-type">System</span>.setProperty(<span class="string"><span class="delimiter">&quot;</span><span class="content">webdriver.ie.driver</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">C:/path/to/IEDriverServer.exe</span><span class="delimiter">&quot;</span></span>);</code></pre>
+<pre>System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+System.setProperty("webdriver.gecko.driver", "/path/to/geckodriver");
+System.setProperty("webdriver.edge.driver", "/path/to/msedgedriver");
+System.setProperty("webdriver.opera.driver", "/path/to/operadriver");
+System.setProperty("webdriver.ie.driver", "C:/path/to/IEDriverServer.exe");</pre>
 </div>
 </div>
 </li>
@@ -1206,7 +1218,7 @@ For instance, when a WebDriver test using Chrome faces a driver incompatibility,
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>webdriver-binaries<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
@@ -1217,7 +1229,7 @@ For instance, when a WebDriver test using Chrome faces a driver incompatibility,
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">t</span><span class="error">e</span><span class="error">s</span><span class="error">t</span><span class="error">I</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:webdriver-binaries:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">t</span><span class="error">e</span><span class="error">s</span><span class="error">t</span><span class="error">I</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:webdriver-binaries:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
 </div>
 </div>
@@ -1266,12 +1278,12 @@ The basic use of these binary is the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">WebDriverBinary.chromeDriver().setup();
+<pre>WebDriverBinary.chromeDriver().setup();
 WebDriverBinary.firefoxDriver().setup();
 WebDriverBinary.ieDriver().setup();
 WebDriverBinary.edgeDriver().setup();
 WebDriverBinary.edgeDriver().setup();
-WebDriverBinary.operaDriver().setup();</code></pre>
+WebDriverBinary.operaDriver().setup();</pre>
 </div>
 </div>
 <div class="sect3">
@@ -1291,27 +1303,24 @@ This database is a collection of shell commands used to discover the version of 
 <p>Using the browser version, it tries to find the proper driver version.
 This process is different for each browser.
 In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release.
-For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following <a href="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100">file</a>.
-Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox.
-For this reason, WebDriverManager uses another knowledge database called versions database.
-This database maps the browser releases with the known compatible driver versions.</p>
+For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following <a href="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100">file</a>.</p>
 </li>
 <li>
-<p>Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at <code>%temp%webdriver</code> by default).
+<p>Once the driver version is discovered, WebDriverBinary downloads this driver to a local cache (located at <code>%temp%/webdrivers</code> by default).
 These drivers are reused in subsequent calls.</p>
 </li>
 <li>
-<p>Finally, WebDriverManager exports the driver path using Java system properties (e.g., <code>webdriver.chrome.driver</code> in the case of the Chrome manager).</p>
+<p>Finally, WebDriverBinary exports the driver path using Java system properties (e.g., <code>webdriver.chrome.driver</code> in the case of the Chrome manager).</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
 <p>This process automated the first two stages of the driver management previously introduced, i.e., download and setup.
-To support the third stage (i.e., maintenance), WebDriverManager implements <em>resolution cache</em>.
-This cache (called by default <code>resolution.properties</code> and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions.
+To support the third stage (i.e., maintenance), WebDriverBinary implements <em>resolution cache</em>.
+This cache (called by default <code>version.properties</code> and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions.
 This relationship is valid during a given <em>time-to-live</em> (TTL).
-The default value for this TTL is 1 hour for browsers and 1 day for drivers.
-In other words, the discovered browser version is valid for 1 hour, and the driver version is considered correct for 1 day.
+The default value for this TTL is 1 hour for browsers and drivers.
+In other words, the discovered browser version is valid for 1 hour.
 This mechanism improves the performance dramatically since the second (and following) calls to the resolution algorithm for the same browser are resolved using only local resources (i.e., without using the shell nor requesting external services).</p>
 </div>
 </div>
@@ -1326,9 +1335,9 @@ For example (the explanation of these methods and the other possibilities are ex
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">WebDriverBinary.firefoxDriver().version(<span class="string"><span class="delimiter">&quot;</span><span class="content">v0.26.0</span><span class="delimiter">&quot;</span></span>).setup();
-WebDriverBinary.chromeDriver().targetPath(<span class="string"><span class="delimiter">&quot;</span><span class="content">temp</span><span class="delimiter">&quot;</span></span>).setup();
-WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
+<pre>WebDriverBinary.firefoxDriver().version("v0.26.0").setup();
+WebDriverBinary.chromeDriver().targetPath("temp").setup();
+WebDriverBinary.firefoxDriver().arch32().setup();</pre>
 </div>
 </div>
 </div>
@@ -1350,7 +1359,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>selcukes-databind<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -1360,9 +1369,21 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-databind:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-databind:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Selcukes DataBind is a transitive Dependency of <code>webdriver-binaries</code>.If you are using <code>webdriver-binaries</code>, then ignore adding this dependency explicitly.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1381,7 +1402,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <p>For POJO class <code>TestUsers.java</code></p>
 </li>
 <li>
-<p>Matching test data files are <code>test_users.json</code> or <code>test_users.yml</code> or <code>test_users.yml</code></p>
+<p>Matching test data files are <code>test_users.json</code> or <code>test_users.yml</code> or <code>test_users.yaml</code></p>
 </li>
 </ul>
 </div>
@@ -1462,7 +1483,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DataMapperTest</span> {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ReadDataFileTest</span> {
     <span class="annotation">@DataProvider</span>
     <span class="directive">public</span> <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">Object</span><span class="type">[]</span>&gt; getTestUsers() {
         <span class="directive">final</span> TestUsers testUsers = DataMapper.parse(TestUsers.class);
@@ -1497,7 +1518,7 @@ WebDriverBinary.firefoxDriver().arch32().setup();</code></pre>
 <div class="sect3">
 <h4 id="update-data-files"><a class="anchor" href="#update-data-files"></a>3.2.3. Update data files</h4>
 <div class="paragraph">
-<p>We&#8217;re also going to use DataMapper to write a TestSample out to a file.
+<p>We&#8217;re also going to use DataMapper to update a TestSample into a file.
 This time we will try using yml file.</p>
 </div>
 <div class="paragraph">
@@ -1549,7 +1570,7 @@ This time we will try using yml file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DataMapperWriteTest</span> {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UpdateDataFileTest</span> {
     <span class="annotation">@SneakyThrows</span>
     <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> testClass() {
@@ -1564,6 +1585,124 @@ This time we will try using yml file.</p>
     <span class="directive">static</span> <span class="type">class</span> <span class="class">TestSample</span> {
         <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; users;
     }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="write-data-files"><a class="anchor" href="#write-data-files"></a>3.2.4. Write data files</h4>
+<div class="paragraph">
+<p>We&#8217;re also going to use DataMapper to write a <code>Customer</code> out to a data file.
+This process is similar to update data file, however it will create a new data file if it is not found.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s create <code>Customer</code> POJO class</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>(fileName = <span class="string"><span class="delimiter">&quot;</span><span class="content">customer.yml</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">Customer</span> {
+        <span class="predefined-type">String</span> firstName;
+        <span class="predefined-type">String</span> lastName;
+        <span class="type">int</span> age;
+        <span class="predefined-type">List</span>&lt;Details&gt; contactDetails;
+    }
+
+    <span class="annotation">@Data</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">Details</span> {
+        <span class="predefined-type">String</span> type;
+        <span class="predefined-type">String</span> number;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now Let&#8217;s create a set object of Customer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        Details details1 = <span class="keyword">new</span> Details();
+        details1.setNumber(<span class="string"><span class="delimiter">&quot;</span><span class="content">512</span><span class="delimiter">&quot;</span></span>);
+        details1.setType(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSM</span><span class="delimiter">&quot;</span></span>);
+
+        Details details2 = <span class="keyword">new</span> Details();
+        details2.setNumber(<span class="string"><span class="delimiter">&quot;</span><span class="content">123</span><span class="delimiter">&quot;</span></span>);
+        details2.setType(<span class="string"><span class="delimiter">&quot;</span><span class="content">A-CSM</span><span class="delimiter">&quot;</span></span>);
+
+        Customer customer = <span class="keyword">new</span> Customer();
+        customer.setAge(<span class="integer">5</span>);
+        customer.setFirstName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Mark</span><span class="delimiter">&quot;</span></span>);
+        customer.setLastName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Jones</span><span class="delimiter">&quot;</span></span>);
+        customer.setContactDetails(<span class="predefined-type">List</span>.of(details1, details2));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s write our Customer using write method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        DataMapper.write(customer);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When we look into the <code>customer.yml</code>, it should look similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">firstName</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Mark</span><span class="delimiter">&quot;</span></span>
+<span class="key">lastName</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Jones</span><span class="delimiter">&quot;</span></span>
+<span class="key">age</span>: <span class="string"><span class="content">5</span></span>
+<span class="key">contactDetails</span>:
+- <span class="string"><span class="content">type: &quot;CSM&quot;</span></span>
+  <span class="key">number</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">512</span><span class="delimiter">&quot;</span></span>
+- <span class="string"><span class="content">type: &quot;A-CSM&quot;</span></span>
+  <span class="key">number</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">123</span><span class="delimiter">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is full example code to create data file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CreateDataFileTest</span> {
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> createDataFileTest() {
+        Details details1 = <span class="keyword">new</span> Details();
+        details1.setNumber(<span class="string"><span class="delimiter">&quot;</span><span class="content">512</span><span class="delimiter">&quot;</span></span>);
+        details1.setType(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSM</span><span class="delimiter">&quot;</span></span>);
+
+        Details details2 = <span class="keyword">new</span> Details();
+        details2.setNumber(<span class="string"><span class="delimiter">&quot;</span><span class="content">123</span><span class="delimiter">&quot;</span></span>);
+        details2.setType(<span class="string"><span class="delimiter">&quot;</span><span class="content">A-CSM</span><span class="delimiter">&quot;</span></span>);
+
+        Customer customer = <span class="keyword">new</span> Customer();
+        customer.setAge(<span class="integer">5</span>);
+        customer.setFirstName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Mark</span><span class="delimiter">&quot;</span></span>);
+        customer.setLastName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Jones</span><span class="delimiter">&quot;</span></span>);
+        customer.setContactDetails(<span class="predefined-type">List</span>.of(details1, details2));
+
+        DataMapper.write(customer);
+
+        Customer newCustomer = DataMapper.parse(Customer.class);
+        newCustomer.getContactDetails().forEach(details -&gt; <span class="predefined-type">System</span>.out.println(details.getType() + <span class="string"><span class="delimiter">&quot;</span><span class="content"> : </span><span class="delimiter">&quot;</span></span> + details.getNumber()));
+    }
+
+    <span class="annotation">@Data</span>
+    <span class="annotation">@DataFile</span>(fileName = <span class="string"><span class="delimiter">&quot;</span><span class="content">customer.yml</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">Customer</span> {
+        <span class="predefined-type">String</span> firstName;
+        <span class="predefined-type">String</span> lastName;
+        <span class="type">int</span> age;
+        <span class="predefined-type">List</span>&lt;Details&gt; contactDetails;
+    }
+
+    <span class="annotation">@Data</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">Details</span> {
+        <span class="predefined-type">String</span> type;
+        <span class="predefined-type">String</span> number;
+    }
+
 }</code></pre>
 </div>
 </div>
@@ -1592,11 +1731,6 @@ This time we will try using yml file.</p>
 </li>
 </ol>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>logger.info(()-&gt; "Navigated to Home page..")</pre>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="setup-3"><a class="anchor" href="#setup-3"></a>4.2. Setup</h3>
@@ -1608,7 +1742,7 @@ This time we will try using yml file.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>selcukes-extent-reports<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -1618,23 +1752,47 @@ This time we will try using yml file.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-extent-reports:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-extent-reports:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Selcukes Extent Reports is a transitive Dependency of <code>selcukes-reports</code>.If you are using <code>selcukes-reports</code>, then ignore adding this dependency explicitly.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you are using <code>selcukes-testng</code> then refer <a href="#_selcukes_testng">Selcukes TestNG</a> for extent report integration
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="usage"><a class="anchor" href="#usage"></a>4.3. Usage</h3>
 <div class="paragraph">
-<p>Create extent.properties file in src/test/resources</p>
+<p>Create <code>extent.properties</code> file in <code>src/test/resources</code> folder</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml">extent.reporter.spark.start=true
 extent.reporter.spark.out=target/extent-reports/Sample.html
 systeminfo.Author=Ramesh
-timestamp.report=false
-thumbnail.report=false</code></pre>
+selcukes.reports.timestamp=false
+selcukes.reportsthumbnail=false</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1662,32 +1820,26 @@ thumbnail.report=false</code></pre>
         <span class="local-variable">this</span>.driver = driver;
     }
 
+
     <span class="annotation">@Before</span>
     <span class="directive">public</span> <span class="type">void</span> beforeTest(Scenario scenario) {
-        getReport().start() <span class="comment">//Initialise Extent Report and start recording logRecord</span>
-                .initSnapshot(driver); <span class="comment">//Initialise Full page screenshot</span>
+        Reporter.getReporter().initSnapshot(driver); <span class="comment">//Initialise Full page screenshot</span>
         logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Starting Scenario ..</span><span class="delimiter">&quot;</span></span> + scenario.getName());
-        getReport().attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
-
     }
 
     <span class="annotation">@BeforeStep</span>
     <span class="directive">public</span> <span class="type">void</span> beforeStep() {
         logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Before Step</span><span class="delimiter">&quot;</span></span>);
-        getReport().attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
     }
 
     <span class="annotation">@AfterStep</span>
     <span class="directive">public</span> <span class="type">void</span> afterStep() {
-        getReport().attachAndRestart(); <span class="comment">// Attach INFO logs and restart logRecord</span>
-        getReport().attachScreenshot(); <span class="comment">//Attach Full page screenshot</span>
-
+        Reporter.getReporter().attachScreenshot(); <span class="comment">//Attach Full page screenshot</span>
     }
 
     <span class="annotation">@After</span>
     <span class="directive">public</span> <span class="type">void</span> afterTest(Scenario scenario) {
         logger.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Completed Scenario ..</span><span class="delimiter">&quot;</span></span> + scenario.getName());
-        getReport().attachAndClear(); <span class="comment">// Attach INFO logs and clear logRecord</span>
     }
 }</code></pre>
 </div>
@@ -1720,7 +1872,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>selcukes-notifier<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -1730,7 +1882,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-notifier:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-notifier:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
 </div>
 </div>
@@ -1738,7 +1890,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <div class="sect2">
 <h3 id="usage-2"><a class="anchor" href="#usage-2"></a>5.3. Usage</h3>
 <div class="paragraph">
-<p>Add selcukes.yaml and update below config as follows</p>
+<p>Add <code>selcukes.yaml</code> and update below config as follows</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1769,6 +1921,12 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 }</code></pre>
 </div>
 </div>
+<div id="teams-notification" class="imageblock thumb">
+<div class="content">
+<img src="img/teams-notification.png" alt="teams notification">
+</div>
+<div class="title">Figure 3. Notification</div>
+</div>
 </div>
 </div>
 </div>
@@ -1788,7 +1946,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>selcukes-snapshot<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -1798,7 +1956,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-snapshot:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-snapshot:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
 </div>
 </div>
@@ -1849,7 +2007,94 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 </div>
 </div>
 <div class="sect1">
-<h2 id="selcukes-excel-runner"><a class="anchor" href="#selcukes-excel-runner"></a>7. Selcukes Excel Runner</h2>
+<h2 id="_selcukes_testng"><a class="anchor" href="#_selcukes_testng"></a>7. Selcukes TestNG</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-testng">Selcukes TestNG</a> is used to run cucumber testng tests with easy runtime configurations for different modules.</p>
+</div>
+<div class="sect2">
+<h3 id="setup-6"><a class="anchor" href="#setup-6"></a>7.1. Setup</h3>
+<div class="paragraph">
+<p>Selcukes TestNG used as a Java dependency in Maven as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>selcukes-testng<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of a Gradle project, we can declare Selcukes TestNG as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-testng:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage-4"><a class="anchor" href="#usage-4"></a>7.2. Usage</h3>
+<div class="paragraph">
+<p>Add <code>selcukes.yaml</code> file in <code>src/test/resource</code> folder and update below cucumber options as required</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">cucumber</span>:
+  <span class="key">module</span>: <span class="string"><span class="content">google</span></span>
+  <span class="key">features</span>: <span class="string"><span class="content">src/test/resources/features/${module}</span></span>
+  <span class="key">glue</span>: <span class="string"><span class="content">io.github.selcukes.testng.tests</span></span>
+  <span class="key">tags</span>:
+  <span class="key">plugin</span>:</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also add report options as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">reports</span>:
+  <span class="key">emailReport</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">htmlReport</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">reportsPath</span>:</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Here emailReport means extent reports, which will created automatically without any additional configurations.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Create your own Test runner by extending <code>SelcukesTestNGRunner</code></p>
+</div>
+<div class="paragraph">
+<p>Add By default, all scenarios will execute in sequential.
+To enable scenario to run in parallel use <code>@parallel</code> annotation to the scenarios as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml">  <span class="error">@parallel</span>
+  <span class="key">Scenario</span>: <span class="string"><span class="content">Maker starts a game</span><span class="content">
+    When the Maker starts a game
+    Then the Maker waits for a Breaker to join</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="selcukes-excel-runner"><a class="anchor" href="#selcukes-excel-runner"></a>8. Selcukes Excel Runner</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner">Selcukes Excel Runner</a> is an Excel driven cucumber runner which helps to</p>
@@ -1865,7 +2110,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 </ol>
 </div>
 <div class="sect2">
-<h3 id="setup-6"><a class="anchor" href="#setup-6"></a>7.1. Setup</h3>
+<h3 id="setup-7"><a class="anchor" href="#setup-7"></a>8.1. Setup</h3>
 <div class="paragraph">
 <p>Selcukes Excel Runner used as a Java dependency in Maven as follows</p>
 </div>
@@ -1874,7 +2119,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>selcukes-excel-runner<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -1884,7 +2129,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-excel-runner:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-excel-runner:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
 </div>
 </div>
@@ -1892,13 +2137,13 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 </div>
 </div>
 <div class="sect1">
-<h2 id="selcukes-reports"><a class="anchor" href="#selcukes-reports"></a>8. Selcukes Reports</h2>
+<h2 id="selcukes-reports"><a class="anchor" href="#selcukes-reports"></a>9. Selcukes Reports</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://github.com/selcukes/selcukes-java/tree/master/selcukes-reports">Selcukes Reports</a> helps to record video and send notifications on test failures</p>
 </div>
 <div class="sect2">
-<h3 id="setup-7"><a class="anchor" href="#setup-7"></a>8.1. Setup</h3>
+<h3 id="setup-8"><a class="anchor" href="#setup-8"></a>9.1. Setup</h3>
 <div class="paragraph">
 <p>Selcukes Reports used as a Java dependency in Maven as follows</p>
 </div>
@@ -1907,7 +2152,7 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>io.github.selcukes<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>selcukes-reports<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.6.0<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -1917,43 +2162,137 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json"><span class="error">d</span><span class="error">e</span><span class="error">p</span><span class="error">e</span><span class="error">n</span><span class="error">d</span><span class="error">e</span><span class="error">n</span><span class="error">c</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> {
-    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-reports:1.6.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
+    <span class="error">i</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span><span class="error">m</span><span class="error">e</span><span class="error">n</span><span class="error">t</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span><span class="error">(</span><span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.selcukes:selcukes-reports:2.0.0</span><span class="delimiter">&quot;</span></span><span class="error">)</span>
 }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="video-recorder"><a class="anchor" href="#video-recorder"></a>9.2. Video Recorder</h3>
+<div class="paragraph">
+<p>Selcukes Reports allows record video of your tests with minimal configurations</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">video</span>:
+  <span class="key">recording</span>: <span class="string"><span class="content">false</span></span>
+  <span class="key">recorderType</span>: <span class="string"><span class="content">FFMPEG</span></span>
+  <span class="key">ffmpegPath</span>:
+  <span class="key">watermarkStatus</span>: <span class="string"><span class="content">false</span></span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ffmpeg-installation"><a class="anchor" href="#ffmpeg-installation"></a>9.2.1. FFMPEG Installation</h4>
+<div class="paragraph">
+<p>In order to use ffmpeg type recorder first you need to follow below steps:</p>
+</div>
+<div class="paragraph">
+<p><em>To Install FFMPEG</em></p>
+</div>
+<div class="paragraph">
+<p>Ubuntu :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo add-apt-repository ppa:mc3man/trusty-media
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install ffmpeg</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mac :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>brew install ffmpeg</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Windows :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Download ffmpeg and extract to folder</p>
+<div class="paragraph">
+<p>Ex: C:\ffmpeg</p>
+</div>
+</li>
+<li>
+<p>Add FFMPEG bin to PATH variable.</p>
+<div class="paragraph">
+<p>Ex: C:\ffmpeg\bin</p>
+</div>
+</li>
+<li>
+<p>Download <code>SendSignalCtrlC.exe</code> from <a href="https://www.ffmpeg.org/download.html">here</a> and put into the ffmpeg bin folder</p>
+<div class="paragraph">
+<p>Ex: C:\ffmpeg\bin</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To be sure that everything works properly, open CMD and perform following command:</p>
+</div>
+<div id="ffmpeg" class="imageblock thumb">
+<div class="content">
+<img src="img/ffmpeg.JPG" alt="ffmpeg">
+</div>
+<div class="title">Figure 4. FFMPEG</div>
+</div>
+<div id="sendCtrlC" class="imageblock thumb">
+<div class="content">
+<img src="img/sendCtrlC.JPG" alt="sendCtrlC">
+</div>
+<div class="title">Figure 5. SendCtrlC</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="selcukes-configuration"><a class="anchor" href="#selcukes-configuration"></a>9. Selcukes Configuration</h2>
+<h2 id="selcukes-configuration"><a class="anchor" href="#selcukes-configuration"></a>10. Selcukes Configuration</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="environment-properties"><a class="anchor" href="#environment-properties"></a>9.1. Environment Properties</h3>
+<h3 id="environment-properties"><a class="anchor" href="#environment-properties"></a>10.1. Environment Properties</h3>
 <div class="paragraph">
 <p>Selcukes environment properties are created using <code>selcukes.yaml</code> file</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="yaml"><span class="comment"># Selcukes Environment Properties</span>
+<span class="head"><span class="head">---</span></span>
 <span class="key">projectName</span>: <span class="string"><span class="content">Selcukes</span></span>
 <span class="key">env</span>: <span class="string"><span class="content">Dev</span></span>
 <span class="key">proxy</span>: <span class="string"><span class="content">false</span></span>
 <span class="key">baseUrl</span>:
-<span class="key">excelRunner</span>:
+<span class="key">excel</span>:
+  <span class="key">runner</span>:
   <span class="key">filePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>
   <span class="key">suiteName</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">smoke</span><span class="delimiter">&quot;</span></span>
+<span class="key">cucumber</span>:
+  <span class="key">module</span>: <span class="string"><span class="content">google</span></span>
+  <span class="key">features</span>: <span class="string"><span class="content">src/test/resources/features/${module}</span></span>
+  <span class="key">glue</span>: <span class="string"><span class="content">io.github.selcukes.testng.tests</span></span>
+  <span class="key">tags</span>:
+  <span class="key">plugin</span>:
 <span class="key">web</span>:
   <span class="key">remote</span>: <span class="string"><span class="content">false</span></span>
   <span class="key">browserName</span>: <span class="string"><span class="content">CHROME</span></span>
   <span class="key">headLess</span>: <span class="string"><span class="content">true</span></span>
-  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://localhost:4444</span><span class="delimiter">&quot;</span></span>
+  <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:8080</span><span class="delimiter">&quot;</span></span>
 <span class="key">windows</span>:
   <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
-  <span class="key">winApp-path</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:/Program Files (x86)/Windows Application Driver/WinAppDriver.exe</span><span class="delimiter">&quot;</span></span>
   <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">C:\\Windows\\System32\\notepad.exe</span><span class="delimiter">&quot;</span></span>
 <span class="key">mobile</span>:
   <span class="key">serviceUrl</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://127.0.0.1:4723</span><span class="delimiter">&quot;</span></span>
   <span class="key">app</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ApiDemos-debug.apk</span><span class="delimiter">&quot;</span></span>
+<span class="key">reports</span>:
+  <span class="key">emailReport</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">htmlReport</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">reportsPath</span>:
 <span class="key">video</span>:
   <span class="key">recording</span>: <span class="string"><span class="content">false</span></span>
   <span class="key">recorderType</span>: <span class="string"><span class="content">FFMPEG</span></span>
@@ -1969,27 +2308,27 @@ And why not attach a screenshot along with that alert so that all the stakeholde
 </div>
 </div>
 <div class="sect2">
-<h3 id="runtime-properties"><a class="anchor" href="#runtime-properties"></a>9.2. Runtime Properties</h3>
+<h3 id="runtime-properties"><a class="anchor" href="#runtime-properties"></a>10.2. Runtime Properties</h3>
 <div class="paragraph">
-<p>The below <code>selcukes.properties</code> provides flexibility to override default environment properties in runtime.</p>
+<p>The below selcukes runtime properties provides flexibility to override default values by updating <code>System.Property</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>selcukes.excel.runner=  # true or false. default: true
 selcukes.excel.suiteName=     # Name of Sheet in Excel Suite File
 selcukes.excel.suiteFile=       # Excel File path used as excel runner
-selcukes.extent.report=      # true or false. default: true.
+selcukes.reports.emailReport=      # true or false. default: true.
 selcukes.features=              # comma separated paths to feature files. example: path/to/example.feature, path/to/other.feature
 selcukes.tags=           # tag expression. example: @smoke and not @slow
 selcukes.glue=                  # comma separated package names. example: com.example.glue
 selcukes.plugin=                # comma separated plugin strings. example: pretty, json:path/to/report.json
 selcukes.reports.path=        # path/target
-selcukes.timestamp.report=     # true or false. default: false</pre>
+selcukes.reports.timestamp=     # true or false. default: false</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logger-properties"><a class="anchor" href="#logger-properties"></a>9.3. Logger Properties</h3>
+<h3 id="logger-properties"><a class="anchor" href="#logger-properties"></a>10.3. Logger Properties</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="yaml"><span class="comment"># To add the FileHandler, use the following line.</span>
@@ -2019,7 +2358,7 @@ selcukes.timestamp.report=     # true or false. default: false</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="community"><a class="anchor" href="#community"></a>10. Community</h2>
+<h2 id="community"><a class="anchor" href="#community"></a>11. Community</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>There are two ways to try to get community support related to Selcukes.
@@ -2030,7 +2369,7 @@ Finally, if you think Selcukes can be enhanced, consider contributing to the pro
 </div>
 </div>
 <div class="sect1">
-<h2 id="support"><a class="anchor" href="#support"></a>11. Support</h2>
+<h2 id="support"><a class="anchor" href="#support"></a>12. Support</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://opencollective.com/selcukes">Selcukes</a> is part of <a href="https://opencollective.com/selcukes">OpenCollective</a>, an online funding platform for open and transparent communities.
@@ -2046,8 +2385,8 @@ This documentation (also available in <a href="selcukes.pdf">PDF</a> and <a href
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.6.0<br>
-Updated on 28-04-2022
+Version 2.0.0<br>
+Updated on 06-05-2022
 </div>
 </div>
 </body>

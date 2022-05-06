@@ -22,12 +22,14 @@ import io.github.selcukes.core.driver.GridRunner;
 import io.github.selcukes.core.enums.DeviceType;
 import io.github.selcukes.core.page.MobilePage;
 import org.openqa.selenium.By;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 //tag::snippet-in-doc[]
 public class MobileTest {
-    @BeforeMethod
-    void beforeTest() {
+    @BeforeSuite
+    void beforeSuite() {
         GridRunner.startAppiumServer();
     }
 
@@ -39,8 +41,8 @@ public class MobileTest {
         page.click(By.xpath("//android.widget.TextView[contains(@text,'Views')]"));
     }
 
-    @AfterMethod
-    void afterTest() {
+    @AfterSuite
+    void afterSuite() {
         DriverManager.removeDriver();
         GridRunner.stopAppiumServer();
     }

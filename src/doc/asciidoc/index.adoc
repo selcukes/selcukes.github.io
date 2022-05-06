@@ -100,41 +100,41 @@ $ gradle clean test
 
 === Browser Tests
 
-Add `selcukes.yaml` file in `src/test/resource` folder and updated below options as required
-[source,yaml]
+Add `selcukes.yaml` file in `src/test/resource` folder and update below options as required
 
+[source,yaml]
 ----
 include::../../test/resources/selcukes.yaml[lines=17..21]
 ----
 
 Create Sample Browser Test as follows
-[source,java]
 
+[source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/WebTest.java[tags=snippet-in-doc,indent=0]
 ----
 
 === Desktop Tests
 
-Add `selcukes.yaml` file in resource folder and updated below options as required
-[source,yaml]
+Add `selcukes.yaml` file in resource folder and update below options as required
 
+[source,yaml]
 ----
 include::../../test/resources/selcukes.yaml[lines=22..24]
 ----
 
 Create Sample WindowDriver Test for Notepad application as follows
-[source,java]
 
+[source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/NotepadTest.java[tags=snippet-in-doc,indent=0]
 ----
 
 === Mobile Tests
 
-Add `selcukes.yaml` file in resource folder and updated below options as required
-[source,yaml]
+Add `selcukes.yaml` file in resource folder and update below options as required
 
+[source,yaml]
 ----
 include::../../test/resources/selcukes.yaml[lines=25..27]
 ----
@@ -182,7 +182,7 @@ First, we can add the driver location to our `PATH` environmental variable.
 Second, we can use _Java system properties_ to export the driver path.
 Each driver path should be identified using a given system property, as follows:
 +
-[source,java]
+
 ----
 System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
 System.setProperty("webdriver.gecko.driver", "/path/to/geckodriver");
@@ -190,6 +190,7 @@ System.setProperty("webdriver.edge.driver", "/path/to/msedgedriver");
 System.setProperty("webdriver.opera.driver", "/path/to/operadriver");
 System.setProperty("webdriver.ie.driver", "C:/path/to/IEDriverServer.exe");
 ----
+
 3. Maintenance.
 Last but not least, we need to warranty the compatibility between driver and browser in time.
 This step is relevant since modern browsers automatically upgrade themselves (i.e., they are _evergreen_ browsers), and for this reason, the compatibility driver-browser is not warranted in the long run.
@@ -234,7 +235,6 @@ include::../../test/java/io/github/selcukes/tests/BrowserTest.java[tags=snippet-
 WebDriver Binaries provides a set of _binaries_ for Chrome, Firefox, Edge, Opera, Chromium, and Internet Explorer.
 The basic use of these binary is the following:
 
-[source,java]
 ----
 WebDriverBinary.chromeDriver().setup();
 WebDriverBinary.firefoxDriver().setup();
@@ -275,7 +275,6 @@ First, by using its _Java API_.
 To that aim, each manager (e.g., `chromeDriver()`, `firefoxDriver()`, etc., allows to concatenate different methods of this API to specify custom options or preferences.
 For example (the explanation of these methods and the other possibilities are explained in the tables at the end of this section):
 
-[source,java]
 ----
 WebDriverBinary.firefoxDriver().version("v0.26.0").setup();
 WebDriverBinary.chromeDriver().targetPath("temp").setup();
@@ -307,6 +306,8 @@ dependencies {
     implementation("io.github.selcukes:selcukes-databind:{project-version}")
 }
 ----
+
+NOTE: Selcukes DataBind is a transitive Dependency of `webdriver-binaries`.If you are using `webdriver-binaries`, then ignore adding this dependency explicitly.
 
 === Data Mapper
 
@@ -427,27 +428,27 @@ We're also going to use DataMapper to write a `Customer` out to a data file.
 This process is similar to update data file, however it will create a new data file if it is not found.
 
 Let's create `Customer` POJO class
-[source,java]
 
+[source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[lines=52..65]
 ----
 
-Let's create a Customer:
-[source,java]
+Now Let's create a set object of Customer:
 
+[source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[lines=32..44]
 ----
 
-Let's write our Customer using write:
+Let's write our Customer using write method:
 [source,java]
 
 ----
 include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[lines=46..46]
 ----
 
-When we look into the `customer.yaml`, it should look similar to:
+When we look into the `customer.yml`, it should look similar to:
 
 [source,yaml]
 ----
@@ -459,6 +460,13 @@ contactDetails:
   number: "512"
 - type: "A-CSM"
   number: "123"
+----
+
+Here is full example code to create data file.
+
+[source,java]
+----
+include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[tags=snippet-in-doc,indent=0]
 ----
 
 == Selcukes Extent Reports
@@ -492,6 +500,10 @@ dependencies {
     implementation("io.github.selcukes:selcukes-extent-reports:{project-version}")
 }
 ----
+
+NOTE: Selcukes Extent Reports is a transitive Dependency of `selcukes-reports`.If you are using `selcukes-reports`, then ignore adding this dependency explicitly.
+
+WARNING: If you are using `selcukes-testng` then refer <<_selcukes_testng, Selcukes TestNG>> for extent report integration
 
 === Usage
 
@@ -584,6 +596,11 @@ public class NotifierTest {
 }
 ----
 
+[[teams-notification]]
+[.thumb]
+.Notification
+image::teams-notification.png[scaledwidth=100%]
+
 == Selcukes Snapshot
 
 https://github.com/selcukes/selcukes-java/tree/master/selcukes-snapshot[Selcukes Snapshot] is a utility library written in Java for creating full page screenshots using Selenium WebDriver.
@@ -615,6 +632,64 @@ dependencies {
 [source,java]
 ----
 include::../../test/java/io/github/selcukes/tests/SnapshotTest.java[tags=snippet-in-doc,indent=0]
+----
+
+[#_selcukes_testng]
+== Selcukes TestNG
+
+https://github.com/selcukes/selcukes-java/tree/master/selcukes-testng[Selcukes TestNG] is used to run cucumber testng tests with easy runtime configurations for different modules.
+
+=== Setup
+
+Selcukes TestNG used as a Java dependency in Maven as follows
+
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>io.github.selcukes</groupId>
+    <artifactId>selcukes-testng</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+In the case of a Gradle project, we can declare Selcukes TestNG as follows:
+
+[source,json,subs="attributes+"]
+----
+dependencies {
+    implementation("io.github.selcukes:selcukes-testng:{project-version}")
+}
+----
+
+=== Usage
+
+Add `selcukes.yaml` file in `src/test/resource` folder and update below cucumber options as required
+
+[source,yaml]
+----
+include::../../test/resources/selcukes.yaml[lines=11..16]
+----
+
+Also add report options as follows
+[source,yaml]
+
+----
+include::../../test/resources/selcukes.yaml[lines=28..31]
+----
+
+NOTE: Here emailReport means extent reports, which will created automatically without any additional configurations.
+
+Create your own Test runner by extending `SelcukesTestNGRunner`
+
+Add By default, all scenarios will execute in sequential.
+To enable scenario to run in parallel use `@parallel` annotation to the scenarios as follows
+
+[source,yaml]
+----
+  @parallel
+  Scenario: Maker starts a game
+    When the Maker starts a game
+    Then the Maker waits for a Breaker to join
 ----
 
 == Selcukes Excel Runner
@@ -673,6 +748,58 @@ dependencies {
 ----
 
 === Video Recorder
+
+Selcukes Reports allows record video of your tests with minimal configurations
+
+[source,yaml]
+----
+include::../../test/resources/selcukes.yaml[lines=32..36]
+----
+
+==== FFMPEG Installation
+
+In order to use ffmpeg type recorder first you need to follow below steps:
+
+_To Install FFMPEG_
+
+Ubuntu :
+
+----
+sudo add-apt-repository ppa:mc3man/trusty-media
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install ffmpeg
+----
+
+Mac :
+
+----
+brew install ffmpeg
+----
+
+Windows :
+
+- Download ffmpeg and extract to folder
++
+Ex: C:\ffmpeg
+- Add FFMPEG bin to PATH variable.
++
+Ex: C:\ffmpeg\bin
+- Download `SendSignalCtrlC.exe` from https://www.ffmpeg.org/download.html[here] and put into the ffmpeg bin folder
++
+Ex: C:\ffmpeg\bin
+
+To be sure that everything works properly, open CMD and perform following command:
+
+[[ffmpeg]]
+[.thumb]
+.FFMPEG
+image::ffmpeg.JPG[scaledwidth=100%]
+
+[[sendCtrlC]]
+[.thumb]
+.SendCtrlC
+image::sendCtrlC.JPG[scaledwidth=100%]
 
 == Selcukes Configuration
 

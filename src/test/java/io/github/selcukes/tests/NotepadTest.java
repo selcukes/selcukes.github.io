@@ -23,14 +23,14 @@ import io.github.selcukes.core.enums.DeviceType;
 import io.github.selcukes.core.page.WinPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 //tag::snippet-in-doc[]
 public class NotepadTest {
-    @BeforeMethod
-    public void beforeTest() {
+    @BeforeSuite
+    public void beforeSuite() {
         GridRunner.startAppiumServer();
     }
 
@@ -49,8 +49,8 @@ public class NotepadTest {
                 .click(By.name("Don't Save"));
     }
 
-    @AfterMethod
-    public void afterTest() {
+    @AfterSuite
+    public void afterSuite() {
         DriverManager.removeDriver();
         GridRunner.stopAppiumServer();
     }
