@@ -18,32 +18,31 @@ package io.github.selcukes.tests;
 
 import io.appium.java_client.AppiumDriver;
 import io.github.selcukes.core.driver.DriverManager;
+import io.github.selcukes.core.driver.GridRunner;
 import io.github.selcukes.core.enums.DeviceType;
 import io.github.selcukes.core.page.MobilePage;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 //tag::snippet-in-doc[]
 public class MobileTest {
-    DriverManager<AppiumDriver> driverManager;
-
-    @BeforeTest
+    @BeforeMethod
     void beforeTest() {
-        driverManager = new DriverManager<>();
+        GridRunner.startAppiumServer();
     }
 
-    @Test(enabled = false)
+    @Test
     public void remoteTest() {
-        AppiumDriver driver = driverManager.createDriver(DeviceType.MOBILE);
+        AppiumDriver driver = DriverManager.createDriver(DeviceType.MOBILE);
         MobilePage page = new MobilePage(driver);
+        page.enableDriverEvents();
         page.click(By.xpath("//android.widget.TextView[contains(@text,'Views')]"));
     }
 
-    @AfterTest
+    @AfterMethod
     void afterTest() {
-        driverManager.getManager().destroyDriver();
+        DriverManager.removeDriver();
+        GridRunner.stopAppiumServer();
     }
 }
 //end::snippet-in-doc[]

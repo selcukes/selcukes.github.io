@@ -100,11 +100,11 @@ $ gradle clean test
 
 === Browser Tests
 
-Add `selcukes.yaml` file in resource folder and updated below options as required
+Add `selcukes.yaml` file in `src/test/resource` folder and updated below options as required
 [source,yaml]
 
 ----
-include::../../main/resources/selcukes.yaml[lines=9..13]
+include::../../test/resources/selcukes.yaml[lines=17..21]
 ----
 
 Create Sample Browser Test as follows
@@ -120,7 +120,7 @@ Add `selcukes.yaml` file in resource folder and updated below options as require
 [source,yaml]
 
 ----
-include::../../main/resources/selcukes.yaml[lines=14..17]
+include::../../test/resources/selcukes.yaml[lines=22..24]
 ----
 
 Create Sample WindowDriver Test for Notepad application as follows
@@ -136,7 +136,7 @@ Add `selcukes.yaml` file in resource folder and updated below options as require
 [source,yaml]
 
 ----
-include::../../main/resources/selcukes.yaml[lines=18..20]
+include::../../test/resources/selcukes.yaml[lines=25..27]
 ----
 
 Create Sample AndroidDriver Test for `ApiDemos-debug.apk` as follows
@@ -256,19 +256,16 @@ This database is a collection of shell commands used to discover the version of 
 This process is different for each browser.
 In Chrome and Edge, their respective drivers (chromedriver and msedgedriver) maintainers also publish resources to identify the suitable driver version for a given major browser release.
 For instance, to find out the version of chromedriver required for Chrome 100, we need to read the following https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100[file].
-Unfortunately, this information is not available in other browsers (e.g., Firefox and Opera) or older versions of Chrome and Firefox.
-For this reason, WebDriverManager uses another knowledge database called versions database.
-This database maps the browser releases with the known compatible driver versions.
-3. Once the driver version is discovered, WebDriverManager downloads this driver to a local cache (located at `%temp%webdriver` by default).
+3. Once the driver version is discovered, WebDriverBinary downloads this driver to a local cache (located at `%temp%/webdrivers` by default).
 These drivers are reused in subsequent calls.
-4. Finally, WebDriverManager exports the driver path using Java system properties (e.g., `webdriver.chrome.driver` in the case of the Chrome manager).
+4. Finally, WebDriverBinary exports the driver path using Java system properties (e.g., `webdriver.chrome.driver` in the case of the Chrome manager).
 
 This process automated the first two stages of the driver management previously introduced, i.e., download and setup.
-To support the third stage (i.e., maintenance), WebDriverManager implements _resolution cache_.
-This cache (called by default `resolution.properties` and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions.
+To support the third stage (i.e., maintenance), WebDriverBinary implements _resolution cache_.
+This cache (called by default `version.properties` and stored in the root of the driver cache) is a file that stores the relationship between the resolved driver and browser versions.
 This relationship is valid during a given _time-to-live_ (TTL).
-The default value for this TTL is 1 hour for browsers and 1 day for drivers.
-In other words, the discovered browser version is valid for 1 hour, and the driver version is considered correct for 1 day.
+The default value for this TTL is 1 hour for browsers and drivers.
+In other words, the discovered browser version is valid for 1 hour.
 This mechanism improves the performance dramatically since the second (and following) calls to the resolution algorithm for the same browser are resolved using only local resources (i.e., without using the shell nor requesting external services).
 
 === Advanced Configuration
@@ -320,7 +317,7 @@ DataMapper object helps to read and write Json or yaml/yml files with `@DataFile
 DataMapper looks for matching data files in test resource folder by converting POJO class name to a SnakeCase json or yaml/yml file.
 
 - For POJO class `TestUsers.java`
-- Matching test data files are `test_users.json` or `test_users.yml` or `test_users.yml`
+- Matching test data files are `test_users.json` or `test_users.yml` or `test_users.yaml`
 
 `@DataFile` annotation also takes additional attributes as follows
 
@@ -352,21 +349,21 @@ Then, let's define the POJO class with `@DataFile` annotation
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[lines=49..53]
+include::../../test/java/io/github/selcukes/tests/databind/ReadDataFileTest.java[lines=49..53]
 ----
 
 Finally, let's create our User class:
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[lines=55..59]
+include::../../test/java/io/github/selcukes/tests/databind/ReadDataFileTest.java[lines=55..59]
 ----
 
 We're going to use DataMapper to read our JSON file into an TestUsers object, so let's set that up now
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[lines=36..36]
+include::../../test/java/io/github/selcukes/tests/databind/ReadDataFileTest.java[lines=36..36]
 ----
 
 We'll find that our TestUsers object is populated from the file, including the list of User.
@@ -375,12 +372,12 @@ Here is full example code to demonstrate to parse and read `test_users.json` fil
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperTest.java[tags=snippet-in-doc,indent=0]
+include::../../test/java/io/github/selcukes/tests/databind/ReadDataFileTest.java[tags=snippet-in-doc,indent=0]
 ----
 
 ==== Update data files
 
-We're also going to use DataMapper to write a TestSample out to a file.
+We're also going to use DataMapper to update a TestSample into a file.
 This time we will try using yml file.
 
 Let's quickly look at the `test_sample.yml` file we'll be writing the values
@@ -400,28 +397,68 @@ Then, let's define the POJO class with `@DataFile` annotation
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[lines=41..45]
+include::../../test/java/io/github/selcukes/tests/databind/UpdateDataFileTest.java[lines=41..45]
 ----
 
 Let's read our TestSample and update values:
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[lines=35..37]
+include::../../test/java/io/github/selcukes/tests/databind/UpdateDataFileTest.java[lines=35..37]
 ----
 
 Let's write our updated TestSample values:
 [source,java]
 
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[lines=38]
+include::../../test/java/io/github/selcukes/tests/databind/UpdateDataFileTest.java[lines=38]
 ----
 
 Here is full example code to demonstrate to update and write values to `test_sample.yml`
 
 [source,java]
 ----
-include::../../test/java/io/github/selcukes/tests/databind/DataMapperWriteTest.java[tags=snippet-in-doc,indent=0]
+include::../../test/java/io/github/selcukes/tests/databind/UpdateDataFileTest.java[tags=snippet-in-doc,indent=0]
+----
+
+==== Write data files
+
+We're also going to use DataMapper to write a `Customer` out to a data file.
+This process is similar to update data file, however it will create a new data file if it is not found.
+
+Let's create `Customer` POJO class
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[lines=52..65]
+----
+
+Let's create a Customer:
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[lines=32..44]
+----
+
+Let's write our Customer using write:
+[source,java]
+
+----
+include::../../test/java/io/github/selcukes/tests/databind/CreateDataFileTest.java[lines=46..46]
+----
+
+When we look into the `customer.yaml`, it should look similar to:
+
+[source,yaml]
+----
+firstName: "Mark"
+lastName: "Jones"
+age: 5
+contactDetails:
+- type: "CSM"
+  number: "512"
+- type: "A-CSM"
+  number: "123"
 ----
 
 == Selcukes Extent Reports
@@ -433,10 +470,6 @@ https://github.com/selcukes/selcukes-java/tree/master/selcukes-extent-reports[Se
 1. Generates Emailable extent report
 2. Full page screenshots attached to report as base64 format
 3. Supports to add JUL based info logs to report
-
-----
-logger.info(()-> "Navigated to Home page..")
-----
 
 === Setup
 
@@ -462,15 +495,15 @@ dependencies {
 
 === Usage
 
-Create extent.properties file in src/test/resources
+Create `extent.properties` file in `src/test/resources` folder
 [source,xml]
 
 ----
 extent.reporter.spark.start=true
 extent.reporter.spark.out=target/extent-reports/Sample.html
 systeminfo.Author=Ramesh
-timestamp.report=false
-thumbnail.report=false
+selcukes.reports.timestamp=false
+selcukes.reportsthumbnail=false
 ----
 
 Add Selcukes Extent Reports plugin to cucumber runner as follows
@@ -526,12 +559,11 @@ dependencies {
 
 === Usage
 
-Add selcukes.yaml and update below config as follows
-[source,yml]
-[source,yaml]
+Add `selcukes.yaml` and update below config as follows
 
+[source,yaml]
 ----
-include::../../main/resources/selcukes.yaml[lines=26..31]
+include::../../test/resources/selcukes.yaml[lines=37..42]
 ----
 
 Create test class as follows
@@ -640,6 +672,8 @@ dependencies {
 }
 ----
 
+=== Video Recorder
+
 == Selcukes Configuration
 
 === Environment Properties
@@ -648,24 +682,24 @@ Selcukes environment properties are created using `selcukes.yaml` file
 [source,yaml]
 
 ----
-include::../../main/resources/selcukes.yaml[]
+include::../../test/resources/selcukes.yaml[]
 ----
 
 === Runtime Properties
 
-The below `selcukes.properties` provides flexibility to override default environment properties in runtime.
+The below selcukes runtime properties provides flexibility to override default values by updating `System.Property`.
 
 ----
 selcukes.excel.runner=  # true or false. default: true
 selcukes.excel.suiteName=     # Name of Sheet in Excel Suite File
 selcukes.excel.suiteFile=       # Excel File path used as excel runner
-selcukes.extent.report=      # true or false. default: true.
+selcukes.reports.emailReport=      # true or false. default: true.
 selcukes.features=              # comma separated paths to feature files. example: path/to/example.feature, path/to/other.feature
 selcukes.tags=           # tag expression. example: @smoke and not @slow
 selcukes.glue=                  # comma separated package names. example: com.example.glue
 selcukes.plugin=                # comma separated plugin strings. example: pretty, json:path/to/report.json
 selcukes.reports.path=        # path/target
-selcukes.timestamp.report=     # true or false. default: false
+selcukes.reports.timestamp=     # true or false. default: false
 ----
 
 === Logger Properties

@@ -18,33 +18,41 @@ package io.github.selcukes.tests;
 
 import io.appium.java_client.windows.WindowsDriver;
 import io.github.selcukes.core.driver.DriverManager;
+import io.github.selcukes.core.driver.GridRunner;
 import io.github.selcukes.core.enums.DeviceType;
 import io.github.selcukes.core.page.WinPage;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 //tag::snippet-in-doc[]
 public class NotepadTest {
-    DriverManager<WindowsDriver> driverManager;
-
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest() {
-        driverManager = new DriverManager<>();
+        GridRunner.startAppiumServer();
     }
 
     @Test
     public void notepadTest() {
-        WindowsDriver driver = driverManager.createDriver(DeviceType.DESKTOP);
+        WindowsDriver driver = DriverManager.createDriver(DeviceType.DESKTOP);
         WinPage page = new WinPage(driver);
-        page.write(By.className("Edit"), "This is sample");
-
+        page.enableDriverEvents();
+        By edit = By.className("Edit");
+        page.enter(edit, "This is sample")
+                .enter(edit, Keys.ENTER)
+                .enter(edit, "Time is")
+                .enter(edit, Keys.ENTER)
+                .enter(edit, Keys.F5)
+                .enter(edit, Keys.CONTROL + "w" + Keys.CONTROL)
+                .click(By.name("Don't Save"));
     }
 
-    @AfterTest
+    @AfterMethod
     public void afterTest() {
-        driverManager.getManager().destroyDriver();
+        DriverManager.removeDriver();
+        GridRunner.stopAppiumServer();
     }
 }
 //end::snippet-in-doc[]

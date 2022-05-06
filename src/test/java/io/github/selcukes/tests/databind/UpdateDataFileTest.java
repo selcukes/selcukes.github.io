@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.UUID;
 
 //tag::snippet-in-doc[]
-public class DataMapperWriteTest {
+public class UpdateDataFileTest {
     @SneakyThrows
     @Test
     public void testClass() {

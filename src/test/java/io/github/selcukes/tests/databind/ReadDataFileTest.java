@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 
 //tag::snippet-in-doc[]
-public class DataMapperTest {
+public class ReadDataFileTest {
     @DataProvider
     public Iterator<Object[]> getTestUsers() {
         final TestUsers testUsers = DataMapper.parse(TestUsers.class);
