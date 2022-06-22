@@ -44,7 +44,7 @@ values={[
 ```java
 dependencies{
         implementation("io.github.selcukes:selcukes-extent-reports:${selcukes.version}")
-        }
+}
 ```
 
 </TabItem>
@@ -54,14 +54,13 @@ dependencies{
 then ignore adding this dependency explicitly.
 :::
 
-:::warning If you are using `selcukes-testng` then refer <<_selcukes_testng, Selcukes TestNG>> for extent report
+:::warning If you are using `selcukes-testng` then refer [Selcukes TestNG](selcukes-testng.md) for extent report
 integration
 :::
 
 ## Usage
 
 Create `extent.properties` file in `src/test/resources` folder
-[source,xml]
 
 ```shell
 extent.reporter.spark.start=true

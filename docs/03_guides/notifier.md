@@ -44,7 +44,7 @@ values={[
 ```java
 dependencies{
         implementation("io.github.selcukes:selcukes-notifier:${selcukes.version}")
-        }
+}
 ```
 
 </TabItem>
@@ -65,7 +65,7 @@ notifier:
 ```
 
 
-Create test class as follows
+Create a test class as follows
 
 ```java
 public class NotifierTest {
