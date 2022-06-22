@@ -13,7 +13,7 @@ sidebar_position: 10
             <scope>provided</scope>
         </dependency>
 ```
-* Create lombok.config in project parent folder and add below properties
+* Create `lombok.config` in project parent folder and add below properties
 ```properties
 lombok.log.fieldName = logger
 lombok.log.custom.declaration = io.github.selcukes.commons.logging.Logger io.github.selcukes.commons.logging.LoggerFactory.getLogger(TYPE)
