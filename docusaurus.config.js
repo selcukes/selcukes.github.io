@@ -89,8 +89,8 @@ const config = {
                 to: '/docs',
               },
               {
-                label: 'Selcukes',
-                to: 'https://github.com/selcukes',
+                label: 'TechyWorks',
+                to: 'https://techyworks.blogspot.com/',
               },
             ],
           },

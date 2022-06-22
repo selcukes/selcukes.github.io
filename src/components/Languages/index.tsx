@@ -11,32 +11,32 @@ type Item = {
 const items: Item[] = [
   {
     name: "Chrome",
-    link: "/docs/guides",
+    link: "/docs",
     icon: require("@site/static/browsers/chrome.svg").default,
   },
   {
     name: "Firefox",
-    link: "/docs/guides",
+    link: "/docs",
     icon: require("@site/static/browsers/firefox.svg").default,
   },
   {
     name: "Edge",
-    link: "/docs/guides",
+    link: "/docs",
     icon: require("@site/static/browsers/edge.svg").default,
   },
   {
     name: "IE",
-    link: "/docs/guides",
+    link: "/docs",
     icon: require("@site/static/browsers/ie.svg").default,
   },
   {
     name: "Android",
-    link: "/docs/guides",
+    link: "/docs",
     icon: require("@site/static/browsers/android.svg").default,
   },
   {
     name: "Desktop",
-    link: "/docs/guides",
+    link: "/docs",
     icon: require("@site/static/browsers/desktop.svg").default,
   },
 ];
