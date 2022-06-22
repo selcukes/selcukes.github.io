@@ -50,7 +50,8 @@ dependencies{
 </TabItem>
 </Tabs>
 
-:::note Selcukes Extent Reports is a transitive Dependency of `selcukes-reports`.If you are using `selcukes-reports`,
+:::note 
+Selcukes Extent Reports is a transitive Dependency of `selcukes-reports`.If you are using `selcukes-reports`,
 then ignore adding this dependency explicitly.
 :::
 
