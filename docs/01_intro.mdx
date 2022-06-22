@@ -1,0 +1,67 @@
+---
+slug: /
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Introduction
+
+Selcukes is an open source library that aims to build high-quality and highly scalable automated tests
+
+## Features
+- Easy add new logic to your tests without causing regression issues. Control the whole execution workflow - change browsers or reuse them. Retry your failing tests to make sure that there is a real problem.
+- Automate UI actions or user scenarios on real devices or emulators with Selcukes features from test creation to execution.
+- Cross-platform screenshot and video recording on test failure
+
+![Technologies](@site/static/img/techs-used.png)
+
+## Getting Started
+
+### What you need to start
+
+#### Java 11
+
+Test Automation is a development activity, so you will need some familiarity with Java.
+Selcukes uses Java 11, so make sure you have a [JDK 11 or later](http://www.oracle.com/technetwork/java/javase/downloads/index.html) installed.
+
+#### IDE
+
+You will need a modern IDE to work with Java.
+We recommend IntelliJ (you can download the Community Edition, which is free, [from here](https://www.jetbrains.com/idea/download).
+But Eclipse will work fine as well.
+
+#### A Build Tool
+
+You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports.
+Make sure you have either [Gradle 3.x or higher](http://www.gradle.org/downloads) or [Maven 3.3.x or higher](https://maven.apache.org/download.cgi) installed.
+
+### Quick Start
+The quickest way to create a new project is to take one of the starter projects on Github.
+You can find the starter project for TestNG at https://github.com/selcukes/selcukes-java-skeleton[selcukes-java-skeleton].
+
+You can clone this repository:
+```shell
+git clone https://github.com/selcukes/selcukes-java-skeleton.git
+cd selcukes-java-skeleton
+```
+
+
+Or simply [download a zip file from here](https://github.com/selcukes/selcukes-java-skeleton/archive/master.zip).
+
+If you are using Maven, you can also create a new project using one of the Selcukes [Maven Archetypes](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html).
+
+#### So far so good?
+
+The starter project comes with a demo test that you can run.
+From the command line, run either
+
+```shell
+$ mvn clean verify
+```
+
+or
+
+```shell
+$ gradle clean test
+```

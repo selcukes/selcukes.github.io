@@ -1,0 +1,160 @@
+@import url("https://rsms.me/inter/inter.css");
+:root {
+  --ifm-font-family-base: "Inter", sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    --ifm-font-family-base: "Inter var", sans-serif;
+  }
+}
+
+:root {
+  --ifm-color-primary: #9333ea;
+  --ifm-color-primary-dark: #8519e7;
+  --ifm-color-primary-darker: #7e17dc;
+  --ifm-color-primary-darkest: #6813b5;
+  --ifm-color-primary-light: #a14ded;
+  --ifm-color-primary-lighter: #a85aee;
+  --ifm-color-primary-lightest: #bc81f2;
+
+
+  --ifm-background-color: var(--ifm-color-gray-0);
+  --ifm-navbar-background-color: var(--ifm-background-color);
+  --ifm-footer-background-color: var(--ifm-background-color);
+  --ifm-link-hover-decoration: none;
+  --ifm-button-padding-horizontal: 1.5rem;
+  --ifm-button-padding-vertical: 0.75rem;
+  --ifm-pre-padding: 1.5rem;
+  --ifm-color-emphasis-50: #f9fafa;
+}
+
+html[data-theme="dark"] {
+  --ifm-background-color: var(--ifm-color-gray-1000);
+  --ifm-color-emphasis-50: #151719;
+  --docsearch-searchbox-background: var(--ifm-color-gray-900) !important;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+[data-theme="dark"] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* custom */
+
+.theme-doc-sidebar-container {
+  border-right: none !important;
+}
+.pagination-nav {
+  display: none;
+}
+
+.navbar {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+.navbar__inner {
+  padding: var(--ifm-navbar-padding-vertical)
+    var(--ifm-navbar-padding-horizontal);
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.65);
+}
+[data-theme="dark"] .navbar__inner {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+.navbar__logo {
+  height: 36px;
+}
+@media screen and (max-width: 996px) {
+  .navbar__brand {
+    flex: 1;
+    justify-content: center;
+    margin-right: 2rem;
+  }
+}
+.navbar__link {
+  font-size: 0.95rem;
+}
+
+.navbar-sidebar {
+  border-right: 1px solid var(--ifm-color-emphasis-100);
+}
+.navbar-sidebar__close {
+  display: none;
+}
+
+.menu {
+  padding: 1rem !important;
+}
+.menu__link {
+  font-size: 0.9rem;
+}
+.menu__link:not(.menu__link--active):hover {
+  background: none;
+}
+.menu__link--sublist:after {
+  transform: scale(0.8);
+}
+
+.footer {
+  padding-bottom: 4rem;
+}
+@media screen and (max-width: 996px) {
+  .footer__links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.button {
+  font-size: calc(0.5rem + 0.5rem * var(--ifm-button-size-multiplier));
+}
+.button {
+  --ifm-button-size-multiplier: 1;
+}
+.button--lg {
+  --ifm-button-size-multiplier: 1.2;
+}
+.button--sm {
+  --ifm-button-size-multiplier: 0.8;
+}
+.button {
+  --ifm-button-color: var(--ifm-color-white);
+}
+.button--secondary {
+  --ifm-button-color: var(--ifm-color-black);
+}
+
+@media screen and (max-width: 996px) {
+  .hidden--sm {
+    display: none;
+  }
+}
+@media screen and (min-width: 997px) {
+  .hidden--lg {
+    display: none;
+  }
+}
+.header-github-link:hover {
+  opacity: 0.6;
+}
+
+.header-github-link:before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+html[data-theme='dark'] .header-github-link:before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
