@@ -43,7 +43,8 @@ dependencies{
 </TabItem>
 </Tabs>
 
-:::note Selcukes TestNG is a transitive Dependency of `selcukes-excel-runner`.If you are using `excel-runner`, then
+:::note 
+Selcukes TestNG is a transitive Dependency of `selcukes-excel-runner`.If you are using `excel-runner`, then
 ignore adding this dependency explicitly.
 :::
 
@@ -69,7 +70,8 @@ reports:
   reportsPath:
 ```
 
-:::tip Here emailReport means extent reports, which will created automatically without any additional configurations.
+:::tip 
+Here emailReport means extent reports, which will created automatically without any additional configurations.
 :::
 Create your own Test runner by extending `SelcukesTestNGRunner`
 
