@@ -9,19 +9,19 @@ export default function Newsletter(): JSX.Element {
         <div>
           <h2 className={styles.heading}>Subscribe for product updates</h2>
           <div className={styles.subheading}>
-            By subscribing, you agree with Revue’s{" "}
-            <a target="_blank" href="https://selcukes.github.io/terms">
+            By subscribing, you agree with Selcukes’s{" "}
+            <a target="_blank" href="https://techyworks.blogspot.com/p/disclaimer.html">
               Terms of Service
             </a>{" "}
             and{" "}
-            <a target="_blank" href="https://selcukes.github.io/privacy">
+            <a target="_blank" href="https://techyworks.blogspot.com/p/privacy.html">
               Privacy Policy
             </a>
             .
           </div>
         </div>
         <form
-          action="https://selcukes.github.io/profile/add_subscriber"
+          action="/"
           method="post"
           target="_blank"
           className={styles.form}
