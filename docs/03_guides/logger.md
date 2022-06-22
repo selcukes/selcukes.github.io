@@ -1,10 +1,10 @@
 ---
 id: logger
-title: CustomLog annotation for Selcukes logger
+title: Selcukes logger
 sidebar_position: 10
 ---
 
-* Add Lombok dependency to pom.xml
+- Add Lombok dependency to pom.xml
 ```xml
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -13,8 +13,8 @@ sidebar_position: 10
             <scope>provided</scope>
         </dependency>
 ```
-* Create `lombok.config` in project parent folder and add below properties
-```properties
+- Create `lombok.config` file in project parent folder and add below properties
+```properties title="lombok.config"
 lombok.log.fieldName = logger
 lombok.log.custom.declaration = io.github.selcukes.commons.logging.Logger io.github.selcukes.commons.logging.LoggerFactory.getLogger(TYPE)
 ```
