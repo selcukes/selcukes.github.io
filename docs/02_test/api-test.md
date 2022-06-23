@@ -6,58 +6,32 @@ sidebar_position: 4
 
 ```java
 package org.example;
-
 import io.github.selcukes.commons.http.Response;
-import io.github.selcukes.commons.http.WebClient;
+import io.github.selcukes.core.page.ApiPage;
+import io.github.selcukes.core.page.Pages;
 import lombok.CustomLog;
-import lombok.SneakyThrows;
+import lombok.Data;
 import org.testng.annotations.Test;
 
 @CustomLog
-public class WebClientTest {
-
-    @SneakyThrows
-    @Test
-    public void postTest() {
-        StringBuilder json = new StringBuilder();
-        json.append("{");
-        json.append("\"name\":\"Ramesh\",");
-        json.append("\"notes\":\"hello\"");
-        json.append("}");
-
-        WebClient client = new WebClient("https://httpbin.org/post");
-        Response response = client.post(json);
-
-        logger.info(response::getBody);
-    }
-
-    @SneakyThrows
-    @Test
-    public void requestTest() {
-
-        WebClient client = new WebClient("https://httpbin.org/get");
-        Response response = client.sendRequest();
-        logger.info(response::getBody);
-    }
-
-    @SneakyThrows
-    @Test
-    public void bearerAuthTest() {
-
-        WebClient client = new WebClient("https://httpbin.org/#/Auth/get_bearer");
-        Response response = client.authenticator("hello")
-                .sendRequest();
-        logger.debug(response::getBody);
-    }
-
-    @SneakyThrows
+public class ApiTest {
     @Test
     public void authTest() {
+        String user = "{\n" +
+                "    \"email\": \"eve.holt@reqres.in\",\n" +
+                "    \"password\": \"admin\"\n" +
+                "}";
+        ApiPage page = Pages.apiPage();
+        Response response = page.request("https://reqres.in/api/register")
+                .post(user);
+        page.assertThat().response(response).isOk();
+        logger.info(() -> "Token is: " + response.bodyAs(ResponseBody.class).getToken());
+    }
 
-        WebClient client = new WebClient("https://httpbin.org/#/Auth/get_basic_auth__user___passwd_");
-        Response response = client.authenticator("hello", "hello")
-                .sendRequest();
-        logger.debug(() -> response.getStatusCode() + "");
+    @Data
+    static class ResponseBody {
+        String id;
+        String token;
     }
 }
 

@@ -18,33 +18,28 @@ values={[
 ```java
 package org.example;
 
-import io.github.selcukes.core.driver.DriverManager;
-import io.github.selcukes.core.enums.DeviceType;
+import io.github.selcukes.core.listener.TestLifecyclePerMethod;
+import io.github.selcukes.core.page.Pages;
 import io.github.selcukes.core.page.WebPage;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 
+@Listeners(TestLifecyclePerMethod.class)
 public class WebTest {
+    WebPage page;
 
-    @BeforeTest
-    public void beforeSuite() {
-        GridRunner.startSelenium(DriverType.CHROME);
+    @BeforeMethod
+    public void setup() {
+        page = Pages.webPage();
     }
 
     @Test
-    public void remoteTest() {
-        WebDriver driver = DriverManager.createDriver(DeviceType.BROWSER);
-        WebPage page = new WebPage(driver);
+    public void webTest() {
         page.open("https://www.google.com/")
-            .assertThat().title("Google");
+                .assertThat().title("Google");
     }
 
-    @AfterTest
-    public void afterTest() {
-        DriverManager.removeDriver();
-    }
 }
 ```
 
@@ -63,7 +58,7 @@ public class WebTest {
     <version>0.1-SNAPSHOT</version>
     <name>Selcukes Java Examples</name>
     <properties>
-        <selcukes.version>2.1.0</selcukes.version>
+        <selcukes.version>2.1.2</selcukes.version>
         <lombok.version>1.18.24</lombok.version>
         <slfj4.version>2.17.2</slfj4.version>
 

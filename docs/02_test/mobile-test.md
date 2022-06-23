@@ -10,29 +10,25 @@ package org.example;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.github.selcukes.core.driver.DriverManager;
-import io.github.selcukes.core.driver.GridRunner;
-import io.github.selcukes.core.enums.DeviceType;
 import io.github.selcukes.core.enums.SwipeDirection;
+import io.github.selcukes.core.listener.TestLifecyclePerClass;
 import io.github.selcukes.core.page.MobilePage;
+import io.github.selcukes.core.page.Pages;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
-public class MobileTest {
+@Listeners(TestLifecyclePerClass.class)
+public class MobileAppTest {
     MobilePage page;
 
     @BeforeMethod
     void beforeTest() {
-        GridRunner.startAppium();
-        WebDriver driver = DriverManager.createDriver(DeviceType.MOBILE);
-        page = new MobilePage(driver);
-
+        page = Pages.mobilePage();
     }
 
-    @Test
+    @Test(enabled = false)
     public void expandAndScrollScreenTest() {
         page.tap("Views")
                 .tap("Expandable Lists")
@@ -42,12 +38,6 @@ public class MobileTest {
                 .swipe(By.xpath("//android.widget.TextView[@text='Child 13']"), SwipeDirection.DOWN)
                 .swipe(By.xpath("//android.widget.TextView[@text='Group 1']"), SwipeDirection.UP);
 
-    }
-
-    @AfterMethod
-    void afterTest() {
-        DriverManager.removeDriver();
-        GridRunner.stopAppium();
     }
 }
 ```
