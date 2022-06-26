@@ -121,7 +121,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Ramesh Babu Prudhvi.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Selcukes.`,
       },
       prism: {
         theme: lightCodeTheme,
