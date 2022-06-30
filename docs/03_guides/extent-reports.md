@@ -56,8 +56,7 @@ then ignore adding this dependency explicitly.
 :::
 
 :::warning 
-If you are using `selcukes-testng` then refer [Selcukes TestNG](selcukes-testng.md) for extent report
-integration
+If you are using `selcukes-testng` then  set `emailReport` as true in `selcukes.yaml` file. No other configurations required
 :::
 
 ## Usage
