@@ -72,9 +72,9 @@ const config = {
         ],
       },
       algolia: {
-        appId: "24JIZLY7SV",
-        apiKey: "e50516a0453321f2fead770bbabe4f2e",
-        indexName: "website",
+        appId: "V9HQFB1KIE",
+        apiKey: "72463c286395f7d9f3c8349f2e6a94d7",
+        indexName: "selcukes",
         contextualSearch: false,
         searchPagePath: false,
       },
