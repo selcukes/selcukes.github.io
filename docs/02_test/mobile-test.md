@@ -28,13 +28,13 @@ public class MobileAppTest {
         page = Pages.mobilePage();
     }
 
-    @Test(enabled = false)
+    @Test
     public void expandAndScrollScreenTest() {
-        page.tap("Views")
-                .tap("Expandable Lists")
-                .tap("3. Simple Adapter")
+        page.click("aid:Views")
+                .click("aid:Expandable Lists")
+                .click("aid:3. Simple Adapter")
                 .swipe(By.xpath("//android.widget.TextView[@text='Group 18']"), SwipeDirection.DOWN)
-                .tap(By.xpath("//android.widget.TextView[@text='Group 18']"))
+                .click(By.xpath("//android.widget.TextView[@text='Group 18']"))
                 .swipe(By.xpath("//android.widget.TextView[@text='Child 13']"), SwipeDirection.DOWN)
                 .swipe(By.xpath("//android.widget.TextView[@text='Group 1']"), SwipeDirection.UP);
 
