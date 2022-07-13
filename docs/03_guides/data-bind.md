@@ -4,8 +4,8 @@ title: Selcukes Databind
 sidebar_position: 2
 ---
 
-[Selcukes DataBind](https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind) helps to parse Json and Yml
-Properties, Excel files
+[Selcukes DataBind](https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind) helps to parse Json , Yml,
+Properties and Excel data files.
 
 ## Setup
 

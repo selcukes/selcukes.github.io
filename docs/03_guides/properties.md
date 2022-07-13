@@ -1,6 +1,6 @@
 ---
 id: properties
-title: Properties
+title: Selcukes Properties
 sidebar_position: 9
 ---
 
