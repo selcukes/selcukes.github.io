@@ -356,6 +356,8 @@ As explained in `DataMapper` section, fileName is optional value - By default Ex
 
 In terms of fields' mapping, you can use custom `@Key` annotation.
 
+### Converter
+
 ExcelMapper provides way to convert field values with custom converter.
 
 To use custom converter, you should specify its class via `@Key` annotation.
@@ -379,6 +381,8 @@ public class StringToListIConverter extends DefaultConverter<List<String>> {
 Custom converters must extend `DefaultConverter` class.
 Also note that by default `ExcelMapper` uses an implicit conversion based on the field type.
 So you don't have to explicitly specify a converter if it's among the defaults.
+
+### Substitutor
 
 Similar to converters, `ExcelMapper` allows you to substitute field value prior to parsing Excel sheet
 
@@ -421,5 +425,54 @@ public class ReadExcelTest {
     }
 }
 ```
+## PropertiesMapper
 
+PropertiesMapper is used to parse Properties file to an entity classes.
+
+```properties title="test_config.properties"
+userName=Ramesh
+password=make
+isTest=true
+osName=${os.name}
+date=${date}
+helloDate=12/12/2022
+selcukes.jim=50
+mass=jim,jil
+```
+
+```java
+public class PropertiesMapperTest {
+
+    @Test
+    public void testProperties() {
+        var testConfig = PropertiesMapper.parse(TestConfig.class);
+        System.out.println(testConfig.getUserName());
+        if (testConfig.isTest())
+            System.out.println(testConfig.getDate());
+        System.out.println(testConfig.getOsName());
+        System.out.println(testConfig.getJim());
+        System.out.println(testConfig.getMass());
+        System.out.println(testConfig.getHelloDate());
+
+    }
+
+    @Interpolate(substitutor = StringSubstitutor.class)
+    @DataFile
+    @Data
+    static class TestConfig {
+        String userName;
+        String password;
+        boolean isTest;
+        String osName;
+        LocalDate date;
+        @Key(name = "helloDate", format = "MM/dd/yyyy")
+        LocalDate helloDate;
+        @Key(name = "selcukes.jim")
+        int jim;
+        @Key(name = "mass", converter = ListStringConverter.class)
+        List<String> mass;
+    }
+
+}
+```
 
