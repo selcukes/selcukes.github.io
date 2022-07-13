@@ -5,7 +5,7 @@ sidebar_position: 2
 ---
 
 [Selcukes DataBind](https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind) helps to parse Json and Yml
-files
+Properties, Excel files
 
 ## Setup
 
@@ -65,7 +65,6 @@ yaml/yml file.
 
 - fileName : Specify custom data file like 'sample_data.json'
 - filePath : path where data file is located. 'src/main/resources'
-- rootFolder : root directory
 - streamLoader: true/false, by default its false. This attribute is used to load data files from class loader which
   helps to read from jar file.
   :::note 
@@ -323,3 +322,104 @@ public class CreateDataFileTest {
 
 }
 ```
+## ExcelMapper
+
+ExcelMapper is used to parse Excel sheet to Stream of entity classes.
+
+Here is an example usage of reading Excel sheet.
+
+```java
+public class ReadExcelTest {    
+    @Data
+    @DataFile(fileName = "TestData.xlsx", sheetName = "Yahoo")
+    static class TestData {
+        @Key(name = "First Name")
+        String firstName;
+        @Key(name = "Last Name")
+        String lastName;
+        @Key(name = "DOB", format = "MM-dd-yyyy")
+        LocalDate dob;
+        String location;
+
+    }
+
+    @Test
+    public void excelMapperTest() {
+        Stream<TestData> dataStream = ExcelMapper.parse(TestData.class);
+        dataStream.forEach(System.out::println);
+    }
+}
+```
+In the above example, We have provided Excel file name and sheet name as input in `@DataFile` annotation. 
+
+As explained in `DataMapper` section, fileName is optional value - By default ExcelMapper will look for datafile name as SnakeCase of Entity class name followed by xlsx as suffix. And sheetName attribute is also an optional. By default, the first one sheet name in Excel file is used.
+
+In terms of fields' mapping, you can use custom `@Key` annotation.
+
+ExcelMapper provides way to convert field values with custom converter.
+
+To use custom converter, you should specify its class via `@Key` annotation.
+
+```java
+@Column(name = "Tags", converter = StringToListConverter.class)
+private List<String> data;
+```
+
+And the actual implementation may look like the following:
+
+```java
+public class StringToListIConverter extends DefaultConverter<List<String>> {
+    @Override
+    public List<String> convert(final String value) {
+        return asList(value.split(","));
+    }
+}
+```
+
+Custom converters must extend `DefaultConverter` class.
+Also note that by default `ExcelMapper` uses an implicit conversion based on the field type.
+So you don't have to explicitly specify a converter if it's among the defaults.
+
+Similar to converters, `ExcelMapper` allows you to substitute field value prior to parsing Excel sheet
+
+Consider, we have given Excel field values as `${DATE}` in Excel file. On the fly this field value will be converted to current date and ensure the value assigned to respective field.
+
+This can be achieved with the help of `@Interpolate`. 
+
+ExcelMapper allows you to use custom substitutor.
+
+```java
+public class FakerDataSubstitutor extends DefaultSubstitutor {
+    @Override
+    public String replace(String strToReplace, final String format) {
+
+        return FakerUtils.substitute(strToReplace);
+    }
+}
+```
+
+```java
+public class ReadExcelTest {
+    @Interpolate(substitutor = FakerDataSubstitutor.class)
+    @Data
+    @DataFile(fileName = "TestData.xlsx", sheetName = "Yahoo")
+    static class TestData {
+        @Key(name = "First Name")
+        String firstName;
+        @Key(name = "Last Name")
+        String lastName;
+        @Key(name = "DOB", format = "MM-dd-yyyy")
+        LocalDate dob;
+        String location;
+
+    }
+
+    @Test
+    public void interpolateExcelMapperTest() {
+        Stream<TestData> dataStream = ExcelMapper.parse(TestData.class);
+        dataStream.forEach(System.out::println);
+    }
+}
+```
+
+
