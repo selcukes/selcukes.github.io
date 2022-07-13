@@ -363,14 +363,14 @@ ExcelMapper provides way to convert field values with custom converter.
 To use custom converter, you should specify its class via `@Key` annotation.
 
 ```java
-@Column(name = "Tags", converter = StringToListConverter.class)
+@Column(name = "Tags", converter = ListOfStringConverter.class)
 private List<String> data;
 ```
 
 And the actual implementation may look like the following:
 
 ```java
-public class StringToListIConverter extends DefaultConverter<List<String>> {
+public class ListOfStringConverter extends DefaultConverter<List<String>> {
     @Override
     public List<String> convert(final String value) {
         return asList(value.split(","));
@@ -388,7 +388,7 @@ Similar to converters, `ExcelMapper` allows you to substitute field value prior 
 
 Consider, we have given Excel field values as `${DATE}` in Excel file. On the fly this field value will be converted to current date and ensure the value assigned to respective field.
 
-This can be achieved with the help of `@Interpolate`. 
+This can be achieved with the help of `@Interpolate` annotation. 
 
 ExcelMapper allows you to use custom substitutor.
 
@@ -469,7 +469,7 @@ public class PropertiesMapperTest {
         LocalDate helloDate;
         @Key(name = "selcukes.jim")
         int jim;
-        @Key(name = "mass", converter = ListStringConverter.class)
+        @Key(name = "mass", converter = ListOfStringConverter.class)
         List<String> mass;
     }
 
