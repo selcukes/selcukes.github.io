@@ -363,7 +363,7 @@ ExcelMapper provides way to convert field values with custom converter.
 To use custom converter, you should specify its class via `@Key` annotation.
 
 ```java
-@Column(name = "Tags", converter = ListOfStringConverter.class)
+@Key(name = "Tags", converter = ListOfStringConverter.class)
 private List<String> data;
 ```
 
