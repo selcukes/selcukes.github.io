@@ -20,6 +20,40 @@ Selcukes is an open source library that aims to build high-quality and highly sc
 
 ### What you need to start
 
+#### Install Node LTS
+On Windows, you can download the [installer](https://nodejs.org/en/). On Mac, you could simply use [Homebrew](https://brew.sh/) to install Node. Similarly, on Linux, you can run the following command:
+```shell
+sudo apt install nodejs
+```
+
+#### Install Appium
+Please follow the instructions below to install Appium:
+From the command prompt or terminal, install Appium using the following command:
+```shell
+npm install -g appium
+```
+Once Appium is installed, you can confirm by checking the installed version by executing the following command, and you will see the version of Appium installed on your machine.
+```shell
+appium -v
+```
+#### Install Appium Doctor
+Since we have already installed Appium on our machine, we must now validate if all the setup is done correctly to run our tests with Appium. To check this, there is another library called appium-doctor.
+
+To install this library, we must run the following command:
+```shell
+npm install -g appium-doctor
+```
+Once this command is executed successfully, run the following command to check the Android setup,
+```shell
+appium-doctor --android
+```
+And to check setup for iOS, run:
+
+```shell
+appium-doctor --ios
+ ```
+This command will check if the setup is done correctly or not. If there is some issue in the setup of mandatory components, it will try to fix it automatically. If it can’t fix on its own, it will mention steps to follow to fix the issues and complete the setup successfully.
+
 #### Java 11
 
 Test Automation is a development activity, so you will need some familiarity with Java.
