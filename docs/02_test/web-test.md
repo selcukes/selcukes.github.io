@@ -18,14 +18,13 @@ values={[
 ```java
 package org.example;
 
-import io.github.selcukes.core.listener.TestLifecyclePerMethod;
+import io.github.selcukes.commons.annotation.Lifecycle;
 import io.github.selcukes.core.page.Pages;
 import io.github.selcukes.core.page.WebPage;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(TestLifecyclePerMethod.class)
+@Lifecycle
 public class WebTest {
     WebPage page;
 
@@ -35,7 +34,7 @@ public class WebTest {
     }
 
     @Test
-    public void webTest() {
+    public void remoteWebTest() {
         page.open("https://www.google.com/")
                 .assertThat().title("Google");
     }
