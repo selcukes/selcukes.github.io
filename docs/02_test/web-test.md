@@ -57,9 +57,9 @@ public class WebTest {
     <version>0.1-SNAPSHOT</version>
     <name>Selcukes Java Examples</name>
     <properties>
-        <selcukes.version>2.1.2</selcukes.version>
-        <lombok.version>1.18.24</lombok.version>
-        <slfj4.version>2.17.2</slfj4.version>
+        <selcukes.version>LATEST</selcukes.version>
+        <lombok.version>LATEST</lombok.version>
+        <slfj4.version>LATEST</slfj4.version>
 
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
