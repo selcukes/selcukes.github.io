@@ -3,6 +3,9 @@ id: web-test
 title: Web Test
 sidebar_position: 1
 ---
+The `WebTest.java` file is an example test class that demonstrates how to create a basic web test using Selcukes. It includes a test method called remoteWebTest() that opens the Google homepage and asserts that the page title is "Google".
+
+The test class also includes a setup() method annotated with @BeforeMethod, which is executed before each test method. The setup() method initializes the WebPage object from the Pages utility class.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
