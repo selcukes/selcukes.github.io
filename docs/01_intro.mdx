@@ -22,69 +22,49 @@ In summary, Selcukes is a reliable and customizable testing solution that stream
 
 ## Getting Started
 
-### What you need to start
+To start using Selcukes, you need to have the following installed on your machine:
 
 #### Install Node LTS
-On Windows, you can download the [installer](https://nodejs.org/en/). On Mac, you could simply use [Homebrew](https://brew.sh/) to install Node. Similarly, on Linux, you can run the following command:
+You can download the [installer](https://nodejs.org/en/) for Windows, use[Homebrew](https://brew.sh/) or run the command below on Linux:
 ```shell
 sudo apt install nodejs
 ```
 
 #### Install Appium
-Please follow the instructions below to install Appium:
-From the command prompt or terminal, install Appium using the following command:
+Install Appium from the command prompt or terminal by running:
 ```shell
 npm install -g appium
 ```
-Once Appium is installed, you can confirm by checking the installed version by executing the following command, and you will see the version of Appium installed on your machine.
+Confirm the installation by running the following command:
 ```shell
 appium -v
 ```
 #### Install Appium Doctor
-Since we have already installed Appium on our machine, we must now validate if all the setup is done correctly to run our tests with Appium. To check this, there is another library called appium-doctor.
-
-To install this library, we must run the following command:
+Validate the setup of Appium by installing appium-doctor:
 ```shell
 npm install -g appium-doctor
 ```
-Once this command is executed successfully, run the following command to check the Android setup,
+Run the following commands to check the setup for Android and iOS:
 ```shell
 appium-doctor --android
-```
-And to check setup for iOS, run:
-
-```shell
 appium-doctor --ios
  ```
-This command will check if the setup is done correctly or not. If there is some issue in the setup of mandatory components, it will try to fix it automatically. If it can’t fix on its own, it will mention steps to follow to fix the issues and complete the setup successfully.
-
 #### Java 11
 
-Test Automation is a development activity, so you will need some familiarity with Java.
-Selcukes uses Java 11, so make sure you have a [JDK 11 or later](http://www.oracle.com/technetwork/java/javase/downloads/index.html) installed.
+You will need to have [JDK 11 or later](http://www.oracle.com/technetwork/java/javase/downloads/index.html) installed.
 
 #### IDE
-
-You will need a modern IDE to work with Java.
-We recommend IntelliJ (you can download the Community Edition, which is free, from [here](https://www.jetbrains.com/idea/download).
-But Eclipse will work fine as well.
+You will need a modern IDE such as [IntelliJ](https://www.jetbrains.com/idea/download) or Eclipse to work with Java.
 
 #### A Build Tool
-
-You will also need a build tool, either Gradle or Maven, to run your tests and generate your reports.
-Make sure you have either [Gradle 3.x or higher](http://www.gradle.org/downloads) or [Maven 3.3.x or higher](https://maven.apache.org/download.cgi) installed.
+You will need either [Gradle 3.x or higher](http://www.gradle.org/downloads) or [Maven 3.3.x or higher](https://maven.apache.org/download.cgi) to run your tests and generate reports.
 
 ### Quick Start
-The quickest way to create a new project is to take one of the starter projects on Github.
-You can find the starter project for TestNG at [selcukes-java-skeleton](https://github.com/selcukes/selcukes-java-skeleton).
-
-You can clone this repository:
+To quickly create a new project, clone the starter project from the [selcukes-java-skeleton](https://github.com/selcukes/selcukes-java-skeleton) repository on Github.
 ```shell
 git clone https://github.com/selcukes/selcukes-java-skeleton.git
 cd selcukes-java-skeleton
 ```
-
-
 Or simply download a zip file from [here](https://github.com/selcukes/selcukes-java-skeleton/archive/master.zip).
 
 #### So far so good?
