@@ -75,7 +75,7 @@ Add Selcukes Extent Reports plugin to cucumber runner as follows
 
 ```java
 @CucumberOptions(tags = "@tag1", plugin = {
-        "io.github.selcukes.extent.report.SelcukesExtentAdapter:",
+        "io.github.selcukes.extent.report.SelcukesExtentAdapter",
         "html:target/cucumber-reports/cucumber.html", "json:target/cucumber-reports/cucumber.json"
 
 })
