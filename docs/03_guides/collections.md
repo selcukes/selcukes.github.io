@@ -15,7 +15,7 @@ DataTable<String, String> dataTable = new DataTable<>();
 To create a DataTable with initial data, you can use the of method and pass a list of maps, where each map represents a row of data with the keys being the column names and the values being the data for that row:
 
 ```java
-DataTable<String, Integer> dataTable = DataTable.of(
+DataTable<String, Object> dataTable = DataTable.of(
 Map.of("name", "Alice", "age", 25),
 Map.of("name", "Bob", "age", 30),
 Map.of("name", "Charlie", "age", 35));
@@ -48,7 +48,7 @@ The getColumnEntries method in the DataTable class allows you to retrieve a list
 
 Here is an example usage of the getColumnEntries method:
 ```java
-DataTable<String, Integer> dataTable = DataTable.of(
+DataTable<String, Object> dataTable = DataTable.of(
 Map.of("name", "Alice", "age", 25),
         Map.of("name", "Bob", "age", 30),
         Map.of("name", "Charlie", "age", 35));
@@ -136,7 +136,7 @@ dataTable.removeRows(predicate);
 To remove a specific row from the DataTable using its index, use the removeRow method.
 ```java
 // Create a sample DataTable
-DataTable<String, String> dataTable = DataTable.of(
+DataTable<String, Object> dataTable = DataTable.of(
         Map.of("name", "Alice", "age", "25"),
         Map.of("name", "Bob", "age", "30"),
         Map.of("name", "Charlie", "age", "35")
