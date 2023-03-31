@@ -1,7 +1,7 @@
 ---
 id: data-bind 
 title: Selcukes Databind 
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 [Selcukes DataBind](https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind) helps to parse Json , Yml,

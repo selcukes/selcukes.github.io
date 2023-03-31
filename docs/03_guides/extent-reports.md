@@ -1,7 +1,7 @@
 ---
 id: extent-reports
 title: Extent Reports
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 [Selcukes Extent Reports](https://github.com/selcukes/selcukes-java/tree/master/selcukes-extent-reports) is used to

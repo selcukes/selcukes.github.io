@@ -1,7 +1,7 @@
 ---
 id: video-recorder 
 title: Video Recorder 
-sidebar_position: 8
+sidebar_position: 7
 ---
 
 [Video Recorder](https://github.com/selcukes/selcukes-java/tree/master/video-recorder) allows recording video of your

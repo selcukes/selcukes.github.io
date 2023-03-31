@@ -1,7 +1,7 @@
 ---
 id: webdriver-binaries
 title: WebDriver Binaries
-sidebar_position: 1
+sidebar_position: 10
 ---
 
 [WebDriver Binaries](https://github.com/selcukes/selcukes-java/tree/master/webdriver-binaries) is an open-source Java

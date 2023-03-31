@@ -1,7 +1,7 @@
 ---
 id: selcukes-reports
 title: Selcukes Reports
-sidebar_position: 7
+sidebar_position: 6
 ---
 
 [Selcukes Reports](https://github.com/selcukes/selcukes-java/tree/master/selcukes-reports) helps with below capabilities

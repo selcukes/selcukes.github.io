@@ -1,7 +1,7 @@
 ---
 id: selcukes-testng 
 title: Selcukes TestNG 
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 [Selcukes TestNG](https://github.com/selcukes/selcukes-java/tree/master/selcukes-testng) is used to run cucumber testng

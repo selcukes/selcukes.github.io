@@ -1,7 +1,7 @@
 ---
 id: selcukes-notifier
 title: Selcukes Notifier
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 [Selcukes Notifier](https://github.com/selcukes/selcukes-java/tree/master/selcukes-notifier) helps to send notifications

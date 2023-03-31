@@ -1,7 +1,7 @@
 ---
 id: excel-runner
 title: Selcukes Excel Runner
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 [Selcukes Excel Runner](https://github.com/selcukes/selcukes-java/tree/master/selcukes-excel-runner) is an Excel driven cucumber runner which helps to

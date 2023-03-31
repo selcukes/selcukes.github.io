@@ -1,7 +1,7 @@
 ---
 id: logger 
 title: Selcukes logger 
-sidebar_position: 10
+sidebar_position: 9
 ---
 ## CustomLog annotation for Selcukes logger
 - Add Lombok dependency to pom.xml

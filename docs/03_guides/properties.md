@@ -1,7 +1,7 @@
 ---
 id: properties
 title: Selcukes Properties
-sidebar_position: 9
+sidebar_position: 8
 ---
 
 ## Runtime Properties
