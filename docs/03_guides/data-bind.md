@@ -52,26 +52,23 @@ ignore adding this dependency explicitly.
 
 DataMapper object helps to read and write Json , xml or yaml/yml files with `@DataFile` annotation.
 
-### Resolution Algorithm
+### DataFile Lookup Strategy
 
-DataMapper looks for matching data files in test resource folder by converting POJO class name to a SnakeCase json or
-yaml/yml file.
+The `DataMapper` uses a specific strategy to locate the appropriate data files in the test resource folder. This strategy is based on converting the POJO class name to a SnakeCase JSON or YAML/YML file.
 
-- For POJO class `TestUsers.java`
-- Matching test data files are `test_users.json` or `test_users.xml` or `test_users.yml` or `test_users.yaml`
+For example, for the POJO class `TestUsers.java`, the matching test data files would be test_users.json, test_users.xml, test_users.yml, or test_users.yaml
 
 `@DataFile` annotation also takes additional attributes as follows
 
-- fileName : Specify custom data file like 'sample_data.json'
-- filePath : path where data file is located. 'src/main/resources'
-- streamLoader: true/false, by default its false. This attribute is used to load data files from class loader which
-  helps to read from jar file.
-  :::note 
-   if you enable streamLoader then fileName attribute is mandatory.
+- fileName : This attribute allows you to specify a custom data file name, such as `sample_data.json`
+- filePath : This attribute is used to specify the path where the data file is located, such as `src/main/resources`.
+- streamLoader: This attribute is set to false by default. If set to true, the DataMapper loads data files from the class loader, which allows for reading from a JAR file.
+  :::note
+  If you enable `streamLoader`, then the `fileName` attribute is mandatory.
   :::
 ### Read data files
 
-Let's first look at the `test_users.json` file we'll be reading
+To illustrate how to read data files using the DataMapper object, let's consider the `test_users.json` file below:
 
 ```json
 {
@@ -88,7 +85,7 @@ Let's first look at the `test_users.json` file we'll be reading
 }
 ```
 
-Then, let's define the POJO class with `@DataFile` annotation
+First, we define a POJO class with the `@DataFile` annotation:
 
 ```java
 
@@ -99,7 +96,7 @@ static class TestUsers {
 }
 ```
 
-Finally, let's create our User class:
+Then, we create our User class:
 
 ```java
 
@@ -111,15 +108,15 @@ static class User {
 }
 ```
 
-We're going to use DataMapper to read our JSON file into an TestUsers object, so let's set that up now
+To read the `test_users.json` file into a TestUsers object using DataMapper, we use the following code:
 
 ```java
 final TestUsers testUsers=DataMapper.parse(TestUsers.class);
 ```
 
-We'll find that our TestUsers object is populated from the file, including the list of User.
+Our `TestUsers` object is now populated with the data from the file, including the list of User.
 
-Here is full example code to demonstrate to parse and read `test_users.json` file
+The following code demonstrates a full example of how to parse and read the `test_users.json` file:
 
 ```java
 public class ReadDataFileTest {
@@ -155,9 +152,7 @@ public class ReadDataFileTest {
 
 ### Update data files
 
-We're also going to use DataMapper to update a TestSample into a file. This time we will try using yml file.
-
-Let's quickly look at the `test_sample.yml` file we'll be writing the values
+In addition to reading data files, DataMapper can also update them. Let's take a look at how to do this with a YAML file, `test_sample.yml`.
 
 ```yaml
 users:
@@ -169,7 +164,7 @@ users:
     password: "40aafad2-1d24-4d6c-85e2-b7630dc17c57"
 ```
 
-Then, let's define the POJO class with `@DataFile` annotation
+First, we define the POJO class with `@DataFile` annotation.
 
 ```java
 
@@ -180,21 +175,22 @@ static class TestSample {
 }
 ```
 
-Let's read our TestSample and update values:
+To update the values in the test_sample.yml file, we first read the file into a TestSample object:
 
 ```java
 UUID uuid=UUID.randomUUID();
-        TestSample testSample=DataMapper.parse(TestSample.class);
-        testSample.getUsers().get("user1").put("password",uuid.toString());
+TestSample testSample=DataMapper.parse(TestSample.class);
 ```
 
-Let's write our updated TestSample values:
-
+We can then modify the values in the TestSample object as desired. For example, let's update the password for "user1" to a new UUID:
+```java
+testSample.getUsers().get("user1").put("password", uuid.toString());
+```
+Finally, we can write the updated TestSample object back to the `test_sample.yml` file:
 ```java
 DataMapper.write(testSample);
 ```
-
-Here is full example code to demonstrate to update and write values to `test_sample.yml`
+Here is the complete example code for updating and writing to the `test_sample.yml` file:
 
 ```java
 public class UpdateDataFileTest {
@@ -217,8 +213,7 @@ public class UpdateDataFileTest {
 
 ### Write data files
 
-We're also going to use DataMapper to write a `Customer` out to a data file. This process is similar to update data
-file, however it will create a new data file if it is not found.
+We'll use DataMapper to write a `Customer` object to a data file. If the file doesn't exist, it will create a new one.
 
 Let's create `Customer` POJO class
 
@@ -240,31 +235,30 @@ static class Details {
 }
 ```
 
-Now Let's create a set object of Customer:
+Next, let's create a Customer object:
 
 ```java
-        Details details1=new Details();
-        details1.setNumber("512");
-        details1.setType("CSM");
+Details details1=new Details();
+details1.setNumber("512");
+details1.setType("CSM");
 
-        Details details2=new Details();
-        details2.setNumber("123");
-        details2.setType("A-CSM");
+Details details2=new Details();
+details2.setNumber("123");
+details2.setType("A-CSM");
 
-        Customer customer=new Customer();
-        customer.setAge(5);
-        customer.setFirstName("Mark");
-        customer.setLastName("Jones");
-        customer.setContactDetails(List.of(details1,details2));
+Customer customer=new Customer();
+customer.setAge(5);
+customer.setFirstName("Mark");
+customer.setLastName("Jones");
+customer.setContactDetails(List.of(details1,details2));
 ```
-
-Let's write our Customer using write method:
+Now, let's use the `write` method to write the Customer to a YAML file:
 
 ```java
 DataMapper.write(customer);
 ```
 
-When we look into the `customer.yml`, it should look similar to:
+The resulting `customer.yml` file will look like this:
 
 ```yaml
 firstName: "Mark"
@@ -351,9 +345,9 @@ public class ReadExcelTest {
 ```
 In the above example, We have provided Excel file name and sheet name as input in `@DataFile` annotation. 
 
-As explained in `DataMapper` section, fileName is optional value - By default ExcelMapper will look for datafile name as SnakeCase of Entity class name followed by xlsx as suffix. And sheetName attribute is also an optional. By default, the first one sheet name in Excel file is used.
+As explained in the `DataMapper` section, the fileName attribute is optional - by default, ExcelMapper will look for a datafile name as the SnakeCase of the entity class name followed by xlsx as a suffix. The sheetName attribute is also optional. By default, the first sheet name in the Excel file is used.
 
-In terms of fields' mapping, you can use custom `@Key` annotation.
+To map fields, you can use `@Key` annotation.
 
 ### Converter
 
@@ -426,8 +420,9 @@ public class ReadExcelTest {
 ```
 ## PropertiesMapper
 
-PropertiesMapper is used to parse Properties file to an entity classes.
+PropertiesMapper is used to parse a `.properties` file into a set of entity classes.
 
+In the following example, we have a `test_config.properties` file containing some properties:
 ```properties title="test_config.properties"
 userName=Ramesh
 password=make
@@ -438,7 +433,7 @@ helloDate=12/12/2022
 selcukes.jim=50
 mass=jim,jil
 ```
-
+We can then use `PropertiesMapper` to map these properties to a TestConfig object:
 ```java
 public class PropertiesMapperTest {
 
@@ -474,6 +469,12 @@ public class PropertiesMapperTest {
 
 }
 ```
+In this example, we have defined a TestConfig class with properties that match those defined in the test_config.properties file. We have also used the @Interpolate annotation to enable property interpolation using the StringSubstitutor class.
+
+We can then call PropertiesMapper.parse(TestConfig.class) to parse the properties file into a TestConfig object.
+
+Note that we have also used the @Key annotation to specify the mapping between property names and class fields. We have also used the @DataFile annotation to indicate that the data source is a file. Finally, we have used the @Data annotation to indicate that this is a data object that should be parsed by PropertiesMapper.
+
 ## CsvMapper
 CsvMapper is a utility class that provides methods to parse CSV files into DataTables. 
 ### Parsing CSV Files
