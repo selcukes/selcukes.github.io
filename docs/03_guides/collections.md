@@ -23,26 +23,17 @@ dataTable.addColumn("Key", "Value");
 ### Adding Rows
 To add a new row to the data table, use the `addRow` method:
 ```java
-Map<String, String> row = new LinkedHashMap<>();
-row.put("Key1", "Value1");
-row.put("Key2", "Value2");
+Map<String, String> row = Map.of("Key1", "Value1","Key2", "Value2");
 dataTable.addRow(row);
 ```
 You can also add multiple rows at once using the `addRows` method:
 
 ```java
-       List<Map<String, String>> rows = new ArrayList<>();
-        Map<String, String> row1 = new LinkedHashMap<>();
-        row1.put("Key1", "Value1");
-        row1.put("Key2", "Value2");
-        rows.add(row1);
+List<Map<String, String>> rows = List.of(
+Map.of("Key1", "Value1","Key2", "Value2"),
+Map.of("Key3", "Value3","Key4", "Value4"));
 
-        Map<String, String> row2 = new LinkedHashMap<>();
-        row2.put("Key1", "Value3");
-        row2.put("Key2", "Value4");
-        rows.add(row2);
-
-        dataTable.addRows(rows);
+dataTable.addRows(rows);
 
 ```
 ### Retrieving Column Keys
@@ -83,15 +74,15 @@ dataTable.updateRows(row -> {
 ### Join
 Suppose we have two `DataTables`, table1 and table2, with the following data:
 ```java
-        DataTable<Integer, String> table1 = new DataTable<>();
-        table1.add(1, Map.of("name", "Alice", "age", 25));
-        table1.add(2, Map.of("name", "Bob", "age", 30));
-        table1.add(3, Map.of("name", "Charlie", "age", 35));
+DataTable<Integer, String> table1 = DataTable.of(
+Map.of("name", "Alice", "age", 25),
+Map.of("name", "Bob", "age", 30),
+Map.of("name", "Charlie", "age", 35));
 
-        DataTable<Integer, String> table2 = new DataTable<>();
-        table2.add(1, Map.of("gender", "F"));
-        table2.add(2, Map.of("gender", "M"));
-        table2.add(3, Map.of("gender", "M"));
+DataTable<Integer, String> table2 = DataTable.of(
+Map.of("gender", "F"),
+Map.of("gender", "M"),
+Map.of("gender", "M"));
 ```
 To join the two tables on the "id" column and add the "gender" column from table2 to table1, we can use the `join` method as follows:
 ```java
@@ -113,11 +104,11 @@ This will produce a new DataTable with the following data:
 ### AggregateByColumn
 Suppose we have a `DataTable` with the following data:
 ```java
-DataTable<Integer, Integer> dataTable = new DataTable<>();
-dataTable.add(1, Map.of("category", 1, "price", 10));
-dataTable.add(2, Map.of("category", 2, "price", 20));
-dataTable.add(3, Map.of("category", 1, "price", 30));
-dataTable.add(4, Map.of("category", 2, "price", 40));
+DataTable<Integer, Integer> dataTable = DataTable.of(
+Map.of("category", 1, "price", 10),
+Map.of("category", 2, "price", 20),
+Map.of("category", 1, "price", 30),
+Map.of("category", 2, "price", 40));
 ```
 To aggregate the "price" column by the "category" column using the sum() function, we can use the aggregateByColumn() method as follows:
 ```java
