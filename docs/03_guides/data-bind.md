@@ -4,8 +4,7 @@ title: Selcukes Databind
 sidebar_position: 1
 ---
 
-[Selcukes DataBind](https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind) helps to parse Json , Yml,
-Properties and Excel data files.
+[Selcukes DataBind](https://github.com/selcukes/selcukes-java/tree/master/selcukes-databind) helps to parser JSON, YML, XML, CSV, Properties and Excel files.
 
 ## Setup
 
@@ -51,7 +50,7 @@ ignore adding this dependency explicitly.
 
 ## Data Mapper
 
-DataMapper object helps to read and write Json or yaml/yml files with `@DataFile` annotation.
+DataMapper object helps to read and write Json , xml or yaml/yml files with `@DataFile` annotation.
 
 ### Resolution Algorithm
 
@@ -59,7 +58,7 @@ DataMapper looks for matching data files in test resource folder by converting P
 yaml/yml file.
 
 - For POJO class `TestUsers.java`
-- Matching test data files are `test_users.json` or `test_users.yml` or `test_users.yaml`
+- Matching test data files are `test_users.json` or `test_users.xml` or `test_users.yml` or `test_users.yaml`
 
 `@DataFile` annotation also takes additional attributes as follows
 
@@ -475,4 +474,19 @@ public class PropertiesMapperTest {
 
 }
 ```
-
+## CsvMapper
+CsvMapper is a utility class that provides methods to parse CSV files into DataTables. 
+### Parsing CSV Files
+To parse a CSV file, call the parse method, passing in the file path and, optionally, a regular expression to split the CSV lines by:
+```java
+Path filePath = Paths.get("path/to/file.csv");
+DataTable<String, String> dataTable = CsvMapper.parse(filePath);
+```
+Optionally, you can specify the regex to split the line by:
+```java
+Path filePath = Paths.get("path/to/file.csv");
+DataTable<String, String> dataTable = CsvMapper.parse(filePath, CsvMapper.CSV_REGEX);
+```
+:::note 
+The parse method throws a DataMapperException if an error occurs while parsing the file. Make sure to handle this exception accordingly.
+:::
