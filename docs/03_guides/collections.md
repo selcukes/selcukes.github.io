@@ -101,6 +101,40 @@ dataTable.updateRows(row -> {
         return row;
         });
 ```
+### Updating Cell
+To update cell at the given row index and column key
+```java
+ dataTable.updateCell(rowIndex, "Key", "Value");
+```
+### Removing Rows
+To remove rows from the DataTable based on a given condition, use the removeRows method. The method takes a Predicate as input, which is used to filter the rows to remove.
+```java
+// Create a sample DataTable
+DataTable<String, Integer> dataTable = DataTable.of(
+Map.of("category", 1, "price", 10),
+Map.of("category", 2, "price", 20),
+Map.of("category", 1, "price", 30),
+Map.of("category", 2, "price", 40)
+);
+
+// Define the predicate to filter rows
+Predicate<Map<String, Integer>> predicate = row -> row.get("category") == 1;
+
+// Remove the rows matching the predicate
+dataTable.removeRows(predicate);
+```
+To remove a specific row from the DataTable using its index, use the removeRow method.
+```java
+// Create a sample DataTable
+DataTable<String, String> dataTable = DataTable.of(
+        Map.of("name", "Alice", "age", "25"),
+        Map.of("name", "Bob", "age", "30"),
+        Map.of("name", "Charlie", "age", "35")
+        );
+
+// Remove the row at index 1
+        dataTable.removeRow(1);
+```
 ### Adding a Column
 
 To add a new column to the table with the given key and defaultValue, use the `addColumn` method:
@@ -127,6 +161,49 @@ This will update a DataTable with the following data:
 [20, 2, 1234]
 [30, 1, 1234]
 [40, 2, 1234]
+```
+### Rename Columns
+To update the column names in a DataTable using the mapping specified in the columnMapping parameter, use the renameColumn method:
+```java
+Map<String, String> columnMapping = Map.of("Key1", "NewKey1", "Key2", "NewKey2");
+dataTable.renameColumn(columnMapping);
+```
+This will update the column names in the dataTable according to the mapping specified in columnMapping.
+
+### Selecting Columns
+The selectColumns method in the DataTable class allows you to return a new DataTable with only the selected columns. For example, if you have a DataTable with columns "A", "B", and "C", and you want to select only columns "A" and "C", you can use this method as follows:
+```java
+DataTable<String, String> dataTable = DataTable.of(
+Map.of("A", "a1", "B", "b1", "C", "c1"),
+Map.of("A", "a2", "B", "b2", "C", "c2"));
+
+List<String> columns = Arrays.asList("A", "C");
+
+DataTable<String, String> selectedColumns = dataTable.selectColumns(columns);
+```
+This will produce a new DataTable with only columns "A" and "C":
+```css
+[A, C]
+[a1, c1]
+[a2, c2]
+```
+### Selecting Rows
+The selectRows method allows you to return a new DataTable instance that contains only the rows that satisfy the given predicate. For example, if you have a DataTable with the following data:
+```java
+DataTable<String, Integer> dataTable = DataTable.of(
+Map.of("A", 1, "B", 2, "C", 3),
+Map.of("A", 4, "B", 5, "C", 6),
+Map.of("A", 7, "B", 8, "C", 9));
+```
+And you want to select only the rows where the value in column "A" is greater than 3, you can use this method as follows:
+```java
+DataTable<String, Integer> selectedRows = dataTable.selectRows(row -> row.get("A") > 3);
+```
+This will produce a new DataTable with only the rows where the value in column "A" is greater than 3:
+```css
+[A, B, C]
+[4, 5, 6]
+[7, 8, 9]
 ```
 ### Join Tables
 
@@ -214,6 +291,13 @@ This will sort a DataTable as follows:
 [Dave, 68]
 ```
 In this example, the columnName parameter is "Grade", indicating that we want to sort by the "Grade" column, and the comparator parameter is gradeComparator, which is a Comparator object that sorts integers in reverse order.
+### Contains
+To check if a DataTable contains an expected row, use the contains method:
+```java
+Map<String, String> expectedRow = Map.of("Key1", "A", "Key2", "X", "Value", "10");
+boolean result = dataTable.contains(expectedRow);
+```
+This will check if the dataTable contains a row with the same keys and values as expectedRow, and return true if it does, false otherwise.
 
 ### Other Operations
 The DataTable class also supports other operations such as sorting, mapping, reducing, and more. These operations are performed using the Stream API, which can be accessed by calling the `rows` method:
