@@ -145,24 +145,25 @@ The sortByColumn method allows you to sort the rows in the DataTable by the valu
 
 For example, suppose you have a DataTable object that contains information about students, including their names and grades on an exam. You could sort the table by grade using the sortByColumn method like this:
 ```java
-DataTable<String, Integer> studentTable = new DataTable<>();
-// ... populate the table with student data ...
+// Create a DataTable object with student data
+DataTable<String, Object> studentTable = DataTable.of(
+Map.of("Name", "Alice", "Grade", 85),
+Map.of("Name", "Bob", "Grade", 72),
+Map.of("Name", "Charlie", "Grade", 92),
+Map.of("Name", "Dave", "Grade", 68));
 
-// Define a comparator to sort by grade in descending order
-Comparator<Integer> descendingOrder = Comparator.reverseOrder();
+// Create a Comparator object to sort by grade in descending order
+Comparator<Object> gradeComparator = Comparator.comparing(
+        obj -> Integer.valueOf(obj.toString()),
+        Comparator.reverseOrder()
+        );
 
 // Sort the table by grade
-studentTable.sortByColumn("Grade", descendingOrder);
-```
-In this example, the columnName parameter is "Grade", indicating that we want to sort by the "Grade" column, and the comparator parameter is descendingOrder, which is a Comparator object that sorts integers in reverse order.
+studentTable.sortByColumn("Grade", gradeComparator);
 
-Note that if the columnName parameter is not found in the DataTable, a DataTableException will be thrown. To avoid this, you can use the checkColumnIndex method to ensure that the column exists before sorting:
-```java
-if (!studentTable.hasColumn("Grade")) {
-    throw new DataTableException("The 'Grade' column does not exist in the table");
-}
-studentTable.sortByColumn("Grade", descendingOrder);
 ```
+In this example, the columnName parameter is "Grade", indicating that we want to sort by the "Grade" column, and the comparator parameter is gradeComparator, which is a Comparator object that sorts integers in reverse order.
+
 ### Other Operations
 The DataTable class also supports other operations such as sorting, mapping, reducing, and more. These operations are performed using the Stream API, which can be accessed by calling the `rows` method:
 ```java
