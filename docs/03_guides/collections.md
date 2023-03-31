@@ -92,7 +92,8 @@ This will update a DataTable with the following data:
 [40, 2, 1234]
 ```
 ### Join
-The `join` method allows you to merge two DataTables based on a common column.
+
+The `join` method is used to merge two DataTables based on a common column. Here's an example of how to use it:
 
 Suppose we have two `DataTables`, table1 and table2, with the following data:
 ```java
@@ -106,7 +107,7 @@ Map.of("name", "Alice","gender", "F"),
 Map.of("name", "Bob","gender", "M"),
 Map.of("name", "Charlie","gender", "M"));
 ```
-In the above two DataTable's, table1 and table2, with a common column "name". We join the two tables on this column using the join method, and merge the rows using a lambda expression that combines the data from both tables into a new HashMap.
+In the example above, we have two DataTables, table1 and table2, with a common column "name". We can use the join method to merge the two tables on this column, and a lambda expression to merge the rows from both tables into a new map.
 ```java
 DataTable<String, Object> joinedTable = table1.join(table2, "name",
         (row1, row2) -> {
@@ -116,14 +117,14 @@ DataTable<String, Object> joinedTable = table1.join(table2, "name",
         return resultRow;
         });
 ```
-This will produce a new DataTable with the following data:
+The resulting joinedTable contains the columns "name", "age", and "gender". Here's the data it contains:
 ```css
 [name, gender, age]
 [Alice, F, 25]
 [Bob, M, 30]
 [Charlie, M, 35]
 ```
-In this example, we used the join method to merge two DataTables based on the common column "name", and then used a lambda expression to merge the rows from the two tables into a new HashMap. The resulting joinedTable contains the columns "name", "age", and "gender"
+In summary, we can use the join method to merge two DataTables based on a common column, and a lambda expression to merge the rows from both tables into a new map. The resulting DataTable contains the merged data.
 
 ### AggregateByColumn
 The `aggregateByColumn` method in the DataTable class allows you to perform aggregation operations on one column based on the values of another column.
