@@ -50,10 +50,10 @@ Here is an example usage of the getColumnEntries method:
 ```java
 DataTable<String, Object> dataTable = DataTable.of(
 Map.of("name", "Alice", "age", 25),
-        Map.of("name", "Bob", "age", 30),
-        Map.of("name", "Charlie", "age", 35));
+Map.of("name", "Bob", "age", 30),
+Map.of("name", "Charlie", "age", 35));
 
-        List<Integer> ages = dataTable.getColumnEntries("age");
+List<Integer> ages = dataTable.getColumnEntries("age");
 ```
 This will produce the following output:
 ```css
@@ -172,7 +172,7 @@ This will update a DataTable with the following data:
 [30, 1, 1234]
 [40, 2, 1234]
 ```
-### Rename Columns
+### Rename Column
 To update the column names in a DataTable using the mapping specified in the columnMapping parameter, use the renameColumn method:
 ```java
 Map<String, String> columnMapping = Map.of("Key1", "NewKey1", "Key2", "NewKey2");
