@@ -167,6 +167,14 @@ Comparator<Object> gradeComparator = Comparator.comparing(
 studentTable.sortByColumn("Grade", gradeComparator);
 
 ```
+This will sort a DataTable as follows:
+```css
+[Name, Grade]
+[Charlie, 92]
+[Alice, 85]
+[Bob, 72]
+[Dave, 68]
+```
 In this example, the columnName parameter is "Grade", indicating that we want to sort by the "Grade" column, and the comparator parameter is gradeComparator, which is a Comparator object that sorts integers in reverse order.
 
 ### Other Operations
