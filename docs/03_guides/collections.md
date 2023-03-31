@@ -12,26 +12,6 @@ To create an instance of `DataTable`, you can use the following code:
 ```java
 DataTable<String, String> dataTable = new DataTable<>();
 ```
-### Adding a Column
-
-To add a new column to the table with the given key and defaultValue, use the `addColumn` method:
-
-```java
-dataTable.addColumn("Key", "Value");
-```
-Suppose we have a `DataTable` with the following data:
-```java
-DataTable<Integer, Integer> dataTable = DataTable.of(
-Map.of("category", 1, "price", 10),
-Map.of("category", 2, "price", 20),
-Map.of("category", 1, "price", 30),
-Map.of("category", 2, "price", 40));
-```
-To add Column `Code` with default `1234` then  we can use the addColumn() method as follows:
-```java
-dataTable.addColumn("Code", 1234);
-```
-The above method inserts a new column `Code` adds default value `1234` for all 4 rows.
 
 ### Adding Rows
 To add a new row to the data table, use the `addRow` method:
@@ -84,40 +64,68 @@ dataTable.updateRows(row -> {
         return row;
         });
 ```
+### Adding a Column
+
+To add a new column to the table with the given key and defaultValue, use the `addColumn` method:
+
+```java
+dataTable.addColumn("Key", "Value");
+```
+Suppose we have a `DataTable` with the following data:
+```java
+DataTable<String, Integer> dataTable = DataTable.of(
+Map.of("category", 1, "price", 10),
+Map.of("category", 2, "price", 20),
+Map.of("category", 1, "price", 30),
+Map.of("category", 2, "price", 40));
+```
+To add Column `Code` with default `1234` then  we can use the addColumn() method as follows:
+```java
+dataTable.addColumn("Code", 1234);
+```
+This will update a DataTable with the following data:
+```css
+[price, category, Code]
+[10, 1, 1234]
+[20, 2, 1234]
+[30, 1, 1234]
+[40, 2, 1234]
+```
 ### Join
 Suppose we have two `DataTables`, table1 and table2, with the following data:
 ```java
-DataTable<Integer, String> table1 = DataTable.of(
+DataTable<String, Object> table1 = DataTable.of(
 Map.of("name", "Alice", "age", 25),
 Map.of("name", "Bob", "age", 30),
 Map.of("name", "Charlie", "age", 35));
 
-DataTable<Integer, String> table2 = DataTable.of(
-Map.of("gender", "F"),
-Map.of("gender", "M"),
-Map.of("gender", "M"));
+DataTable<String, String> table2 = DataTable.of(
+Map.of("name", "Alice","gender", "F"),
+Map.of("name", "Bob","gender", "M"),
+Map.of("name", "Charlie","gender", "M"));
 ```
-To join the two tables on the "id" column and add the "gender" column from table2 to table1, we can use the `join` method as follows:
+To join the two tables on the "name" column and add the "gender" column from table2 to table1, we can use the `join` method as follows:
 ```java
-DataTable<Integer, Map<String, Object>> joinedTable = table1.join(table2, "id", (row1, row2) -> {
-        Map<String, Object> result = new HashMap<>(row1);
-        result.put("gender", row2.get("gender"));
-        return result;
+DataTable<String, Object> joinedTable = table1.join(table2, "name",
+        (row1, row2) -> {
+        var resultRow = new HashMap<String, Object>();
+        resultRow.putAll(row1);
+        resultRow.putAll(row2);
+        return resultRow;
         });
 ```
 This will produce a new DataTable with the following data:
 ```css
-{
-  1: {name=Alice, age=25, gender=F},
-  2: {name=Bob, age=30, gender=M},
-  3: {name=Charlie, age=35, gender=M}
-}
+[name, gender, age]
+[Alice, F, 25]
+[Bob, M, 30]
+[Charlie, M, 35]
 ```
 
 ### AggregateByColumn
 Suppose we have a `DataTable` with the following data:
 ```java
-DataTable<Integer, Integer> dataTable = DataTable.of(
+DataTable<String, Integer> dataTable = DataTable.of(
 Map.of("category", 1, "price", 10),
 Map.of("category", 2, "price", 20),
 Map.of("category", 1, "price", 30),
@@ -129,10 +137,7 @@ Map<Integer, Integer> result = dataTable.aggregateByColumn("price", "category", 
 ```
 This will produce a Map with the following data:
 ```css
-{
-  1: 40,
-  2: 60
-}
+{1=40, 2=60}
 ```
 
 ### SortByColumn
