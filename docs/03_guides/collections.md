@@ -19,6 +19,19 @@ To add a new column to the table with the given key and defaultValue, use the `a
 ```java
 dataTable.addColumn("Key", "Value");
 ```
+Suppose we have a `DataTable` with the following data:
+```java
+DataTable<Integer, Integer> dataTable = DataTable.of(
+Map.of("category", 1, "price", 10),
+Map.of("category", 2, "price", 20),
+Map.of("category", 1, "price", 30),
+Map.of("category", 2, "price", 40));
+```
+To add Column `Code` with default `1234` then  we can use the addColumn() method as follows:
+```java
+dataTable.addColumn("Code", 1234);
+```
+The above method inserts a new column `Code` adds default value `1234` for all 4 rows.
 
 ### Adding Rows
 To add a new row to the data table, use the `addRow` method:
