@@ -12,7 +12,14 @@ To create an instance of `DataTable`, you can use the following code:
 ```java
 DataTable<String, String> dataTable = new DataTable<>();
 ```
+To create a DataTable with initial data, you can use the of method and pass a list of maps, where each map represents a row of data with the keys being the column names and the values being the data for that row:
 
+```java
+DataTable<String, Integer> dataTable = DataTable.of(
+Map.of("name", "Alice", "age", 25),
+Map.of("name", "Bob", "age", 30),
+Map.of("name", "Charlie", "age", 35));
+```
 ### Adding Rows
 To add a new row to the data table, use the `addRow` method:
 ```java
