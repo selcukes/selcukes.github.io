@@ -101,11 +101,14 @@ dataTable.updateRows(row -> {
         return row;
         });
 ```
+This will update the value for the "Key3" column in each row of the table. The function passed to updateRows takes a Map<K, V> as input, which represents a single row of the table. In this example, the function adds a new key-value pair to each row and returns the updated row.
+
 ### Updating Cell
-To update cell at the given row index and column key
+To update a cell at the given row index and column key in a DataTable, use the updateCell method:
 ```java
- dataTable.updateCell(rowIndex, "Key", "Value");
+ dataTable.updateCell(rowIndex, "Key", "newValue");
 ```
+This will update the cell at the specified row index and column key with the new value.
 ### Removing Rows
 To remove rows from the DataTable based on a given condition, use the removeRows method. The method takes a Predicate as input, which is used to filter the rows to remove.
 ```java
