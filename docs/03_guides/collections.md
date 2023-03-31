@@ -36,6 +36,22 @@ To retrieve a list of column keys from the first row of the data table, use the 
 ```java
 List<String> columns = dataTable.getColumns();
 ```
+### Retrieving Column Entries
+The getColumnEntries method in the DataTable class allows you to retrieve a list of all the values in a given column of the table.
+
+Here is an example usage of the getColumnEntries method:
+```java
+DataTable<String, Integer> dataTable = DataTable.of(
+Map.of("name", "Alice", "age", 25),
+        Map.of("name", "Bob", "age", 30),
+        Map.of("name", "Charlie", "age", 35));
+
+        List<Integer> ages = dataTable.getColumnEntries("age");
+```
+This will produce the following output:
+```css
+[25, 30, 35]
+```
 ### Filtering Rows
 To filter the rows of the DataTable based on a predicate, use the `filter` method:
 
@@ -54,8 +70,29 @@ Optional<Map<String, String>> lastMatch = dataTable.findLast(row -> row.get("Key
 To group the rows of the DataTable based on the values of a column key, use the `groupByColumn` method:
 
 ```java
+DataTable<String, String> dataTable = DataTable.of(
+Map.of("Key1", "A", "Key2", "X", "Value", "10"),
+Map.of("Key1", "A", "Key2", "Y", "Value", "20"),
+Map.of("Key1", "B", "Key2", "X", "Value", "30"),
+Map.of("Key1", "B", "Key2", "Y", "Value", "40"));
+
 Map<String, DataTable<String, String>> groupedRows = dataTable.groupByColumn("Key1");
 ```
+This will produce a Map of DataTable with the following data:
+```css
+A{
+[Value, Key2, Key1]
+[10, X, A]
+[20, Y, A]
+}
+B{
+[Value, Key2, Key1]
+[30, X, B]
+[40, Y, B]
+}
+```
+In this example, we grouped the rows of dataTable by the values in the "Key1" column, which resulted in a map where each key corresponds to a unique value in the "Key1" column, and each value is a new DataTable containing the rows with that key.
+
 ### Updating Rows
 To update each row in the table by applying a function to the map representing each row, use the `updateRows` method:
 ```java
@@ -91,7 +128,7 @@ This will update a DataTable with the following data:
 [30, 1, 1234]
 [40, 2, 1234]
 ```
-### Join
+### Join Tables
 
 The `join` method is used to merge two DataTables based on a common column. Here's an example of how to use it:
 
@@ -126,7 +163,7 @@ The resulting joinedTable contains the columns "name", "age", and "gender". Here
 ```
 In summary, we can use the join method to merge two DataTables based on a common column, and a lambda expression to merge the rows from both tables into a new map. The resulting DataTable contains the merged data.
 
-### AggregateByColumn
+### Aggregate by Column
 The `aggregateByColumn` method in the DataTable class allows you to perform aggregation operations on one column based on the values of another column.
 Suppose we have a `DataTable` with the following data:
 ```java
@@ -144,9 +181,9 @@ This will produce a Map with the following data:
 ```css
 {1=40, 2=60}
 ```
-n this case, the "category" column has two distinct values: 1 and 2. The "price" values for the "category" 1 are 10 and 30, which sum up to 40. Similarly, the "price" values for the "category" 2 are 20 and 40, which sum up to 60.
+In this case, the "category" column has two distinct values: 1 and 2. The "price" values for the "category" 1 are 10 and 30, which sum up to 40. Similarly, the "price" values for the "category" 2 are 20 and 40, which sum up to 60.
 
-### SortByColumn
+### Sort by Column
 The sortByColumn method allows you to sort the rows in the DataTable by the values in a particular column. You specify which column to sort by using the columnName parameter, which should be the name of the column you want to sort by. You also specify a Comparator object to determine the order of the values in the column.
 
 For example, suppose you have a DataTable object that contains information about students, including their names and grades on an exam. You could sort the table by grade using the sortByColumn method like this:
