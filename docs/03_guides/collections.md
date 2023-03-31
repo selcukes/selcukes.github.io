@@ -130,6 +130,30 @@ This will produce a Map with the following data:
   2: 60
 }
 ```
+
+### SortByColumn
+The sortByColumn method allows you to sort the rows in the DataTable by the values in a particular column. You specify which column to sort by using the columnName parameter, which should be the name of the column you want to sort by. You also specify a Comparator object to determine the order of the values in the column.
+
+For example, suppose you have a DataTable object that contains information about students, including their names and grades on an exam. You could sort the table by grade using the sortByColumn method like this:
+```java
+DataTable<String, Integer> studentTable = new DataTable<>();
+// ... populate the table with student data ...
+
+// Define a comparator to sort by grade in descending order
+Comparator<Integer> descendingOrder = Comparator.reverseOrder();
+
+// Sort the table by grade
+studentTable.sortByColumn("Grade", descendingOrder);
+```
+In this example, the columnName parameter is "Grade", indicating that we want to sort by the "Grade" column, and the comparator parameter is descendingOrder, which is a Comparator object that sorts integers in reverse order.
+
+Note that if the columnName parameter is not found in the DataTable, a DataTableException will be thrown. To avoid this, you can use the checkColumnIndex method to ensure that the column exists before sorting:
+```java
+if (!studentTable.hasColumn("Grade")) {
+    throw new DataTableException("The 'Grade' column does not exist in the table");
+}
+studentTable.sortByColumn("Grade", descendingOrder);
+```
 ### Other Operations
 The DataTable class also supports other operations such as sorting, mapping, reducing, and more. These operations are performed using the Stream API, which can be accessed by calling the `rows` method:
 ```java
