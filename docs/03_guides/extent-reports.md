@@ -56,12 +56,12 @@ then ignore adding this dependency explicitly.
 :::
 
 :::warning 
-If you are using `selcukes-testng` then  set `emailReport` as true in `selcukes.yaml` file. No other configurations required
+If you are using `selcukes-testng` then set `emailReport` as true in `selcukes.yaml` file. No other configurations required
 :::
 
 ## Usage
 
-Create `extent.properties` file in `src/test/resources` folder
+Create an `extent.properties` file in the `src/test/resources` folder with the following properties:
 
 ```shell
 extent.reporter.spark.start=true
@@ -71,7 +71,7 @@ selcukes.reports.timestamp=false
 selcukes.reports.thumbnail=false
 ```
 
-Add Selcukes Extent Reports plugin to cucumber runner as follows
+Add Selcukes Extent Reports plugin to the cucumber runner by adding `io.github.selcukes.extent.report.SelcukesExtentAdapter` to the plugin option in the `@CucumberOptions` annotation:
 
 ```java
 @CucumberOptions(tags = "@tag1", plugin = {
@@ -80,7 +80,7 @@ Add Selcukes Extent Reports plugin to cucumber runner as follows
 
 })
 ```
-Update Cucuckber Hooks 
+Update Cucumber Hooks 
 ```java
 package io.github.selcukes.example.cucumber.steps;
 
@@ -144,8 +144,8 @@ public class CucumberHooks {
 	}
 }
 ```
-The above CucumberHooks class will take care of extent report integration
 
 :::note 
 Use Selcukes Logger to attach custom info logs to extent report
 :::
+That's it! With these steps, Selcukes Extent Reports plugin is integrated with Cucumber and will generate reports in the specified output folder.
