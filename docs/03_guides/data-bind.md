@@ -44,7 +44,7 @@ dependencies{
 </Tabs>
 
 :::note 
-Selcukes DataBind is a transitive Dependency of `webdriver-binaries`.If you are using `webdriver-binaries`, then
+Selcukes DataBind is a transitive Dependency of `selcukes-commons`.If you are using `selcukes-commons`, then
 ignore adding this dependency explicitly.
 :::
 
