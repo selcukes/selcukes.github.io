@@ -12,9 +12,20 @@ import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="java"
 values={[
-{label: 'WebTest.java', value: 'java'}, {label: 'pom.xml', value: 'pom'}
+{label: 'selcukes.yaml', value: 'yaml'},{label: 'WebTest.java', value: 'java'}, {label: 'pom.xml', value: 'pom'}
 ]
 }>
+
+<TabItem value="yaml">
+
+```yaml
+web:
+  remote: false
+  cloud:
+  browser: CHROME
+  headLess: true
+  serviceUrl: "http://127.0.0.1:4444"
+```
 
 <TabItem value="java">
 
