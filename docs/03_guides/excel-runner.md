@@ -46,4 +46,37 @@ dependencies{
 </Tabs>
 
 ## Usage
-To be updated...
+ExcelTestRunner supports both single-excel-file and multi-excel file.
+### Single Excel File Tests
+Single Excel file tests hold both suite details and testdata details in same excel file.
+To run cucumber tests from a single Excel file, you will need to create a "Test Suite" sheet, that will contain the following information:
+
+* Screen: The name of the screen
+* Feature: The name of the feature that the test belongs to.
+* Test: The name of the test or Scenario.
+* Run: Indicates that the test should be run.
+
+And Have the separate sheets for each screen will contain the following mandatory column:
+
+* Test: The name of the test or Scenario.
+* Example: The cucumber example.
+* Run: Indicates that the test should be run.
+
+In additions to above three column, you have your screen specific field column.
+
+Here is exmple of Single excel file test [TestData.xlsx](https://github.com/selcukes/selcukes-java/blob/main/selcukes-excel-runner/src/test/resources/TestData.xlsx)
+
+### Multi Excel File Tests
+To run cucumber tests from multiple Excel files, you will need to create a "TestSuite.xlsx" file with multiple test suite sheets like Regression, Smoke, etc. Each test suite sheet will contain the following information:
+
+* Screen: The name of the screen
+* Feature: The name of the feature that the test belongs to.
+* Test: The name of the test or Scenario.
+* Run: Indicates that the test should be run.
+* DataFile: The path to the file that contains the respective screen test data.
+
+The `DataFile` column is new in multi-excel file concept. It specifies the path to the file that contains the test data for the respective screen. The test data is similar to single-excel file test approach, only thing here, each screen has dedicated excel file instead of sheet.
+
+Here is exmple of Multi excel file Tests
+* Suite file [TestSuite.xlsx](https://github.com/selcukes/selcukes-java/blob/main/selcukes-excel-runner/src/test/resources/TestSuite.xlsx)
+* Google screen file [Google.xlsx](https://github.com/selcukes/selcukes-java/blob/main/selcukes-excel-runner/src/test/resources/Google.xlsx)
