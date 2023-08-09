@@ -32,7 +32,7 @@ At the top of each docs page, you need to include these things:
 | Variable                 | Description                                                                                                                    |
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | `id`                     | A brief string that uniquely identifies the page within its parent folder. The id and the name of the file should be the same. |
-| `title`                  | The main title of the page. This value will automatically be rendered using the H1 style at the top of the page.               
+| `title`                  | The main title of the page. This value will automatically be rendered using the H1 style at the top of the page.               |
 | `sidebar_label`          | This is what will appear in the left hand navigation tree for the page.                                                        |
 | `description` (optional) | This is what appears when the page is referenced in a Google search result.                                                    |
 | `keywords` (optional)    | A list of terms that help categorize the page for SEO purposes.                                                                |
