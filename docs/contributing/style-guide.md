@@ -153,7 +153,7 @@ and then reference the image as follows:
 
 ## Videos
 
-Any referenced videos need to be from a Sauce Labs YouTube account.
+Any referenced videos need to be from a Selcukes YouTube account.
 The suggested iframe code structure is as follows:
 ```html
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-RDh1ukLN8w" frameborder="0" allow="accelerometer;
@@ -322,10 +322,10 @@ RemoteWebDriver driver = new RemoteWebDriver(url, capabilities);
 
 ## Code References
 
-The Sauce Labs Open Source Team created a plugin for use with Docusaurus to allow us to reference code on GitHub
-rather than duplicating code in this repo. Ideally all code displayed in the Sauce Labs documentation points to code in
+The Selcukes Open Source Team created a plugin for use with Docusaurus to allow us to reference code on GitHub
+rather than duplicating code in this repo. Ideally all code displayed in the Selcukes documentation points to code in
 one of the `demo-<language>` repos on
-[Sauce Labs Training GitHub Org](https://github.com/saucelabs-training/?q=demo#org-repositories).
+[Selcukes Training GitHub Org](https://github.com/selcukes/?q=demo#org-repositories).
 When referencing code, include the language, "reference" and a title indicating what the sample shows.
 The URL for the link can be for the entire file, or include specific line numbers at the end.
 
@@ -335,9 +335,9 @@ all code references should reference a tag instead of
 a branch name or a commit hash. For our `demo-<language>` repos, we are doing semantic versioning with `docs-<version>`.
 So, we will create and use `docs-1.0` or `docs-1.1`, etc., as needed.
 
-To create a new tag in one of the Sauce Labs owned repos:
+To create a new tag in one of the Selcukes owned repos:
 ```shell
-git tag -a -m 'reference for Sauce Labs documentation' docs-<version>
+git tag -a -m 'reference for Selcukes documentation' docs-<version>
 git push origin --tags
 ```
 :::
@@ -354,7 +354,7 @@ git push origin --tags
       <td>
 
     ```java reference title="Example Test"
-    https://github.com/saucelabs-training/demo-java/blob/docs-1.0/selenium-examples/src/test/java/com/saucedemo/selenium/demo/SauceBindingsTest.java#L39-L43
+    https://github.com/selcukes/selcukes-demo/blob/main/src/test/java/io/github/selcukes/demo/ReadExcelTest.java#L13-L26
     ```
 
 </td>
@@ -368,7 +368,7 @@ git push origin --tags
       <td>
 
 ```java reference title="Example Test"
-https://github.com/saucelabs-training/demo-java/blob/docs-1.0/selenium-examples/src/test/java/com/saucedemo/selenium/demo/SauceBindingsTest.java#L39-L43
+https://github.com/selcukes/selcukes-demo/blob/main/src/test/java/io/github/selcukes/demo/ReadExcelTest.java#L13-L26
 ```
 
 </td>
@@ -511,13 +511,13 @@ Blue badges are used for everything except for deprecated information, which is 
       <td>
 
 ```html
-<p><span className="sauceDBlue">Beta</span></p>
-<p><span className="sauceDBlue">Enterprise Only</span></p>
-<p><span className="sauceDBlue">iOS Only</span></p>
-<p><span className="sauceDBlue">Live Testing Only</span></p>
-<p><span className="sauceDBlue">Early Access</span></p>
+<p><span className="selcukesDBlue">Beta</span></p>
+<p><span className="selcukesDBlue">Enterprise Only</span></p>
+<p><span className="selcukesDBlue">iOS Only</span></p>
+<p><span className="selcukesDBlue">Live Testing Only</span></p>
+<p><span className="selcukesDBlue">Early Access</span></p>
 
-<p><span className="sauceGold">Deprecated</span></p>
+<p><span className="selcukesGold">Deprecated</span></p>
 ```
 
 </td>
@@ -529,13 +529,13 @@ Blue badges are used for everything except for deprecated information, which is 
 
 </td>
       <td>
-<p><span className="sauceDBlue">Beta</span></p>
-<p><span className="sauceDBlue">Enterprise Only</span></p>
-<p><span className="sauceDBlue">iOS Only</span></p>
-<p><span className="sauceDBlue">Live Testing Only</span></p>
-<p><span className="sauceDBlue">Early Access</span></p>
+<p><span className="selcukesDBlue">Beta</span></p>
+<p><span className="selcukesDBlue">Enterprise Only</span></p>
+<p><span className="selcukesDBlue">iOS Only</span></p>
+<p><span className="selcukesDBlue">Live Testing Only</span></p>
+<p><span className="selcukesDBlue">Early Access</span></p>
 
-<p><span className="sauceGold">Deprecated</span></p>
+<p><span className="selcukesGold">Deprecated</span></p>
 </td>
     </tr>
   </tbody>
@@ -558,7 +558,7 @@ technology.
       <td>
 
 ```html
-<p><span class="highlight sauce-cloud">Sauce Cloud only</span></p>
+<p><span class="highlight selcukes-cloud">selcukes Cloud only</span></p>
 <p><span class="highlight docker">Docker only</span></p>
 <p><span class="highlight cypress">Cypress</span></p>
 <p><span class="highlight playwright">Playwright version >= 1.12</span></p>
@@ -575,7 +575,7 @@ technology.
 
 </td>
       <td>
-<p><span class="highlight sauce-cloud">Sauce Cloud only</span></p>
+<p><span class="highlight selcukes-cloud">selcukes Cloud only</span></p>
 <p><span class="highlight docker">Docker only</span></p>
 <p><span class="highlight cypress">Cypress</span></p>
 <p><span class="highlight playwright">Playwright version >= 1.12</span></p>
