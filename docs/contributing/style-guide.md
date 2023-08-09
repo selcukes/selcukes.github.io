@@ -354,7 +354,7 @@ git push origin --tags
       <td>
 
     ```java reference title="Example Test"
-    https://github.com/selcukes/selcukes-demo/blob/main/src/test/java/io/github/selcukes/demo/ReadExcelTest.java#L13-L26
+    https://github.com/selcukes/selcukes-demo/blob/docs-1.0/src/test/java/io/github/selcukes/demo/ReadExcelTest.java#L13-L26
     ```
 
 </td>
@@ -368,7 +368,7 @@ git push origin --tags
       <td>
 
 ```java reference title="Example Test"
-https://github.com/selcukes/selcukes-demo/blob/main/src/test/java/io/github/selcukes/demo/ReadExcelTest.java#L13-L26
+https://github.com/selcukes/selcukes-demo/blob/docs-1.0/src/test/java/io/github/selcukes/demo/ReadExcelTest.java#L13-L26
 ```
 
 </td>
