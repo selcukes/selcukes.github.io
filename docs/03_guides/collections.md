@@ -108,7 +108,7 @@ dataTable.updateRows(row -> {
         return row;
         });
 ```
-This will update the value for the "Key3" column in each row of the table. The function passed to updateRows takes a Map<K, V> as input, which represents a single row of the table. In this example, the function adds a new key-value pair to each row and returns the updated row.
+This will update the value for the "Key3" column in each row of the table. The function passed to updateRows takes a Map as input, which represents a single row of the table. In this example, the function adds a new key-value pair to each row and returns the updated row.
 
 ### Updating Cell
 To update a cell at the given row index and column key in a DataTable, use the updateCell method:
