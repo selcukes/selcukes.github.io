@@ -1,5 +1,5 @@
-const lightCodeTheme = require("prism-react-renderer/themes/nightOwlLight");
-const darkCodeTheme = require("prism-react-renderer/themes/nightOwl");
+const lightCodeTheme = require('prism-react-renderer').themes.nightOwlLight;
+const darkCodeTheme = require('prism-react-renderer').themes.nightOwl;
 
 const config = {
   title: "Selcukes",
