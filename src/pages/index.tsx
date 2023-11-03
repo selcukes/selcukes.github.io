@@ -5,7 +5,7 @@ import Languages from "@site/src/components/Languages";
 import Layout from "@theme/Layout";
 import React from "react";
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
   return (
     <Layout description="One stop automation solution for Web, Desktop, Mobile and API">
       <Head>
