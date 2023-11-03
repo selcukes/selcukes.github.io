@@ -1,7 +1,10 @@
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 const lightCodeTheme = require("prism-react-renderer/themes/nightOwlLight");
 const darkCodeTheme = require("prism-react-renderer/themes/nightOwl");
 
-const config = {
+const config: Config = {
   title: "Selcukes",
   tagline: "One stop automation solution for Web, Desktop, Mobile and API",
   url: "https://selcukes.github.io",
@@ -16,7 +19,7 @@ const config = {
   presets: [
     [
       "classic",
-      ({
+      {
         docs: {
           editUrl: "https://github.com/selcukes/selcukes.github.io/tree/main",
           breadcrumbs: false,
@@ -34,14 +37,14 @@ const config = {
           changefreq: "weekly",
           priority: 0.5,
         },
-      }),
+      } satisfies Preset.Options,
     ],
   ],
 
   plugins: [],
 
   themeConfig:
-    ({
+    {
       colorMode: {
         defaultMode: "dark",
       },
@@ -128,7 +131,7 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['java', 'json','yaml','bash', 'powershell'],
       },
-    }),
+    } satisfies Preset.ThemeConfig,,
 };
 
-module.exports = config;
+export default config;
