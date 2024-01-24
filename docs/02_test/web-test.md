@@ -25,6 +25,7 @@ web:
   browser: CHROME
   headLess: true
   serviceUrl: "http://127.0.0.1:4444"
+  serverJar: "https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.17.0/selenium-server-4.17.0.jar"
 ```
 
 </TabItem>
