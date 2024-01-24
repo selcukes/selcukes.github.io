@@ -4,6 +4,28 @@ title: Desktop Test
 sidebar_position: 3
 ---
 
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="java"
+values={[
+{label: 'selcukes.yaml', value: 'yaml'},{label: 'NotepadTest.java', value: 'java'}
+]
+}>
+
+<TabItem value="yaml">
+
+```yaml
+windows:
+  remote: false
+  serviceUrl: "http://127.0.0.1:4723"
+  app: "C:\\Windows\\System32\\notepad.exe"
+```
+
+</TabItem>
+<TabItem value="java">
+
 ```java
 package org.example;
 
@@ -32,3 +54,6 @@ public class NotepadTest {
     }
 }
 ```
+
+</TabItem>
+</Tabs>

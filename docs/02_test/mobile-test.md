@@ -4,6 +4,32 @@ title: Mobile Test
 sidebar_position: 2
 ---
 
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="java"
+values={[
+{label: 'selcukes.yaml', value: 'yaml'},{label: 'MobileTest.java', value: 'java'}
+]
+}>
+
+<TabItem value="yaml">
+
+```yaml
+mobile:
+  remote: true
+  cloud: BROWSER_STACK
+  platform: Android
+  browser: CHROME
+  headLess: true
+  serviceUrl: "http://127.0.0.1:4723"
+  app: "src/test/resources/android-app.apk"
+```
+
+</TabItem>
+<TabItem value="java">
+
 ```java
 package org.example;
 
@@ -48,3 +74,6 @@ public class MobileAppTest {
     }
 }
 ```
+
+</TabItem>
+</Tabs>

@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="java"
 values={[
-{label: 'selcukes.yaml', value: 'yaml'},{label: 'WebTest.java', value: 'java'}, {label: 'pom.xml', value: 'pom'}
+{label: 'selcukes.yaml', value: 'yaml'},{label: 'WebTest.java', value: 'java'}
 ]
 }>
 
@@ -49,55 +49,12 @@ public class WebTest {
     }
 
     @Test
-    public void remoteWebTest() {
+    public void sampleWebTest() {
         page.open("https://www.google.com/")
                 .assertThat().title("Google");
     }
 
 }
-```
-
-</TabItem>
-<TabItem value="pom">
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
-    <artifactId>examples</artifactId>
-    <version>0.1-SNAPSHOT</version>
-    <name>Selcukes Java Examples</name>
-    <properties>
-        <selcukes.version>LATEST</selcukes.version>
-        <lombok.version>LATEST</lombok.version>
-        <slfj4.version>LATEST</slfj4.version>
-
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.selcukes</groupId>
-            <artifactId>selcukes-java</artifactId>
-            <version>${selcukes.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${slfj4.version}</version>
-        </dependency>
-    </dependencies>
-</project>
 ```
 
 </TabItem>
