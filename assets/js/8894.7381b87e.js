@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkSelcukes=self.webpackChunkSelcukes||[]).push([[8894],{8894:(e,s,k)=>{k.r(s)}}]);
