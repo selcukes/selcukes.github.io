@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkSelcukes=self.webpackChunkSelcukes||[]).push([[8947],{6600:e=>{e.exports=JSON.parse('{"authors":[{"name":"Ramesh Babu","title":"Automation Architect | Advanced Certified Scrum Master\xae (CSM)","url":"https://twitter.com/amrameshbabu","imageURL":"https://github.com/rameshbabuprudhvi.png","key":"rameshbabuprudhvi","page":null,"count":1}]}')}}]);
